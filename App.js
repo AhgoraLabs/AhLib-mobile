@@ -13,9 +13,25 @@ export default function App() {
         })();
     }, []);
 
-    const handleBarCodeScanned = ({ type, data }) => {
+    const handleBarCodeScanned = async ({ type, data }) => {
         setScanned(true);
-        alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+        try {
+            const requestOptions = JSON.stringify({
+                method: "POST",
+                headers: {
+                    "api-key": "100216A23C5AEE390338BBD19EA86D29",
+                    "Content-Type": "application/json",
+                },
+                body: {
+                    search: "9788551002490",
+                },
+            });
+
+            const response = await fetch("https://isbn-search-br.search.windows.net/indexes/isbn-index/docs/search?api-version=2016-09-01", requestOptions);
+            const data = await response.json();
+        } catch (err) {}
+
+        alert(`O código de barras ${data} foi escaneado! `);
     };
 
     if (hasPermission === null) {
