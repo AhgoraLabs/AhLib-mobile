@@ -3,8 +3,8 @@
 
 baixe  expo go
 
-rose "yarn"
+rode "yarn"
 
-rose "expo start"
+rode "expo start"
 
 scaneie qr code no app
