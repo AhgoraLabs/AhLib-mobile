@@ -2,8 +2,8 @@ import * as React from "react";
 import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import Home from "./Home/index";
-import Camera from "./Camera/index";
+import Home from "./Pages/Home/index";
+import Camera from "./Pages/Camera/index";
 
 const Tab = createMaterialBottomTabNavigator();
 
