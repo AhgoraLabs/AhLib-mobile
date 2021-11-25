@@ -4,7 +4,7 @@ import React from "react";
 export default function Login() {
     return (
         <View style={styles.container}>
-            <Image source={require("..src/assets/splash.png")} />
+            <Image source={require("../src/assets/ImgAhgoraLabs.png")} />
         </View>
     );
 }
