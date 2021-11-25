@@ -5,7 +5,7 @@ export default function Home() {
     return (
         <View>
             {" "}
-            <Text> 22</Text>
+            <Text> Informativo dos livros</Text>
         </View>
     );
 }
