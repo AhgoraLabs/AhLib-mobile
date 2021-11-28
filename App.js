@@ -2,19 +2,72 @@ import * as React from "react";
 import { Text, View, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import "react-native-gesture-handler";
+import { createStackNavigator } from "@react-navigation/stack";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 import Home from "./Pages/Home/index";
 import Camera from "./Pages/Camera/index";
 import Login from "./Login/index";
 
 const Tab = createMaterialBottomTabNavigator();
+const Stack = createStackNavigator();
 
-export default function App() {
+function MyTabs() {
+    return (
+        <Tab.Navigator activeColor="#FFF" barStyle={{ backgroundColor: "#404040" }}>
+            <Tab.Screen
+                options={{
+                    tabBarLabel: "Home",
+                    tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={26} />,
+                }}
+                name="Home"
+                component={Home}
+            />
+            <Tab.Screen
+                options={{
+                    tabBarLabel: "Código de Barras",
+                    tabBarIcon: ({ color }) => <MaterialCommunityIcons name="barcode" color={color} size={26} />,
+                }}
+                name="Camera"
+                component={Camera}
+            />
+        </Tab.Navigator>
+    );
+}
+export default function App(navigation) {
     return (
         <NavigationContainer>
-            <Tab.Navigator initialRouteName="Login" activeColor="#FFF" barStyle={{ backgroundColor: "#400080" }}>
-                <Tab.Screen name="Home" component={Login} />
-                <Tab.Screen name="Camera" component={Camera} />
-            </Tab.Navigator>
+            <Stack.Navigator>
+                <Stack.Screen
+                    options={{
+                        title: " AhgoraLabs",
+                        headerStyle: {
+                            backgroundColor: "#404040",
+                        },
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                    name="Login"
+                    component={Login}
+                />
+                <Stack.Screen
+                    options={{
+                        title: "AhgoraLabs",
+                        headerStyle: {
+                            backgroundColor: "#404040",
+                        },
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
+                        },
+                    }}
+                    name="Home"
+                    component={MyTabs}
+                />
+            </Stack.Navigator>
         </NavigationContainer>
     );
 }

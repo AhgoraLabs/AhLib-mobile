@@ -1,19 +1,25 @@
-import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Button, TouchableOpacity } from "react-native";
 import React from "react";
 import Home from "../Pages/Home/index";
-import { NavigationContainer } from "@react-navigation/native";
 
 export default function Login({ navigation }) {
     return (
         <KeyboardAvoidingView style={styles.background}>
             <View style={styles.container}>
-                <Image source={require("../src/assets/ImgAhgoraLabs.png")} />
+                <Image
+                    style={{
+                        resizeMode: "contain",
+                        height: 100,
+                        width: 200,
+                    }}
+                    source={require("../src/assets/iconAhgora.png")}
+                />
             </View>
 
             <View style={styles.containerLogo}>
                 <TextInput style={styles.input} placeholder="Email" autoCorrect={false} onChangeText={() => {}} />
                 <TextInput style={styles.input} placeholder="Senha" autoCorrect={false} onChangeText={() => {}} />
-                <TouchableOpacity style={styles.btnSubmit}>
+                <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate("Home")}>
                     <Text style={styles.submitText}>Acessar</Text>
                 </TouchableOpacity>
 
@@ -30,7 +36,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#191919",
+        backgroundColor: "#404040",
     },
     containerLogo: {
         flex: 1,
@@ -41,8 +47,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         paddingBottom: 50,
-        width: 250,
-        height: 50,
     },
     input: {
         backgroundColor: "#FFF",
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
         width: 250,
     },
     btnSubmit: {
-        backgroundColor: "#400080",
+        backgroundColor: "#3b3b3b",
         height: 50,
         padding: 10,
         alignItems: "center",
