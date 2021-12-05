@@ -12,7 +12,7 @@ export default function Login({ navigation }) {
                         height: 100,
                         width: 200,
                     }}
-                    source={require("../src/assets/iconAhgora.png")}
+                    source={require("../assets/iconAhgora.png")}
                 />
             </View>
 

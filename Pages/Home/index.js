@@ -10,7 +10,7 @@ export default function Home({ navigation }) {
                     height: "20%",
                     width: "100%",
                 }}
-                source={require("../../src/assets/imgAhgora.png")}
+                source={require("../../assets/imgAhgora.png")}
             />
             <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate("Camera")}>
                 <Text style={styles.submitText}>Escanear Código de Barras</Text>
