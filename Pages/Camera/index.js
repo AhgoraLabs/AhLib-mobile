@@ -14,14 +14,6 @@ export default function Camera() {
     }, []);
     const handleBarCodeScanned = async ({ type, data }) => {
         setScanned(true);
-        data = "9788547000240";
-        const response = await fetch(`localhost:5000/books/isbn/${data}`);
-
-        const responseData = await response.json();
-
-        alert(responseData, "teste");
-
-        alert(`O código de barras ${data} foi escaneado! `);
     };
 
     if (hasPermission === null) {
