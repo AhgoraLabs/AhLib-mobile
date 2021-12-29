@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Button, TouchableOpacity } from "react-native";
 import React from "react";
-import Home from "../Pages/Home/index";
 
 export default function Login({ navigation }) {
     return (

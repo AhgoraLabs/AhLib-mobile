@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
 export default function Camera() {
@@ -12,40 +12,32 @@ export default function Camera() {
             setHasPermission(status === "granted");
         })();
     }, []);
-
     const handleBarCodeScanned = async ({ type, data }) => {
         setScanned(true);
-        try {
-            const requestOptions = JSON.stringify({
-                method: "POST",
-                headers: {
-                    "api-key": "100216A23C5AEE390338BBD19EA86D29",
-                    "Content-Type": "application/json",
-                },
-                body: {
-                    search: "9788551002490",
-                },
-            });
+        data = "9788547000240";
+        const response = await fetch(`localhost:5000/books/isbn/${data}`);
 
-            const response = await fetch("https://isbn-search-br.search.windows.net/indexes/isbn-index/docs/search?api-version=2016-09-01", requestOptions);
-            const data = await response.json();
-            console.log(data);
-        } catch (err) {}
+        const responseData = await response.json();
+
+        alert(responseData, "teste");
 
         alert(`O código de barras ${data} foi escaneado! `);
     };
 
     if (hasPermission === null) {
-        return <Text>Requesting for camera permission</Text>;
+        return <Text>Requer permissão da camera</Text>;
     }
     if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
+        return <Text>Sem acesso a camera</Text>;
     }
 
     return (
         <View style={styles.container}>
-            <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />
-            {scanned && <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />}
+            <Button onPress={handleBarCodeScanned} title="Button" />
+            <View style={styles.barcodebox}>
+                <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />
+                {scanned && <TouchableOpacity title={"Scanear novamente"} onPress={() => setScanned(false)} color="#3b3b3b" />}
+            </View>
         </View>
     );
 }
@@ -55,5 +47,15 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         justifyContent: "center",
+        backgroundColor: "#404040",
+    },
+    barcodebox: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: "90%",
+        width: 500,
+        overflow: "hidden",
+        borderRadius: 30,
+        backgroundColor: "#222",
     },
 });
