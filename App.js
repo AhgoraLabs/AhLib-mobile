@@ -9,6 +9,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Home from "./Pages/Home/index";
 import Camera from "./Pages/Camera/index";
 import Login from "./Login/index";
+import Books from "./Pages/Books";
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -17,7 +18,7 @@ function MyTabs() {
     const sendBook = async () => {
         try {
             const isbn = "9788547000240";
-            const response = await fetch(`http://localhost:5000/books/isbn/${isbn}`);
+            const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/${isbn}`);
             const responseData = await response.json();
             console.log(responseData);
         } catch (error) {
@@ -27,11 +28,10 @@ function MyTabs() {
 
     return (
         <>
-            <Button onPress={sendBook} title="Button" />
             <Tab.Navigator activeColor="#FFF" barStyle={{ backgroundColor: "#404040" }}>
                 <Tab.Screen
                     options={{
-                        tabBarLabel: "Home",
+                        tabBarLabel: "Inicio",
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={26} />,
                     }}
                     name="Home"
@@ -45,6 +45,14 @@ function MyTabs() {
                     name="Camera"
                     component={Camera}
                 />
+                <Tab.Screen
+                    options={{
+                        tabBarLabel: "Cadastro de Livro",
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
+                    }}
+                    name="Book"
+                    component={Books}
+                />
             </Tab.Navigator>
         </>
     );
@@ -55,25 +63,11 @@ export default function App(navigation) {
             <Stack.Navigator>
                 <Stack.Screen
                     options={{
-                        title: " AhgoraLabs",
+                        title: "Ah-Lib",
                         headerStyle: {
-                            backgroundColor: "#404040",
+                            backgroundColor: "white",
                         },
-                        headerTintColor: "#fff",
-                        headerTitleStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
-                    name="Login"
-                    component={Login}
-                />
-                <Stack.Screen
-                    options={{
-                        title: "AhgoraLabs",
-                        headerStyle: {
-                            backgroundColor: "#404040",
-                        },
-                        headerTintColor: "#fff",
+                        headerTintColor: "gray",
                         headerTitleStyle: {
                             fontWeight: "bold",
                         },

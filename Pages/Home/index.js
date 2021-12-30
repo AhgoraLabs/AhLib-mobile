@@ -4,14 +4,7 @@ import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 export default function Home({ navigation }) {
     return (
         <View style={styles.background}>
-            <Image
-                style={{
-                    resizeMode: "cover",
-                    height: "20%",
-                    width: "100%",
-                }}
-                source={require("../../assets/imgAhgora.png")}
-            />
+            <Image style={{ marginTop: 30 }} source={require("../../assets/logoAhgora.png")} />
             <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate("Camera")}>
                 <Text style={styles.submitText}>Escanear Código de Barras</Text>
             </TouchableOpacity>
@@ -22,7 +15,6 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        backgroundColor: "#2e2e2e",
         alignItems: "center",
     },
     btnSubmit: {
