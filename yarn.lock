@@ -4658,6 +4658,13 @@ range-parser@~1.2.1:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
 
+react-clip-path@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/react-clip-path/-/react-clip-path-0.0.6.tgz#d9181cf89166d472470207fc2bb4ca059feed207"
+  integrity sha512-q3uU3GfqKBMzGzSsMYy1g550ctosfGm8+leNJlQTxA2oSqdzrid0lbLEaXrsP7uU01mT6HjYrFxQO6b5uqwHFg==
+  dependencies:
+    styled-components "^5.2.1"
+
 react-devtools-core@^4.6.0:
   version "4.21.0"
   resolved "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-4.21.0.tgz#a54c9a0fd7261491e616d6c87d1869e011d8521d"
@@ -5399,7 +5406,7 @@ strip-eof@^1.0.0:
   resolved "https://registry.yarnpkg.com/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
   integrity sha1-u0P/VZim6wXYm1n80SnJgzE2Br8=
 
-styled-components@^5.3.3:
+styled-components@^5.2.1, styled-components@^5.3.3:
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-5.3.3.tgz#312a3d9a549f4708f0fb0edc829eb34bde032743"
   integrity sha512-++4iHwBM7ZN+x6DtPPWkCI4vdtwumQ+inA/DdAsqYd4SVgUKJie5vXyzotA00ttcFdQkCng7zc6grwlfIfw+lw==

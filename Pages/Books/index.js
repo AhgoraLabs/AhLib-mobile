@@ -20,7 +20,9 @@ function Books({ route }) {
                     Dados do livro
                 </Label>
             </Div>
-
+            <Label onPress={() => setData({})} color="black" style={{ marginLeft: "70%", marginBottom: 20 }}>
+                Limpar Campos
+            </Label>
             <Div>
                 <Input placeholder="ISBN" defaultValue={data.isbn}></Input>
                 <Input placeholder="Título" defaultValue={data.title}></Input>

@@ -22,6 +22,9 @@ function Books({ route }) {
             </Div>
 
             <Div>
+                <Label size={30} color="#494949">
+                    Encontramos alguns livros, verifique se é algum desses
+                </Label>
                 <Input placeholder="ISBN" defaultValue={data.isbn}></Input>
                 <Input placeholder="Título" defaultValue={data.title}></Input>
                 <Input placeholder="Sub-titulo" defaultValue={data.subtitle}></Input>
