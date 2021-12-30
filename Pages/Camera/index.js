@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
-export default function Camera() {
+export default function Camera({ navigation }) {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
 
@@ -25,7 +25,6 @@ export default function Camera() {
 
     return (
         <View style={styles.container}>
-            <Button onPress={handleBarCodeScanned} title="Button" />
             <View style={styles.barcodebox}>
                 <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />
                 {scanned && <TouchableOpacity title={"Scanear novamente"} onPress={() => setScanned(false)} color="#3b3b3b" />}

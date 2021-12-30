@@ -17,7 +17,7 @@ function Books({ route }) {
         <Container>
             <Div>
                 <Label size={30} color="#494949">
-                    Dados do livro
+                    Encontramos alguns livros, verifique se é algum desses
                 </Label>
             </Div>
 

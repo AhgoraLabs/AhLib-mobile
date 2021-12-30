@@ -9,23 +9,12 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Home from "./Pages/Home/index";
 import Camera from "./Pages/Camera/index";
 import Login from "./Login/index";
-import Books from "./Pages/Books";
+import Book from "./Pages/Books";
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 
 function MyTabs() {
-    const sendBook = async () => {
-        try {
-            const isbn = "9788547000240";
-            const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/${isbn}`);
-            const responseData = await response.json();
-            console.log(responseData);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     return (
         <>
             <Tab.Navigator activeColor="#FFF" barStyle={{ backgroundColor: "#404040" }}>
@@ -51,7 +40,7 @@ function MyTabs() {
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
                     }}
                     name="Book"
-                    component={Books}
+                    component={Book}
                 />
             </Tab.Navigator>
         </>
