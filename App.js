@@ -69,7 +69,7 @@ export default function App(navigation) {
                             fontWeight: "bold",
                         },
                     }}
-                    name="Home"
+                    name="home"
                     component={MyTabs}
                 />
             </Stack.Navigator>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Div, Label, Input, Button } from "./styles";
-import { View, Text, StyleSheet, TextInput, flatList } from "react-native";
+import { View, Text, StyleSheet, TextInput, flatList, AsyncStorage } from "react-native";
 
 function Books({ route }) {
     const [data, setData] = useState({});
@@ -12,6 +12,24 @@ function Books({ route }) {
             console.log(data);
         }
     }, [route]);
+
+    const handleClick = async () => {
+        try {
+            const token = await AsyncStorage.getItem("@token");
+            console.log(data);
+            // const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/${data.isbn}`, {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         Accept: "application/json",
+            //         auth: token,
+            //     },
+            // });
+
+            // const responseData = await response.json();
+            // console.log(responseData);
+        } catch (err) {}
+    };
 
     return (
         <Container>
@@ -34,7 +52,7 @@ function Books({ route }) {
                 <Input placeholder="Imagem" defaultValue={data.imageLinks?.thumbnail}></Input>
                 <Input placeholder="Idioma" defaultValue={data.language}></Input>
                 <Input defaultValue={data.description} height={150} underlineColorAndroid="transparent" placeholder="Descrição" placeholderTextColor="grey" numberOfLines={10} multiline={true}></Input>
-                <Button>
+                <Button onPress={() => handleClick()}>
                     <Label color="white">Enviar</Label>
                 </Button>
             </Div>

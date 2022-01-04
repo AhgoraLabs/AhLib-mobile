@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Button, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Button, TouchableOpacity, AsyncStorage } from "react-native";
 import React, { useState } from "react";
 
 export default function Login({ navigation }) {
@@ -10,8 +10,8 @@ export default function Login({ navigation }) {
             const settings = {
                 method: "POST",
                 body: JSON.stringify({
-                    email,
-                    password,
+                    email: "pablo.bion@hotmail.com",
+                    password: "1XBdcJzo",
                 }),
                 headers: {
                     Accept: "application/json",
@@ -20,8 +20,17 @@ export default function Login({ navigation }) {
             };
 
             const response = await fetch("http://ahlib.herokuapp.com/users/auth", settings);
+            const responseData = await response.json();
+            const { error, message } = responseData;
+            const { token } = responseData.data;
+            //token deve ser salvo no app, provavelmente com local storage.
+            //isso porque o token deve ser enviado junto no momento de criar o livro, porque precisamos verificar se quem, está mandando o livro é de fato o acesso da recepcionista.
 
-            const { error, message } = await response.json();
+            try {
+                await AsyncStorage.setItem("@token", token);
+            } catch (e) {
+                // saving error
+            }
 
             if (error) {
                 alert(message);
