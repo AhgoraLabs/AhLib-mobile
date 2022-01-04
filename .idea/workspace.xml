@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0e600d9-8f3a-44b8-bcc1-3750127370af" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Camera/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Camera/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,9 +40,9 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1094" y="200" width="1200" height="792" key="AVDManager" timestamp="1640816668229">
+    <state x="1094" y="200" width="1200" height="792" key="AVDManager" timestamp="1641252005608">
       <screen x="0" y="0" width="2560" height="1032" />
     </state>
-    <state x="1094" y="200" width="1200" height="792" key="AVDManager/2560.75.1440.852/0.0.2560.1032@0.0.2560.1032" timestamp="1640816668229" />
+    <state x="1094" y="200" width="1200" height="792" key="AVDManager/2560.75.1440.852/0.0.2560.1032@0.0.2560.1032" timestamp="1641252005608" />
   </component>
 </project>

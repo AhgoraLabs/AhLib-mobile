@@ -1,7 +1,37 @@
 import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Button, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 export default function Login({ navigation }) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleLogin = async (email, password) => {
+        try {
+            const settings = {
+                method: "POST",
+                body: JSON.stringify({
+                    email,
+                    password,
+                }),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+            };
+
+            const response = await fetch("http://ahlib.herokuapp.com/users/auth", settings);
+
+            const { error, message } = await response.json();
+
+            if (error) {
+                alert(message);
+                return;
+            }
+
+            navigation.navigate("home");
+        } catch (err) {}
+    };
+
     return (
         <KeyboardAvoidingView style={styles.background}>
             <View style={styles.container}>
@@ -11,19 +41,35 @@ export default function Login({ navigation }) {
                         height: 100,
                         width: 200,
                     }}
-                    source={require("../assets/iconAhgora.png")}
+                    source={require("../assets/logoAhgora.png")}
                 />
             </View>
 
             <View style={styles.containerLogo}>
-                <TextInput style={styles.input} placeholder="Email" autoCorrect={false} onChangeText={() => {}} />
-                <TextInput style={styles.input} placeholder="Senha" autoCorrect={false} onChangeText={() => {}} />
-                <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate("Home")}>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Email"
+                    autoCorrect={false}
+                    onChangeText={value => {
+                        setEmail(value);
+                    }}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Senha"
+                    autoCorrect={false}
+                    secureTextEntry={true}
+                    onChangeText={value => {
+                        setPassword(value);
+                    }}
+                />
+                <TouchableOpacity
+                    style={styles.btnSubmit}
+                    onPress={() => {
+                        handleLogin(email, password);
+                    }}
+                >
                     <Text style={styles.submitText}>Acessar</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.btnRegister}>
-                    <Text style={styles.registerText}>Criar Conta</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
@@ -35,7 +81,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#404040",
     },
     containerLogo: {
         flex: 1,
@@ -57,7 +102,7 @@ const styles = StyleSheet.create({
         width: 250,
     },
     btnSubmit: {
-        backgroundColor: "#3b3b3b",
+        backgroundColor: "lightblue",
         height: 50,
         padding: 10,
         alignItems: "center",

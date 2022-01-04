@@ -6,9 +6,9 @@ import "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+import Login from "./Login/index";
 import Home from "./Pages/Home/index";
 import Camera from "./Pages/Camera/index";
-import Login from "./Login/index";
 import Book from "./Pages/Books";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -23,7 +23,7 @@ function MyTabs() {
                         tabBarLabel: "Inicio",
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={26} />,
                     }}
-                    name="Home"
+                    name="home"
                     component={Home}
                 />
                 <Tab.Screen
@@ -31,7 +31,7 @@ function MyTabs() {
                         tabBarLabel: "Código de Barras",
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="barcode" color={color} size={26} />,
                     }}
-                    name="Camera"
+                    name="barcode"
                     component={Camera}
                 />
                 <Tab.Screen
@@ -39,7 +39,7 @@ function MyTabs() {
                         tabBarLabel: "Cadastro de Livro",
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
                     }}
-                    name="Book"
+                    name="book"
                     component={Book}
                 />
             </Tab.Navigator>
@@ -52,11 +52,19 @@ export default function App(navigation) {
             <Stack.Navigator>
                 <Stack.Screen
                     options={{
-                        title: "Ah-Lib",
-                        headerStyle: {
-                            backgroundColor: "white",
+                        title: "AhgoraLabs",
+                        headerTintColor: "#fff",
+                        headerTitleStyle: {
+                            fontWeight: "bold",
                         },
-                        headerTintColor: "gray",
+                    }}
+                    name="Login"
+                    component={Login}
+                />
+                <Stack.Screen
+                    options={{
+                        title: "AhgoraLabs",
+                        headerTintColor: "#fff",
                         headerTitleStyle: {
                             fontWeight: "bold",
                         },

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Image } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Image, TextInput } from "react-native";
 import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
 
@@ -13,7 +13,7 @@ export default function CameraComponent({ navigation }) {
 
     useEffect(() => {
         (async () => {
-            const { status } = await Camera.requestPermissionsAsync();
+            const { status } = await Camera.requestCameraPermissionsAsync();
             setHasPermission(status === "granted");
         })();
     }, []);
@@ -25,9 +25,10 @@ export default function CameraComponent({ navigation }) {
             const isbn = data;
             const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/${isbn}`);
             const responseData = await response.json();
+
             setScanned(true);
             setLoading(false);
-            navigation.navigate("Book", { data: { isbn, ...responseData.volumeInfo } });
+            navigation.navigate("Book", { data: { isbn, ...responseData } });
         } catch (error) {
             console.log(error);
         }
@@ -46,7 +47,7 @@ export default function CameraComponent({ navigation }) {
                 {isFocused && <Camera onBarCodeScanned={scanned ? undefined : getPerIsbn} style={StyleSheet.absoluteFillObject} />}
                 {scanned && !loading && (
                     <Modal style={{ backgroundColor: "white", height: 100 }}>
-                        <Text style={{ color: "black", fontSize: 24 }}>Você deseja scanear um novo livro?</Text>
+                        <Text style={{ color: "black", fontSize: 24, textAlign: "center" }}>Você deseja scanear um novo livro?</Text>
                         <Button onPress={() => setScanned(false)}>
                             <Text style={{ color: "white", fontSize: 24 }}>Scanear novo livro</Text>
                         </Button>
@@ -55,7 +56,10 @@ export default function CameraComponent({ navigation }) {
                 {!scanned && !loading && (
                     <>
                         <LineBar />
-                        <Text style={{ color: "white", fontSize: 20, marginTop: 20 }}>Coloque o código de barras na area indicada</Text>
+                        <Text style={{ color: "white", fontSize: 20, marginTop: 20, textAlign: "center" }}>Coloque o código de barras na area indicada</Text>
+                        <Button onPress={() => getPerIsbn({ data: "9788547000240" })}>
+                            <Text>ssahu</Text>
+                        </Button>
                     </>
                 )}
                 {loading && (
