@@ -16,19 +16,21 @@ function Books({ route }) {
     const handleClick = async () => {
         try {
             const token = await AsyncStorage.getItem("@token");
-            console.log(data);
-            // const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/${data.isbn}`, {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //         Accept: "application/json",
-            //         auth: token,
-            //     },
-            // });
+            const response = await fetch("http://ahlib.herokuapp.com/books/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    auth: token,
+                },
+                body: JSON.stringify(data),
+            });
+            const responseData = await response.json();
 
-            // const responseData = await response.json();
-            // console.log(responseData);
-        } catch (err) {}
+            console.log(responseData);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (

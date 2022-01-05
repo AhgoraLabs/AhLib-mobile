@@ -57,7 +57,7 @@ export default function CameraComponent({ navigation }) {
                     <>
                         <LineBar />
                         <Text style={{ color: "white", fontSize: 20, marginTop: 20, textAlign: "center" }}>Coloque o código de barras na area indicada</Text>
-                        <Button onPress={() => getPerIsbn({ data: "9788547000240" })}>
+                        <Button onPress={() => getPerIsbn({ data: "9788576574460" })}>
                             <Text>ssahu</Text>
                         </Button>
                     </>
