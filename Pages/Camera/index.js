@@ -25,7 +25,7 @@ export default function CameraComponent({ navigation }) {
             const isbn = data;
             const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/${isbn}`);
             const responseData = await response.json();
-
+            console.log(responseData);
             setScanned(true);
             setLoading(false);
             navigation.navigate("book", { data: { isbn, ...responseData } });
@@ -57,7 +57,7 @@ export default function CameraComponent({ navigation }) {
                     <>
                         <LineBar />
                         <Text style={{ color: "white", fontSize: 20, marginTop: 20, textAlign: "center" }}>Coloque o código de barras na area indicada</Text>
-                        <Button onPress={() => getPerIsbn({ data: "9788576574460" })}>
+                        <Button onPress={() => getPerIsbn({ data: "9788532529565" })}>
                             <Text>ssahu</Text>
                         </Button>
                     </>
