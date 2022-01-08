@@ -25,10 +25,9 @@ export default function CameraComponent({ navigation }) {
             const isbn = data;
             const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/${isbn}`);
             const responseData = await response.json();
-            console.log(responseData);
             setScanned(true);
             setLoading(false);
-            navigation.navigate("book", { data: { isbn, ...responseData } });
+            navigation.navigate("book", { data: { ...responseData, isbn } });
         } catch (error) {
             console.log(error);
         }

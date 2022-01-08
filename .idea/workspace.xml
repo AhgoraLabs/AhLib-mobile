@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0e600d9-8f3a-44b8-bcc1-3750127370af" name="Default Changelist" comment="" />
+    <list default="true" id="f0e600d9-8f3a-44b8-bcc1-3750127370af" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Pages/Books/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Books/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,5 +37,11 @@
       <updated>1640814819122</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="680" y="120" width="1200" height="792" key="AVDManager" timestamp="1641597982192">
+      <screen x="0" y="0" width="2560" height="1032" />
+    </state>
+    <state x="680" y="120" width="1200" height="792" key="AVDManager/2560.75.1440.852/0.0.2560.1032@0.0.2560.1032" timestamp="1641597982192" />
   </component>
 </project>

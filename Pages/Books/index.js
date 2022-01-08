@@ -1,32 +1,54 @@
 import React, { useEffect, useState } from "react";
 import { Container, Div, Label, Input, Button } from "./styles";
-import { View, Text, StyleSheet, TextInput, flatList, AsyncStorage } from "react-native";
+import { AsyncStorage } from "react-native";
+import moment from "moment";
 
 function Books({ route }) {
     const [data, setData] = useState({});
 
     useEffect(() => {
-        if (route?.params?.data) {
-            console.log(route?.params?.data);
-            setData(route?.params?.data);
-            console.log(data);
-        }
+        if (route?.params?.data) setData(route?.params?.data);
     }, [route]);
 
-    const handleClick = async () => {
+    //obrigatorios
+    /*
+        title 
+        isbn
+        data dd/mm/yyyy
+    */
+
+    const handleChangeData = (key, value) => setData({ ...data, [key]: value });
+
+    const handleSendBook = async () => {
+        const body = data;
+        const momentDate = data.publishDate ? moment(new Date("Mar 14, 2017")).format("DD/MM/YYYY") : false;
+        body.publishDate = momentDate;
+        console.log(momentDate);
+
+        if (!data.title || !data.isbn) {
+            alert("Necessário título e ISBN");
+            return false;
+        }
+
         try {
-            const token = await AsyncStorage.getItem("@token");
-            const response = await fetch("http://ahlib.herokuapp.com/books/", {
+            //const token = await AsyncStorage.getItem("@token");
+            const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/books/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
-                    auth: token,
+                    //auth: token,
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(body),
             });
+
             const responseData = await response.json();
 
+            if (responseData.error) {
+                alert("Houve problema ao cadastrar livro");
+                return false;
+            }
+            alert("Livro cadastrado com sucesso!");
             console.log(responseData);
         } catch (error) {
             console.log(error);
@@ -40,21 +62,31 @@ function Books({ route }) {
                     Dados do livro
                 </Label>
             </Div>
-            <Label onPress={() => setData({})} color="black" style={{ marginLeft: "70%", marginBottom: 20 }}>
+            <Label onPress={() => setData({})} color="black" style={{ marginBottom: 20, width: 300 }}>
                 Limpar Campos
             </Label>
             <Div>
-                <Input placeholder="ISBN" defaultValue={data.isbn}></Input>
-                <Input placeholder="Título" defaultValue={data.title}></Input>
-                <Input placeholder="Sub-titulo" defaultValue={data.subtitle}></Input>
-                <Input placeholder="Autor" defaultValue={data.authors}></Input>
-                <Input placeholder="Editora" defaultValue={data.publisher}></Input>
-                <Input placeholder="Data de publicação" defaultValue={data.publishedDate}></Input>
-                <Input placeholder="Total de paginas" defaultValue={data.pageCount}></Input>
-                <Input placeholder="Imagem" defaultValue={data.imageLinks?.thumbnail}></Input>
-                <Input placeholder="Idioma" defaultValue={data.language}></Input>
-                <Input defaultValue={data.description} height={150} underlineColorAndroid="transparent" placeholder="Descrição" placeholderTextColor="grey" numberOfLines={10} multiline={true}></Input>
-                <Button onPress={() => handleClick()}>
+                <Input placeholder="ISBN" defaultValue={data.isbn} onChangeText={value => handleChangeData("isbn", value)}></Input>
+                <Input placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
+                <Input placeholder="Sub-titulo" defaultValue={data.subtitle} onChangeText={value => handleChangeData("subtitle", value)}></Input>
+                <Input placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
+                <Input placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>
+                <Input placeholder="Data de publicação" defaultValue={data.publishDate} onChangeText={value => handleChangeData("publishDate", value)}></Input>
+                <Input placeholder="Total de paginas" defaultValue={data.pages} onChangeText={value => handleChangeData("pages", value)}></Input>
+                <Input placeholder="Imagem" defaultValue={data.imageLinks?.image} onChangeText={value => handleChangeData("image", value)}></Input>
+                {/* <Image style={{ width: "100%", height: "50%" }} source={{ uri: "https://engineering.fb.com/wp-content/uploads/2016/04/yearinreview.jpg" }} /> */}
+                <Input placeholder="Idioma" defaultValue={data.language} onChangeText={value => handleChangeData("language", value)}></Input>
+                <Input
+                    defaultValue={data.description}
+                    height={150}
+                    underlineColorAndroid="transparent"
+                    placeholder="Descrição"
+                    placeholderTextColor="grey"
+                    numberOfLines={10}
+                    multiline={true}
+                    onChange={target => handleChangeData("description", target.target.value)}
+                ></Input>
+                <Button onPress={() => handleSendBook()}>
                     <Label color="white">Enviar</Label>
                 </Button>
             </Div>

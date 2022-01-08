@@ -19,7 +19,7 @@ export default function Login({ navigation }) {
                 },
             };
 
-            const response = await fetch("http://ahlib.herokuapp.com/users/auth", settings);
+            const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/users/auth", settings);
             const responseData = await response.json();
             const { error, message } = responseData;
             const { token } = responseData.data;
