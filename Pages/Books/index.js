@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 import { Container, Div, Label, Input, Button } from "./styles";
 import { AsyncStorage } from "react-native";
 import moment from "moment";
-import DatePicker from "react-native-datepicker";
 function Books({ route }) {
     const [data, setData] = useState({});
 
@@ -67,19 +66,36 @@ function Books({ route }) {
                 Limpar Campos
             </Label>
             <Div>
-                <Input placeholder="ISBN" defaultValue={data.isbn} onChangeText={(value) => handleChangeData("isbn", value)}></Input>
-                <Input placeholder="Título" defaultValue={data.title} onChangeText={(value) => handleChangeData("title", value)}></Input>
-                <Input placeholder="Sub-titulo" defaultValue={data.subtitle} onChangeText={(value) => handleChangeData("subtitle", value)}></Input>
-                <Input placeholder="Autor" defaultValue={data.author} onChangeText={(value) => handleChangeData("author", value)}></Input>
-                <Input placeholder="Editora" defaultValue={data.publisher} onChangeText={(value) => handleChangeData("publisher", value)}></Input>
-
-                <DatePicker format="DD/MM/YYYY" placeholder="Selecione a data" confirmBtnText="Confirm" cancelBtnText="Cancel" style={styles.dateComponent}></DatePicker>
-
-                <Input placeholder="Total de paginas" defaultValue={data.pages} onChangeText={(value) => handleChangeData("pages", value)}></Input>
-                <Input placeholder="Imagem" defaultValue={data.imageLinks?.image} onChangeText={(value) => handleChangeData("image", value)}></Input>
+                <Input placeholder="ISBN" defaultValue={data.isbn} onChangeText={value => handleChangeData("isbn", value)}></Input>
+                <Input placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
+                <Input placeholder="Sub-titulo" defaultValue={data.subtitle} onChangeText={value => handleChangeData("subtitle", value)}></Input>
+                <Input placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
+                <Input placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>
+                <Input placeholder="Idioma" defaultValue={data.language} onChangeText={value => handleChangeData("language", value)}></Input>
+                <Input
+                    defaultValue={data.description}
+                    height={150}
+                    underlineColorAndroid="transparent"
+                    placeholder="Descrição"
+                    placeholderTextColor="grey"
+                    numberOfLines={10}
+                    multiline={true}
+                    onChange={target => handleChangeData("description", target.target.value)}
+                ></Input>
+                <Input placeholder="Total de paginas" defaultValue={data.pages} onChangeText={value => handleChangeData("pages", value)}></Input>
+                <Input placeholder="Imagem" defaultValue={data.imageLinks?.image} onChangeText={value => handleChangeData("image", value)}></Input>
                 {/* <Image style={{ width: "100%", height: "50%" }} source={{ uri: "https://engineering.fb.com/wp-content/uploads/2016/04/yearinreview.jpg" }} /> */}
-                <Input placeholder="Idioma" defaultValue={data.language} onChangeText={(value) => handleChangeData("language", value)}></Input>
-                <Input defaultValue={data.description} height={150} underlineColorAndroid="transparent" placeholder="Descrição" placeholderTextColor="grey" numberOfLines={10} multiline={true} onChange={(target) => handleChangeData("description", target.target.value)}></Input>
+                <Input placeholder="Idioma" defaultValue={data.language} onChangeText={value => handleChangeData("language", value)}></Input>
+                <Input
+                    defaultValue={data.description}
+                    height={150}
+                    underlineColorAndroid="transparent"
+                    placeholder="Descrição"
+                    placeholderTextColor="grey"
+                    numberOfLines={10}
+                    multiline={true}
+                    onChange={target => handleChangeData("description", target.target.value)}
+                ></Input>
                 <Button onPress={() => handleSendBook()}>
                     <Label color="white">Enviar</Label>
                 </Button>
