@@ -35,6 +35,7 @@ export default function CameraComponent({ navigation }) {
     const handleGetPerIsbnText = dataIsbn => {
         if (dataIsbn.length < 10 || !dataIsbn) return alert("Isbn precisa ter 10 ou mais números e não pode ser vazio.");
         getPerIsbn({ data: dataIsbn });
+        setIsbnText("");
     };
 
     if (hasPermission === null) {

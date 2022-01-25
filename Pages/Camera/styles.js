@@ -39,7 +39,7 @@ export const Modal = styled.View`
 
 export const Button = styled.TouchableOpacity`
     background-color: #1565c0;
-    width: 200px;
+    width: 220px;
     border-radius: 10px;
     display: flex;
     flex-direction: row;
@@ -48,6 +48,7 @@ export const Button = styled.TouchableOpacity`
     height: 60px;
     margin-top: 30px;
     color: white;
+    padding: 5px;
 `;
 
 export const Input = styled.TextInput`
