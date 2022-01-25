@@ -17,8 +17,8 @@ export const Div = styled.View`
 `;
 
 export const Label = styled.Text`
-    font-size: ${(props) => (props.size ? props.size : "18px")};
-    color: ${(props) => (props.color ? props.color : "black")};
+    font-size: ${props => (props.size ? `${props.size}px` : "18px")};
+    color: ${props => (props.color ? props.color : "black")};
     margin-bottom: 10px;
 `;
 
@@ -31,7 +31,7 @@ export const Input = styled.TextInput`
     padding-left: 10px;
     margin-bottom: 10px;
     border: 1px solid lightgray;
-    height: ${(props) => (props.height ? props.height : "40px")};
+    height: ${props => (props.height ? props.height : "40px")};
 `;
 
 export const Button = styled.TouchableOpacity`

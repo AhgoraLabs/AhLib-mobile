@@ -45,6 +45,19 @@ export const Button = styled.TouchableOpacity`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    height: 90px;
-    margin-top: 40px;
+    height: 60px;
+    margin-top: 30px;
+    color: white;
+`;
+
+export const Input = styled.TextInput`
+    background-color: lightgray;
+    margin-top: 50px;
+    margin-bottom: 15px;
+    color: #222;
+    font-size: 17px;
+    border-radius: 7px;
+    width: 250px;
+    height: 60px;
+    padding-left: 10px;
 `;

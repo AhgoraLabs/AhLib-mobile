@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Image, TextInput } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Image } from "react-native";
 import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
 
-import { Container, Modal, Button, CameraView, LineBar } from "./styles";
+import { Container, Modal, Button, CameraView, LineBar, TextInput, Input } from "./styles";
 
 export default function CameraComponent({ navigation }) {
     const [scanned, setScanned] = useState(false);
     const [loading, setLoading] = useState(false);
     const [hasPermission, setHasPermission] = useState(null);
     const isFocused = useIsFocused();
-    const [onChangeText, setOnChangeText] = useState("");
+    const [isbnText, setIsbnText] = useState("");
 
     useEffect(() => {
         (async () => {
@@ -21,17 +21,20 @@ export default function CameraComponent({ navigation }) {
 
     const getPerIsbn = async ({ type, data }) => {
         setLoading(true);
-
         try {
-            const isbn = data;
-            const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/${isbn}`);
+            const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/${data}`);
             const responseData = await response.json();
             setScanned(true);
             setLoading(false);
-            navigation.navigate("Cadastro de Livro", { data: { ...responseData, isbn } });
+            navigation.navigate("Cadastro de Livro", { data: { ...responseData, data } });
         } catch (error) {
             console.log(error);
         }
+    };
+
+    const handleGetPerIsbnText = dataIsbn => {
+        if (dataIsbn.length < 10 || !dataIsbn) return alert("Isbn precisa ter 10 ou mais números e não pode ser vazio.");
+        getPerIsbn({ data: dataIsbn });
     };
 
     if (hasPermission === null) {
@@ -57,10 +60,15 @@ export default function CameraComponent({ navigation }) {
                     <>
                         <LineBar />
                         <Text style={{ color: "white", fontSize: 20, marginTop: 20, textAlign: "center" }}>Coloque o código de barras na area indicada</Text>
-                        <TextInput style={styles.inputISBN} placeholder="Digite o ISBN" autoCorrect={false} onChangeText={onChangeText}></TextInput>
-                        <TouchableOpacity onPress={() => setScanned(false)}>
-                            <Text style={styles.textButton}>Scanear</Text>
-                        </TouchableOpacity>
+                        <Input placeholder="Digite o ISBN" autoCorrect={false} onChangeText={value => setIsbnText(value)} />
+                        <Button
+                            onPress={() => {
+                                handleGetPerIsbnText(isbnText);
+                                setScanned(false);
+                            }}
+                        >
+                            <Text style={{ color: "white" }}>Scanear</Text>
+                        </Button>
                     </>
                 )}
                 {loading && (
@@ -72,34 +80,3 @@ export default function CameraComponent({ navigation }) {
         </Container>
     );
 }
-
-const styles = StyleSheet.create({
-    barcodebox: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        height: 100,
-        width: 500,
-        overflow: "hidden",
-        borderRadius: 30,
-    },
-    inputISBN: {
-        backgroundColor: "lightgray",
-        marginBottom: 15,
-        color: "#222",
-        fontSize: 17,
-        borderRadius: 7,
-        padding: 10,
-        width: 250,
-    },
-    textButton: {
-        color: "#FFF",
-        backgroundColor: "#1565c0",
-        width: 80,
-        borderRadius: 20,
-        marginBottom: 20,
-        height: 30,
-        marginTop: 10,
-        fontSize: 20,
-    },
-});
