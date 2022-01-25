@@ -73,8 +73,8 @@ export default function App(navigation) {
 
     useEffect(async () => {
         const token = await AsyncStorage.getItem("@token");
-        await setLogged(!!token);
-        console.log(token, "lele", !!token);
+
+        token === "false" ? setLogged(false) : setLogged(true);
     }, []);
 
     return (

@@ -36,7 +36,7 @@ export default function Login({ navigation }) {
             }
 
             await AsyncStorage.setItem("@token", token);
-            await navigation.navigate("Início");
+            await navigation.navigate("book");
         } catch (err) {}
     };
 
