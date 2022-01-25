@@ -5,7 +5,7 @@ export default function Home({ navigation }) {
     return (
         <View style={styles.background}>
             <Image style={{ marginTop: 30 }} source={require("../../assets/logoAhgora.png")} />
-            <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate("barcode")}>
+            <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate("Código de Barras")}>
                 <Text style={styles.submitText}>Escanear Código de Barras</Text>
             </TouchableOpacity>
         </View>

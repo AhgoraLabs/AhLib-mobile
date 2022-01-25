@@ -1,29 +1,37 @@
 import * as React from "react";
-import { Text, View, Image, Button } from "react-native";
+import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import "react-native-gesture-handler";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+//import "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import Login from "./Login/index";
 import Home from "./Pages/Home/index";
 import Camera from "./Pages/Camera/index";
 import Book from "./Pages/Books";
 
-const Tab = createMaterialBottomTabNavigator();
+//const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-function MyTabs() {
+function MyTabs({ navigation }) {
+    const logout = async () => {
+        await AsyncStorage.setItem("@token", JSON.stringify(false));
+    };
+
     return (
         <>
-            <Tab.Navigator activeColor="#FFF" barStyle={{ backgroundColor: "#404040" }}>
+            <Tab.Navigator shifting={true} sceneAnimationEnabled={false}>
                 <Tab.Screen
                     options={{
-                        tabBarLabel: "Inicio",
+                        tabBarLabel: "Início",
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={26} />,
+                        showLabel: false,
                     }}
-                    name="home"
+                    name="Início"
                     component={Home}
                 />
                 <Tab.Screen
@@ -31,7 +39,7 @@ function MyTabs() {
                         tabBarLabel: "Código de Barras",
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="barcode" color={color} size={26} />,
                     }}
-                    name="barcode"
+                    name="Código de Barras"
                     component={Camera}
                 />
                 <Tab.Screen
@@ -39,39 +47,41 @@ function MyTabs() {
                         tabBarLabel: "Cadastro de Livro",
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
                     }}
-                    name="book"
+                    name="Cadastro de Livro"
                     component={Book}
+                />
+                <Tab.Screen
+                    options={{
+                        tabBarLabel: "Sair",
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="logout" color={color} size={26} />,
+                        tabBarStyle: { display: "none" },
+                        tabBarVisible: false,
+                    }}
+                    name="logout"
+                    component={Login}
+                    listeners={({ navigation }) => ({
+                        tabPress: e => logout(),
+                    })}
                 />
             </Tab.Navigator>
         </>
     );
 }
+
 export default function App(navigation) {
+    const [logged, setLogged] = useState(false);
+
+    useEffect(async () => {
+        const token = await AsyncStorage.getItem("@token");
+        await setLogged(!!token);
+        console.log(token, "lele", !!token);
+    }, []);
+
     return (
         <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen
-                    options={{
-                        title: "AhgoraLabs",
-                        headerTintColor: "#fff",
-                        headerTitleStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
-                    name="Login"
-                    component={Login}
-                />
-                <Stack.Screen
-                    options={{
-                        title: "AhgoraLabs",
-                        headerTintColor: "#fff",
-                        headerTitleStyle: {
-                            fontWeight: "bold",
-                        },
-                    }}
-                    name="home"
-                    component={MyTabs}
-                />
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
+                {!logged && <Stack.Screen name="login" component={Login} />}
+                <Stack.Screen name="book" component={MyTabs} />
             </Stack.Navigator>
         </NavigationContainer>
     );

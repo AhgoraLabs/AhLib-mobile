@@ -1,9 +1,15 @@
-import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Button, TouchableOpacity, AsyncStorage } from "react-native";
-import React, { useState } from "react";
+import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Button, TouchableOpacity, BackHandler } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState, useEffect } from "react";
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    useEffect(() => {
+        const backHandler = BackHandler.addEventListener("hardwareBackPress", () => true);
+        return () => backHandler.remove();
+    }, []);
 
     const handleLogin = async (email, password) => {
         try {
@@ -23,21 +29,14 @@ export default function Login({ navigation }) {
             const responseData = await response.json();
             const { error, message } = responseData;
             const { token } = responseData.data;
-            //token deve ser salvo no app, provavelmente com local storage.
-            //isso porque o token deve ser enviado junto no momento de criar o livro, porque precisamos verificar se quem, está mandando o livro é de fato o acesso da recepcionista.
-
-            try {
-                await AsyncStorage.setItem("@token", token);
-            } catch (e) {
-                // saving error
-            }
 
             if (error) {
                 alert(message);
                 return;
             }
 
-            navigation.navigate("home");
+            await AsyncStorage.setItem("@token", token);
+            await navigation.navigate("Início");
         } catch (err) {}
     };
 

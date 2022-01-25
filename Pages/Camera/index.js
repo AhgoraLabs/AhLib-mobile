@@ -27,7 +27,7 @@ export default function CameraComponent({ navigation }) {
             const responseData = await response.json();
             setScanned(true);
             setLoading(false);
-            navigation.navigate("book", { data: { ...responseData, isbn } });
+            navigation.navigate("Cadastro de Livro", { data: { ...responseData, isbn } });
         } catch (error) {
             console.log(error);
         }

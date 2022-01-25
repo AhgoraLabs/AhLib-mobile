@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Container, Div, Label, Input, Button } from "./styles";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
 function Books({ route }) {
     const [data, setData] = useState({});
