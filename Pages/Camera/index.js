@@ -10,6 +10,7 @@ export default function CameraComponent({ navigation }) {
     const [loading, setLoading] = useState(false);
     const [hasPermission, setHasPermission] = useState(null);
     const isFocused = useIsFocused();
+    const [onChangeText, setOnChangeText] = useState("");
 
     useEffect(() => {
         (async () => {
@@ -56,9 +57,10 @@ export default function CameraComponent({ navigation }) {
                     <>
                         <LineBar />
                         <Text style={{ color: "white", fontSize: 20, marginTop: 20, textAlign: "center" }}>Coloque o código de barras na area indicada</Text>
-                        <Button onPress={() => getPerIsbn({ data: "9788532529565" })}>
-                            <Text>ssahu</Text>
-                        </Button>
+                        <TextInput style={styles.inputISBN} placeholder="Digite o ISBN" autoCorrect={false} onChangeText={onChangeText}></TextInput>
+                        <TouchableOpacity onPress={() => setScanned(false)}>
+                            <Text style={styles.textButton}>Scanear</Text>
+                        </TouchableOpacity>
                     </>
                 )}
                 {loading && (
@@ -80,5 +82,24 @@ const styles = StyleSheet.create({
         width: 500,
         overflow: "hidden",
         borderRadius: 30,
+    },
+    inputISBN: {
+        backgroundColor: "lightgray",
+        marginBottom: 15,
+        color: "#222",
+        fontSize: 17,
+        borderRadius: 7,
+        padding: 10,
+        width: 250,
+    },
+    textButton: {
+        color: "#FFF",
+        backgroundColor: "#1565c0",
+        width: 80,
+        borderRadius: 20,
+        marginBottom: 20,
+        height: 30,
+        marginTop: 10,
+        fontSize: 20,
     },
 });
