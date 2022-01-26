@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, Image, TextInput, KeyboardAvoidingView, Button, TouchableOpacity, BackHandler } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, Button, TouchableOpacity, BackHandler, Animated, Easing } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState, useEffect } from "react";
+import { KeyboardAvoidingView } from "./styles";
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
@@ -12,47 +13,68 @@ export default function Login({ navigation }) {
     }, []);
 
     const handleLogin = async (email, password) => {
-        try {
-            const settings = {
-                method: "POST",
-                body: JSON.stringify({
-                    email: "pablo.bion@hotmail.com",
-                    password: "1XBdcJzo",
-                }),
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-            };
+        startImageRotateFunction();
 
-            const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/users/auth", settings);
-            const responseData = await response.json();
-            const { error, message } = responseData;
-            const { token } = responseData.data;
+        // try {
+        //     const settings = {
+        //         method: "POST",
+        //         body: JSON.stringify({
+        //             email: "pablo.bion@hotmail.com",
+        //             password: "1XBdcJzo",
+        //         }),
+        //         headers: {
+        //             Accept: "application/json",
+        //             "Content-Type": "application/json",
+        //         },
+        //     };
 
-            console.log(message);
+        //     const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/users/auth", settings);
+        //     const responseData = await response.json();
+        //     const { error, message } = responseData;
+        //     const { token } = responseData.data;
 
-            if (error || !token) {
-                alert(message);
-                return;
-            }
+        //     console.log(message);
 
-            await AsyncStorage.setItem("@token", token);
-            await navigation.navigate("Início");
-        } catch (err) {}
+        //     if (error || !token) {
+        //         alert(message);
+        //         return;
+        //     }
+
+        //     await AsyncStorage.setItem("@token", token);
+        //     await navigation.navigate("Início");
+        // } catch (err) {}
     };
 
+    let rotateValueHolder = new Animated.Value(0);
+
+    const startImageRotateFunction = () => {
+        rotateValueHolder.setValue(0);
+        Animated.timing(rotateValueHolder, {
+            toValue: 1,
+            duration: 2000,
+            easing: Easing.linear,
+            useNativeDriver: false,
+        }).start(() => {});
+    };
+
+    const rotateData = rotateValueHolder.interpolate({
+        inputRange: [0, 1],
+        outputRange: ["0deg", "180deg"],
+    });
+
     return (
-        <KeyboardAvoidingView style={styles.background}>
+        <KeyboardAvoidingView>
             <View style={styles.container}>
-                <Image
+                <Animated.Image
                     style={{
                         resizeMode: "contain",
                         height: 100,
                         width: 200,
+                        transform: [{ rotate: rotateData }],
                     }}
-                    source={require("../assets/logoAhgora.png")}
+                    source={require("../assets/onlylogo.png")}
                 />
+                <Text style={{ fontSize: 40, color: "#494949" }}>AhLib</Text>
             </View>
 
             <View style={styles.containerLogo}>
@@ -87,11 +109,6 @@ export default function Login({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    background: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
     containerLogo: {
         flex: 1,
         justifyContent: "center",
