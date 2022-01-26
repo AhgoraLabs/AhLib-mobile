@@ -51,7 +51,7 @@ export const Button = styled.TouchableOpacity`
     padding: 5px;
 `;
 
-export const Input = styled.TextInput`
+export const Input = styled.View`
     background-color: lightgray;
     margin-top: 50px;
     margin-bottom: 15px;

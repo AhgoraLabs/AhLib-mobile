@@ -26,13 +26,14 @@ export default function CameraComponent({ navigation }) {
             const responseData = await response.json();
             setScanned(true);
             setLoading(false);
+            console.log(data);
             navigation.navigate("Cadastro de Livro", { data: { ...responseData, data } });
         } catch (error) {
             console.log(error);
         }
     };
 
-    const handleGetPerIsbnText = dataIsbn => {
+    const handleGetPerIsbnText = (dataIsbn) => {
         if (dataIsbn === "") return navigation.navigate("Cadastro de Livro");
         if (dataIsbn.length < 10) return alert("Isbn precisa ter 10 ou mais números e não pode ser vazio.");
         getPerIsbn({ data: dataIsbn });
@@ -62,14 +63,14 @@ export default function CameraComponent({ navigation }) {
                     <>
                         <LineBar />
                         <Text style={{ color: "white", fontSize: 20, marginTop: 20, textAlign: "center" }}>Coloque o código de barras na area indicada</Text>
-                        <Input placeholder="Digite o ISBN" autoCorrect={false} onChangeText={value => setIsbnText(value)} />
+                        <Input placeholder="Digite o ISBN" autoCorrect={false} onChangeText={(value) => setIsbnText(value)} />
                         <Button
                             onPress={() => {
                                 handleGetPerIsbnText(isbnText);
                                 setScanned(false);
                             }}
                         >
-                            <Text style={{ color: "white" }}>Scanear</Text>
+                            <Text style={{ color: "white" }}>Buscar livro</Text>
                         </Button>
                         <Text
                             style={{ color: "white", marginTop: 20 }}

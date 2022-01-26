@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "react-native";
-
-import { Container } from "./styles";
+import { Text, FlatList, View } from "react-native";
+import { Container, Livros } from "./styles";
 
 function List() {
     const [listBooks, setListBooks] = useState({});
@@ -22,16 +21,24 @@ function List() {
             });
 
             const responseData = await response.json();
-            setListBooks(responseData);
+            setListBooks(responseData.data);
             console.log(responseData);
         } catch (error) {
             console.log(error);
         }
     };
-
+    const livro = () => <Text> pablito </Text>;
     return (
         <Container>
-            <Text>List</Text>
+            <FlatList
+                data={listBooks}
+                keyExtractor={(listBooks) => listBooks.title}
+                renderItem={({ item }) => {
+                   <Livros>
+                    <Text>asd asd</Text>
+                   </Livros>
+                }}
+            ></FlatList>
         </Container>
     );
 }
