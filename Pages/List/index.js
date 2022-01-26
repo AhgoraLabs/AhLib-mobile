@@ -32,12 +32,12 @@ function List() {
         <Container>
             <FlatList
                 data={listBooks}
-                keyExtractor={(listBooks) => listBooks.title}
-                renderItem={({ item }) => {
-                   <Livros>
-                    <Text>asd asd</Text>
-                   </Livros>
-                }}
+                keyExtractor={listBooks => listBooks.title}
+                renderItem={({ item }) => (
+                    <Livros>
+                        <Text>asd asd</Text>
+                    </Livros>
+                )}
             ></FlatList>
         </Container>
     );
