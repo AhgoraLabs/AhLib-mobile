@@ -13,6 +13,7 @@ import Home from "./Pages/Home";
 import Camera from "./Pages/Camera";
 import Book from "./Pages/Books";
 import List from "./Pages/List/index";
+import BookPage from "./Pages/BookPage";
 
 //const Tab = createMaterialBottomTabNavigator();
 const Tab = createBottomTabNavigator();
@@ -57,6 +58,14 @@ function MyTabs({ navigation }) {
                     }}
                     name="Lista de Livros"
                     component={List}
+                />
+                <Tab.Screen
+                    options={{
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
+                        tabBarButton: () => null,
+                    }}
+                    name="Pagina do Livro"
+                    component={BookPage}
                 />
                 <Tab.Screen
                     options={{

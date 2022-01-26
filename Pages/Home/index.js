@@ -17,15 +17,12 @@ export default function Home({ navigation }) {
                 style={{
                     resizeMode: "contain",
                     height: 100,
-                    width: 200,
+                    width: 160,
                 }}
                 source={require("../../assets/ahlib.png")}
             ></Image>
-            <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate("Código de Barras")}>
-                <Text style={styles.submitText}>Escanear Código de Barras</Text>
-            </TouchableOpacity>
             <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate("Lista de Livros")}>
-                <Text style={styles.submitText}>Escanear Código de Barras</Text>
+                <Text style={styles.submitText}>Lista de Livros (BETA)</Text>
             </TouchableOpacity>
         </View>
     );
@@ -33,7 +30,6 @@ export default function Home({ navigation }) {
 
 const styles = StyleSheet.create({
     background: {
-        flex: 1,
         alignItems: "center",
     },
     btnSubmit: {

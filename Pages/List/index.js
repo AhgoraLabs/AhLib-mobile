@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Text, FlatList, View } from "react-native";
-import { Container, Livros } from "./styles";
+import { FlatList } from "react-native";
+import { Container, Livros, Text, Image } from "./styles";
 
-function List() {
+function List({ navigation }) {
     const [listBooks, setListBooks] = useState({});
 
     useEffect(() => {
@@ -27,15 +27,21 @@ function List() {
             console.log(error);
         }
     };
-    const livro = () => <Text> pablito </Text>;
+
     return (
         <Container>
             <FlatList
                 data={listBooks}
+                contentContainerStyle={{ flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "center" }}
                 keyExtractor={listBooks => listBooks.title}
                 renderItem={({ item }) => (
-                    <Livros>
-                        <Text>asd asd</Text>
+                    <Livros onPress={() => navigation.navigate("Pagina do Livro", { data: item })}>
+                        <Text>{item.title}</Text>
+                        <Image
+                            source={{
+                                uri: item.image,
+                            }}
+                        />
                     </Livros>
                 )}
             ></FlatList>
