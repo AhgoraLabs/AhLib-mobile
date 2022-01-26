@@ -4,7 +4,23 @@ import { Text, View, StyleSheet, Image, TouchableOpacity, Button } from "react-n
 export default function Home({ navigation }) {
     return (
         <View style={styles.background}>
-            <Image style={{ marginTop: 30 }} source={require("../../assets/logoAhgora.png")} />
+            <Image
+                style={{
+                    resizeMode: "contain",
+                    height: 100,
+                    width: 200,
+                    marginTop: 30,
+                }}
+                source={require("../../assets/onlylogo.png")}
+            />
+            <Image
+                style={{
+                    resizeMode: "contain",
+                    height: 100,
+                    width: 200,
+                }}
+                source={require("../../assets/ahlib.png")}
+            ></Image>
             <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate("Código de Barras")}>
                 <Text style={styles.submitText}>Escanear Código de Barras</Text>
             </TouchableOpacity>

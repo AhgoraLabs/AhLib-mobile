@@ -8,50 +8,51 @@ export default function Login({ navigation }) {
     const [password, setPassword] = useState("");
 
     useEffect(() => {
+        startImageRotateFunction();
+        startFade();
         const backHandler = BackHandler.addEventListener("hardwareBackPress", () => true);
         return () => backHandler.remove();
     }, []);
 
     const handleLogin = async (email, password) => {
-        startImageRotateFunction();
+        try {
+            const settings = {
+                method: "POST",
+                body: JSON.stringify({
+                    email: "pablo.bion@hotmail.com",
+                    password: "1XBdcJzo",
+                }),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+            };
 
-        // try {
-        //     const settings = {
-        //         method: "POST",
-        //         body: JSON.stringify({
-        //             email: "pablo.bion@hotmail.com",
-        //             password: "1XBdcJzo",
-        //         }),
-        //         headers: {
-        //             Accept: "application/json",
-        //             "Content-Type": "application/json",
-        //         },
-        //     };
+            const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/users/auth", settings);
+            const responseData = await response.json();
+            const { error, message } = responseData;
+            const { token } = responseData.data;
 
-        //     const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/users/auth", settings);
-        //     const responseData = await response.json();
-        //     const { error, message } = responseData;
-        //     const { token } = responseData.data;
+            console.log(message);
 
-        //     console.log(message);
+            if (error || !token) {
+                alert(message);
+                return;
+            }
 
-        //     if (error || !token) {
-        //         alert(message);
-        //         return;
-        //     }
-
-        //     await AsyncStorage.setItem("@token", token);
-        //     await navigation.navigate("Início");
-        // } catch (err) {}
+            await AsyncStorage.setItem("@token", token);
+            await navigation.navigate("Início");
+        } catch (err) {
+            console.log(err);
+        }
     };
 
-    let rotateValueHolder = new Animated.Value(0);
+    let [rotateValueHolder] = useState(new Animated.Value(0));
 
     const startImageRotateFunction = () => {
-        rotateValueHolder.setValue(0);
         Animated.timing(rotateValueHolder, {
             toValue: 1,
-            duration: 2000,
+            duration: 1500,
             easing: Easing.linear,
             useNativeDriver: false,
         }).start(() => {});
@@ -59,8 +60,18 @@ export default function Login({ navigation }) {
 
     const rotateData = rotateValueHolder.interpolate({
         inputRange: [0, 1],
-        outputRange: ["0deg", "180deg"],
+        outputRange: ["0deg", "360deg"],
     });
+
+    const [fadeAnim] = useState(new Animated.Value(0));
+
+    const startFade = () => {
+        Animated.timing(fadeAnim, {
+            toValue: 1,
+            duration: 800,
+            useNativeDriver: false,
+        }).start();
+    };
 
     return (
         <KeyboardAvoidingView>
@@ -74,7 +85,15 @@ export default function Login({ navigation }) {
                     }}
                     source={require("../assets/onlylogo.png")}
                 />
-                <Text style={{ fontSize: 40, color: "#494949" }}>AhLib</Text>
+                <Animated.Image
+                    style={{
+                        resizeMode: "contain",
+                        height: 100,
+                        width: 200,
+                        opacity: fadeAnim,
+                    }}
+                    source={require("../assets/ahlib.png")}
+                ></Animated.Image>
             </View>
 
             <View style={styles.containerLogo}>
