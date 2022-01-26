@@ -31,7 +31,7 @@ export const Input = styled.TextInput`
     padding-left: 10px;
     margin-bottom: 10px;
     border: 1px solid lightgray;
-    height: ${props => (props.height ? props.height : "40px")};
+    height: ${props => (props.height ? `${props.height}px` : "40px")};
 `;
 
 export const Button = styled.TouchableOpacity`

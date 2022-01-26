@@ -30,13 +30,15 @@ export default function Login({ navigation }) {
             const { error, message } = responseData;
             const { token } = responseData.data;
 
-            if (error) {
+            console.log(message);
+
+            if (error || !token) {
                 alert(message);
                 return;
             }
 
             await AsyncStorage.setItem("@token", token);
-            await navigation.navigate("book");
+            await navigation.navigate("Início");
         } catch (err) {}
     };
 

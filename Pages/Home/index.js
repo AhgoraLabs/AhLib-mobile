@@ -8,6 +8,9 @@ export default function Home({ navigation }) {
             <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate("Código de Barras")}>
                 <Text style={styles.submitText}>Escanear Código de Barras</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.btnSubmit} onPress={() => navigation.navigate("Lista de Livros")}>
+                <Text style={styles.submitText}>Escanear Código de Barras</Text>
+            </TouchableOpacity>
         </View>
     );
 }

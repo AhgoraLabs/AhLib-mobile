@@ -33,7 +33,8 @@ export default function CameraComponent({ navigation }) {
     };
 
     const handleGetPerIsbnText = dataIsbn => {
-        if (dataIsbn.length < 10 || !dataIsbn) return alert("Isbn precisa ter 10 ou mais números e não pode ser vazio.");
+        if (dataIsbn === "") return navigation.navigate("Cadastro de Livro");
+        if (dataIsbn.length < 10) return alert("Isbn precisa ter 10 ou mais números e não pode ser vazio.");
         getPerIsbn({ data: dataIsbn });
         setIsbnText("");
     };
@@ -70,6 +71,14 @@ export default function CameraComponent({ navigation }) {
                         >
                             <Text style={{ color: "white" }}>Scanear</Text>
                         </Button>
+                        <Text
+                            style={{ color: "white", marginTop: 20 }}
+                            onPress={() => {
+                                navigation.navigate("Cadastro de Livro");
+                            }}
+                        >
+                            Cadastrar um novo livro
+                        </Text>
                     </>
                 )}
                 {loading && (
