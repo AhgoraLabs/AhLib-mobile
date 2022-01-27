@@ -37,6 +37,7 @@ function MyTabs({ navigation }) {
                     options={{
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={26} />,
                         showLabel: false,
+                        headerLeft: () => null,
                     }}
                     name="Início"
                     component={Home}
