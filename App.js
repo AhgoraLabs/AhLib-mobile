@@ -26,7 +26,14 @@ function MyTabs({ navigation }) {
 
     return (
         <>
-            <Tab.Navigator shifting={true} sceneAnimationEnabled={false}>
+            <Tab.Navigator
+                shifting={true}
+                sceneAnimationEnabled={false}
+                screenOptions={{
+                    //headerLeft: () => <Button onPress={() => alert("This is a button!")} title="Info" color="#fff" />,
+                    headerLeft: () => <MaterialCommunityIcons onPress={() => navigation.goBack()} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />,
+                }}
+            >
                 <Tab.Screen
                     options={{
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={26} />,
