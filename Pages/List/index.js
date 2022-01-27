@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 import { Container, Livros, Text, Image } from "./styles";
+import ContentLoader, { Rect, Circle } from "react-content-loader/native";
 
 function List({ navigation }) {
     const [listBooks, setListBooks] = useState({});
@@ -30,6 +31,11 @@ function List({ navigation }) {
 
     return (
         <Container>
+            {/* <ContentLoader viewBox="0 80 380 650" backgroundColor="lightgray">
+                <Rect x="0" y="40" rx="4" ry="4" width="170" height="280" />
+                <Rect x="200" y="40" rx="4" ry="4" width="170" height="280" />
+            </ContentLoader> */}
+
             <FlatList
                 data={listBooks}
                 contentContainerStyle={{ flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "center" }}
