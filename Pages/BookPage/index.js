@@ -5,24 +5,25 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import ReadMore from "@fawazahmed/react-native-read-more";
 import StarRating from "react-native-star-rating";
 
-function List({ route }) {
+function List({ route, navigation }) {
     const [BookData, setBookData] = useState({});
+    const [commentsData, setCommentsData] = useState({});
     const [sizeDescription, setSizeDescription] = useState(16);
     const [rate, setRate] = useState([]);
 
     useEffect(async () => {
-        await setBookData(route.params.data);
-
-        fetchLoan();
+        const { data } = await route.params;
+        await setBookData(data);
+        fetchGetComments(data);
     }, [route]);
 
-    const fetchLoan = async () => {
-        const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/comments/?idBook=${BookData._id}`);
+    const fetchGetComments = async book => {
+        const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/comments/?idBook=${book._id}`);
         const responseData = await response.json();
+        setCommentsData(responseData);
 
         const dataStars = responseData.data;
         const stars = dataStars.map(({ stars }) => stars);
-
         const valueStars = totalStars(stars);
         setRate(valueStars);
     };
@@ -41,7 +42,7 @@ function List({ route }) {
                             uri: BookData.image,
                         }}
                     />
-                    <StarRating containerStyle={{ marginTop: 20 }} disabled={false} maxStars={5} rating={rate} selectedStar={rating => {}} fullStarColor="gold" halfStarColor="gold" />
+                    <StarRating containerStyle={{ marginTop: 20 }} disabled={false} maxStars={5} rating={rate} fullStarColor="gold" halfStarColor="gold" />
                     <Text style={{ marginTop: 20, marginBottom: 15 }} bold={true} size={24} uppercase={true} color="#201A33">
                         {BookData.title}
                     </Text>
@@ -91,7 +92,10 @@ function List({ route }) {
             </ScrollView>
             <FooterView>
                 <View style={{ display: "flex", paddingTop: 5, justifyContent: "space-evenly", flexDirection: "row" }}>
-                    <TouchableOpacity style={{ backgroundColor: "#162130", borderRadius: 10, padding: 15, display: "flex", flexDirection: "row", alignItems: "center" }}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("Comentários", { data: commentsData.data })}
+                        style={{ backgroundColor: "#162130", borderRadius: 10, padding: 15, display: "flex", flexDirection: "row", alignItems: "center" }}
+                    >
                         <MaterialCommunityIcons name="comment-text-outline" color="white" size={18} />
                     </TouchableOpacity>
                     <TouchableOpacity style={{ backgroundColor: "#162130", borderRadius: 10, padding: 10, display: "flex", flexDirection: "row", alignItems: "center" }}>

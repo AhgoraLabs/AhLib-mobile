@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-//import "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -14,6 +13,7 @@ import Camera from "./Pages/Camera";
 import Book from "./Pages/Books";
 import List from "./Pages/List/index";
 import BookPage from "./Pages/BookPage";
+import BookPageComments from "./Pages/BookPage/Components/Comments";
 
 //const Tab = createMaterialBottomTabNavigator();
 const Tab = createBottomTabNavigator();
@@ -76,6 +76,14 @@ function MyTabs({ navigation }) {
                     }}
                     name="Pagina do Livro"
                     component={BookPage}
+                />
+                <Tab.Screen
+                    options={{
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
+                        tabBarButton: () => null,
+                    }}
+                    name="Comentários"
+                    component={BookPageComments}
                 />
                 <Tab.Screen
                     options={{
