@@ -5,6 +5,7 @@ export const Container = styled.View`
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
+    padding-bottom: 100px;
 `;
 export const BackgroundColorHead = styled.View`
     position: absolute;
@@ -29,7 +30,9 @@ export const Image = styled.Image`
 export const FooterView = styled.View`
     position: absolute;
     bottom: 0;
-    height: 50px;
+    height: 60px;
+    padding-top: 1px;
+    padding-bottom: 5px;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.6);
 `;

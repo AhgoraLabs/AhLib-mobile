@@ -2,14 +2,34 @@ import React, { useEffect, useState } from "react";
 import { Container, BackgroundColorHead, Image, Text, FooterView } from "./styles";
 import { View, ScrollView, TouchableOpacity, Button } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import ReadMore from "@fawazahmed/react-native-read-more";
+import StarRating from "react-native-star-rating";
 
 function List({ route }) {
     const [BookData, setBookData] = useState({});
     const [sizeDescription, setSizeDescription] = useState(16);
+    const [rate, setRate] = useState([]);
 
-    useEffect(() => {
-        setBookData(route.params.data);
+    useEffect(async () => {
+        await setBookData(route.params.data);
+
+        fetchLoan();
     }, [route]);
+
+    const fetchLoan = async () => {
+        const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/comments/?idBook=${BookData._id}`);
+        const responseData = await response.json();
+
+        const dataStars = responseData.data;
+        const stars = dataStars.map(({ stars }) => stars);
+
+        const valueStars = totalStars(stars);
+        setRate(valueStars);
+    };
+
+    const totalStars = (star = []) => {
+        return star.length > 0 ? parseInt(star.reduce((acc, curr) => curr + acc)) / star.length : 0;
+    };
 
     return (
         <>
@@ -21,13 +41,14 @@ function List({ route }) {
                             uri: BookData.image,
                         }}
                     />
-                    <Text style={{ marginTop: 20 }} bold={true} size={24} uppercase={true} color="#201A33">
+                    <StarRating containerStyle={{ marginTop: 20 }} disabled={false} maxStars={5} rating={rate} selectedStar={rating => {}} fullStarColor="gold" halfStarColor="gold" />
+                    <Text style={{ marginTop: 20, marginBottom: 15 }} bold={true} size={24} uppercase={true} color="#201A33">
                         {BookData.title}
                     </Text>
 
-                    <Text color="gray">By: {BookData.author}</Text>
+                    <Text color="gray">By {BookData.author}</Text>
 
-                    <View style={{ display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-around", marginTop: 20 }}>
+                    <View style={{ display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-around", marginTop: 30 }}>
                         <View style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                             <Text color="gray">Editora</Text>
                             <Text size={16} bold={true} color="#201A33">
@@ -47,9 +68,9 @@ function List({ route }) {
                             </Text>
                         </View>
                     </View>
-                    <View style={{ width: "100%", paddingLeft: 30, paddingRight: 30, marginTop: 15 }}>
-                        <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                            <Text size={26} bold={true} color="#201A33">
+                    <View style={{ width: "100%", paddingLeft: 30, paddingRight: 30, marginTop: 25 }}>
+                        <View style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: 15 }}>
+                            <Text size={24} bold={true} color="#201A33">
                                 Descrição
                             </Text>
                             <Text color="#494949" style={{ marginLeft: 30 }}>
@@ -62,16 +83,25 @@ function List({ route }) {
                                 <MaterialCommunityIcons name="minus" color="#494949" size={20} />
                             </TouchableOpacity>
                         </View>
-                        <Text size={sizeDescription} style={{ textAlign: "justify" }} color="gray">
+                        <ReadMore numberOfLines={5} seeMoreText="Ver Mais" seeLessText="Ver Menos" preserveLinebreaks={true} style={{ textAlign: "justify", color: "gray", fontSize: sizeDescription }}>
                             {BookData.description}
-                        </Text>
+                        </ReadMore>
                     </View>
                 </Container>
             </ScrollView>
             <FooterView>
                 <View style={{ display: "flex", paddingTop: 5, justifyContent: "space-around", flexDirection: "row" }}>
-                    <Button title="alugar livro beta"></Button>
-                    <Button title="comentar"></Button>
+                    <TouchableOpacity style={{ backgroundColor: "#162130", borderRadius: 10, padding: 15, display: "flex", flexDirection: "row", alignItems: "center" }}>
+                        <MaterialCommunityIcons name="comment-text-outline" color="white" size={18} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ backgroundColor: "#162130", borderRadius: 10, padding: 15, display: "flex", flexDirection: "row", alignItems: "center" }}>
+                        <MaterialCommunityIcons name="star" color="white" size={18} />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ backgroundColor: "#162130", borderRadius: 10, padding: 10, display: "flex", flexDirection: "row", alignItems: "center" }}>
+                        <Text size={16} color="white">
+                            Alugar Este Livro
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </FooterView>
         </>
