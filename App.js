@@ -81,6 +81,9 @@ function MyTabs({ navigation }) {
                     options={{
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
                         tabBarButton: () => null,
+                        headerLeft: () => (
+                            <MaterialCommunityIcons onPress={() => navigation.navigate("Pagina do Livro")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />
+                        ),
                     }}
                     name="Comentários"
                     component={BookPageComments}

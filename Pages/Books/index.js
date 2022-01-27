@@ -23,7 +23,6 @@ function Books({ route }) {
         const body = data;
         const momentDate = data.publishDate ? moment(new Date("Mar 14, 2017")).format("DD/MM/YYYY") : false;
         body.publishDate = momentDate;
-        console.log(momentDate);
 
         if (!data.title || !data.isbn) {
             alert("Necessário título e ISBN");
