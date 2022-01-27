@@ -90,12 +90,9 @@ function List({ route }) {
                 </Container>
             </ScrollView>
             <FooterView>
-                <View style={{ display: "flex", paddingTop: 5, justifyContent: "space-around", flexDirection: "row" }}>
+                <View style={{ display: "flex", paddingTop: 5, justifyContent: "space-evenly", flexDirection: "row" }}>
                     <TouchableOpacity style={{ backgroundColor: "#162130", borderRadius: 10, padding: 15, display: "flex", flexDirection: "row", alignItems: "center" }}>
                         <MaterialCommunityIcons name="comment-text-outline" color="white" size={18} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={{ backgroundColor: "#162130", borderRadius: 10, padding: 15, display: "flex", flexDirection: "row", alignItems: "center" }}>
-                        <MaterialCommunityIcons name="star" color="white" size={18} />
                     </TouchableOpacity>
                     <TouchableOpacity style={{ backgroundColor: "#162130", borderRadius: 10, padding: 10, display: "flex", flexDirection: "row", alignItems: "center" }}>
                         <Text size={16} color="white">
