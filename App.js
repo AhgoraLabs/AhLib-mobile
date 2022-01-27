@@ -108,7 +108,6 @@ export default function App(navigation) {
             <Stack.Navigator screenOptions={{ headerShown: false }}>
                 {!logged && <Stack.Screen name="login" component={Login} />}
                 <Stack.Screen name="book" component={MyTabs} />
-                {/* <Stack.Screen name="aaaa" component={List} /> */}
             </Stack.Navigator>
         </NavigationContainer>
     );
