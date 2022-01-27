@@ -30,7 +30,6 @@ function MyTabs({ navigation }) {
                 shifting={true}
                 sceneAnimationEnabled={false}
                 screenOptions={{
-                    //headerLeft: () => <Button onPress={() => alert("This is a button!")} title="Info" color="#fff" />,
                     headerLeft: () => <MaterialCommunityIcons onPress={() => navigation.goBack()} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />,
                 }}
             >
@@ -70,6 +69,9 @@ function MyTabs({ navigation }) {
                     options={{
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
                         tabBarButton: () => null,
+                        headerLeft: () => (
+                            <MaterialCommunityIcons onPress={() => navigation.navigate("Lista de Livros")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />
+                        ),
                     }}
                     name="Pagina do Livro"
                     component={BookPage}
