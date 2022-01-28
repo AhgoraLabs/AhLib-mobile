@@ -11,21 +11,26 @@ function List({ route, navigation }) {
     const [sizeDescription, setSizeDescription] = useState(16);
     const [rate, setRate] = useState([]);
 
-    useEffect(async () => {
-        const { data } = await route.params;
-        await setBookData(data);
+    useEffect(() => {
+        if (!route) return false;
+        const { data } = route?.params;
+        setBookData(data);
         fetchGetComments(data);
     }, [route]);
 
     const fetchGetComments = async book => {
-        const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/comments/?idBook=${book._id}`);
-        const responseData = await response.json();
-        setCommentsData(responseData);
+        try {
+            const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/comments/?idBook=${book._id}`);
+            const responseData = await response.json();
+            setCommentsData(responseData);
 
-        const dataStars = responseData.data;
-        const stars = dataStars.map(({ stars }) => stars);
-        const valueStars = totalStars(stars);
-        setRate(valueStars);
+            const dataStars = responseData.data;
+            const stars = dataStars.map(({ stars }) => stars);
+            const valueStars = totalStars(stars);
+            setRate(valueStars);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     const totalStars = (star = []) => {

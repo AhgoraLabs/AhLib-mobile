@@ -8,27 +8,35 @@ export const Container = styled.View`
 `;
 export const Livros = styled.TouchableOpacity`
     width: 170px;
-    height: 280px;
-    border: 1px solid lightgray;
-    box-shadow: 5px 5px 1px black;
+    height: 220px;
     border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
-    overflow: hidden;
-    background-color: lightgray;
-    margin: 5px;
+    background-color: #b7b7b7;
+    margin-top: 50px;
+    elevation: 1;
+    padding-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
 `;
 
 export const Text = styled.Text`
-    font-size: 14px;
-    color: black;
+    font-size: ${props => (props.size ? `${props.size}px` : "18px")};
+    font-weight: ${props => (props.bold === true ? "bold" : "normal")};
+    text-transform: ${props => (props.uppercase === true ? "uppercase" : "capitalize")};
+    color: ${props => (props.color ? props.color : "black")};
+    text-align: center;
 `;
 
 export const Image = styled.Image`
-    width: 100%;
-    height: 90%;
+    width: 140px;
+    height: 220px;
     border-radius: 10px;
+    elevation: 2;
+    position: relative;
+    top: 0;
+    margin-left: 25px;
+    margin-bottom: -220px;
+    margin-top: 25px;
 `;

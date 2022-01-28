@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList } from "react-native";
+import { FlatList, View } from "react-native";
 import { Container, Livros, Text, Image } from "./styles";
 import ContentLoader, { Rect, Circle } from "react-content-loader/native";
 
@@ -38,17 +38,22 @@ function List({ navigation }) {
 
             <FlatList
                 data={listBooks}
-                contentContainerStyle={{ flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "center" }}
+                numColumns={1}
+                contentContainerStyle={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}
                 keyExtractor={listBooks => listBooks.title}
                 renderItem={({ item }) => (
-                    <Livros onPress={() => navigation.navigate("Pagina do Livro", { data: item })}>
-                        <Text>{item.title}</Text>
+                    <View key={item._id} style={{ paddingBottom: 30 }}>
                         <Image
                             source={{
                                 uri: item.image,
                             }}
                         />
-                    </Livros>
+                        <Livros onPress={() => navigation.navigate("Pagina do Livro", { data: item })}>
+                            <Text color="white" bold={true} size={14}>
+                                {item.title}
+                            </Text>
+                        </Livros>
+                    </View>
                 )}
             ></FlatList>
         </Container>
