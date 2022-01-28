@@ -14,6 +14,7 @@ import Book from "./Pages/Books";
 import List from "./Pages/List/index";
 import BookPage from "./Pages/BookPage";
 import BookPageComments from "./Pages/BookPage/Components/Comments";
+import BookLoan from "./Pages/BookPage/Components/Loan"
 
 //const Tab = createMaterialBottomTabNavigator();
 const Tab = createBottomTabNavigator();
@@ -87,6 +88,17 @@ function MyTabs({ navigation }) {
                     }}
                     name="Comentários"
                     component={BookPageComments}
+                />
+                <Tab.Screen
+                    options={{
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
+                        tabBarButton: () => null,
+                        headerLeft: () => (
+                            <MaterialCommunityIcons onPress={() => navigation.navigate("Pagina do Livro")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />
+                        ),
+                    }}
+                    name="Emprestimo"
+                    component={BookLoan}
                 />
                 <Tab.Screen
                     options={{
