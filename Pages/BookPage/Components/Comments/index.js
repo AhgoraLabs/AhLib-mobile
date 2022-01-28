@@ -29,7 +29,7 @@ function Comments({ route }) {
                             borderRadius: 10,
                             display: "flex",
                             alignItems: "center",
-                            elevation: 3,
+                            elevation: 1,
                         }}
                     >
                         <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>

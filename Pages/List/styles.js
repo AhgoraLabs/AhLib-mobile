@@ -13,9 +13,9 @@ export const Livros = styled.TouchableOpacity`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    background-color: #b7b7b7;
+    background-color: white;
     margin-top: 50px;
-    elevation: 1;
+    elevation: 5;
     padding-bottom: 20px;
     margin-right: 10px;
     margin-left: 10px;
@@ -33,10 +33,19 @@ export const Image = styled.Image`
     width: 140px;
     height: 220px;
     border-radius: 10px;
-    elevation: 2;
+    elevation: 6;
     position: relative;
     top: 0;
     margin-left: 25px;
     margin-bottom: -220px;
     margin-top: 25px;
+`;
+
+//List render books
+
+export const ImageList = styled.Image`
+    width: 40px;
+    height: 80px;
+    border-radius: 5px;
+    margin-right: 20px;
 `;
