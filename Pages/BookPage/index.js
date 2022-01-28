@@ -47,7 +47,7 @@ function List({ route, navigation }) {
                             uri: BookData.image,
                         }}
                     />
-                    <StarRating containerStyle={{ marginTop: 20 }} disabled={false} maxStars={5} rating={rate} fullStarColor="gold" halfStarColor="gold" />
+                    <StarRating containerStyle={{ marginTop: 20 }} disabled={false} maxStars={5} rating={rate ? rate : 0} fullStarColor="gold" halfStarColor="gold" />
                     <Text style={{ marginTop: 20, marginBottom: 15 }} bold={true} size={24} uppercase={true} color="#201A33">
                         {BookData.title}
                     </Text>
