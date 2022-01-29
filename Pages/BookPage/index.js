@@ -5,18 +5,20 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import ReadMore from "@fawazahmed/react-native-read-more";
 import StarRating from "react-native-star-rating";
 
-function List({ route, navigation }) {
+import { useBookContext } from "../Context/book";
+
+function List({ navigation }) {
+    const { providerBook } = useBookContext();
+    const data = providerBook("get");
     const [BookData, setBookData] = useState({});
     const [commentsData, setCommentsData] = useState({});
     const [sizeDescription, setSizeDescription] = useState(16);
     const [rate, setRate] = useState([]);
 
     useEffect(() => {
-        if (!route) return false;
-        const { data } = route?.params;
         setBookData(data);
         fetchGetComments(data);
-    }, [route]);
+    }, [data]);
 
     const fetchGetComments = async book => {
         try {
@@ -103,8 +105,10 @@ function List({ route, navigation }) {
                     >
                         <MaterialCommunityIcons name="comment-text-outline" color="white" size={18} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('Emprestimo')}
-                    style={{ backgroundColor: "#162130", borderRadius: 10, padding: 10, display: "flex", flexDirection: "row", alignItems: "center" }}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("Emprestimo")}
+                        style={{ backgroundColor: "#162130", borderRadius: 10, padding: 10, display: "flex", flexDirection: "row", alignItems: "center" }}
+                    >
                         <Text size={16} color="white">
                             Alugar Este Livro
                         </Text>

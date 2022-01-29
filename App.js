@@ -7,6 +7,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+//context menu
+import BookProvider from "./Pages/Context/book";
+
 import Login from "./Login";
 import Home from "./Pages/Home";
 import Camera from "./Pages/Camera";
@@ -14,7 +17,7 @@ import Book from "./Pages/Books";
 import List from "./Pages/List/index";
 import BookPage from "./Pages/BookPage";
 import BookPageComments from "./Pages/BookPage/Components/Comments";
-import BookLoan from "./Pages/BookPage/Components/Loan"
+import BookLoan from "./Pages/BookPage/Components/Loan";
 
 //const Tab = createMaterialBottomTabNavigator();
 const Tab = createBottomTabNavigator();
@@ -128,11 +131,13 @@ export default function App(navigation) {
     }, []);
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
-                {!logged && <Stack.Screen name="login" component={Login} />}
-                <Stack.Screen name="book" component={MyTabs} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <BookProvider>
+            <NavigationContainer>
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    {!logged && <Stack.Screen name="login" component={Login} />}
+                    <Stack.Screen name="book" component={MyTabs} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </BookProvider>
     );
 }

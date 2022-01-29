@@ -5,11 +5,16 @@ import ReadMore from "@fawazahmed/react-native-read-more";
 import UserAvatar from "react-native-user-avatar";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
+//context
+import { useBookContext } from "../../../Context/book";
+
 function Comments({ route }) {
+    const { providerBook } = useBookContext();
     const [commentsData, setCommentsData] = useState([]);
 
     useEffect(() => {
         setCommentsData(route.params.data);
+        console.log(providerBook("get"));
     }, [route]);
     return (
         <ScrollView>

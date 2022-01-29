@@ -3,8 +3,11 @@ import { FlatList, View, TouchableOpacity } from "react-native";
 import { Container, Livros, Text, Image, ImageList } from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Placeholder, PlaceholderMedia, PlaceholderLine, Fade, Loader, Shine, ShineOverlay } from "rn-placeholder";
+import { useBookContext } from "../Context/book";
 
 function List({ navigation }) {
+    const { providerBook } = useBookContext();
+
     const [listBooks, setListBooks] = useState([]);
     const [normalModeList, setNormalModeList] = useState(true);
 
@@ -31,6 +34,11 @@ function List({ navigation }) {
         }
     };
 
+    const handleClickBook = item => {
+        providerBook("set", item);
+        navigation.navigate("Pagina do Livro");
+    };
+
     const normalBooksRender = () => (
         <Container>
             <FlatList
@@ -45,7 +53,7 @@ function List({ navigation }) {
                                 uri: item.image,
                             }}
                         />
-                        <Livros onPress={() => navigation.navigate("Pagina do Livro", { data: item })}>
+                        <Livros onPress={() => handleClickBook(item)}>
                             <Text color="#201A33" bold={true} size={14}>
                                 {item.title}
                             </Text>
@@ -74,7 +82,7 @@ function List({ navigation }) {
                         elevation: 1,
                         margin: 10,
                     }}
-                    onPress={() => navigation.navigate("Pagina do Livro", { data: item })}
+                    onPress={() => handleClickBook(item)}
                 >
                     <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                         <ImageList
