@@ -59,7 +59,7 @@ export const NoImage = styled.Text`
     margin-bottom: -220px;
     margin-top: 25px;
     margin-left: 25px;
-    background-color: lightgray;
+    background-color: lightblue;
 `;
 
 //List render books

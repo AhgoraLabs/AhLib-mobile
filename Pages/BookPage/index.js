@@ -43,7 +43,7 @@ function List({ navigation }) {
                             }}
                         />
                     ) : (
-                        <NoImage>Sem Imagem{"\n"}Disponível</NoImage>
+                        <NoImage>{BookData.title}</NoImage>
                     )}
                     <StarRating containerStyle={{ marginTop: 20 }} disabled={false} maxStars={5} rating={rate ? rate : 0} fullStarColor="gold" halfStarColor="gold" />
                     <Text style={{ marginTop: 20, marginBottom: 15 }} bold={true} size={24} uppercase={true} color="#201A33">

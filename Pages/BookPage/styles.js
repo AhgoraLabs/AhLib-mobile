@@ -31,7 +31,7 @@ export const NoImage = styled.Text`
     width: 180px;
     height: 250px;
     border-radius: 20px;
-    background-color: lightgray;
+    background-color: lightblue;
     text-align: center;
     padding-top: 100px;
 `;

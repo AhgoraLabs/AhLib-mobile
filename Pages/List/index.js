@@ -86,7 +86,7 @@ function List({ navigation }) {
                                     }}
                                 />
                             ) : (
-                                <NoImage>Sem Imagem Disponível</NoImage>
+                                <NoImage>{item.title}</NoImage>
                             )}
                         </View>
 
