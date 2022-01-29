@@ -2,9 +2,18 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
     display: flex;
-    flex-direction: row;
-    height: 100%;
+
     padding-top: 10px;
+    padding-bottom: 100px;
+    height: 120%;
+`;
+
+export const ScrollView = styled.ScrollView`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 100%;
 `;
 export const Livros = styled.TouchableOpacity`
     width: 170px;
@@ -33,12 +42,24 @@ export const Image = styled.Image`
     width: 140px;
     height: 220px;
     border-radius: 10px;
-    elevation: 6;
     position: relative;
     top: 0;
     margin-left: 25px;
     margin-bottom: -220px;
     margin-top: 25px;
+`;
+export const NoImage = styled.Text`
+    width: 140px;
+    height: 220px;
+    border-radius: 10px;
+    position: relative;
+    top: 0;
+    padding-top: 100px;
+    text-align: center;
+    margin-bottom: -220px;
+    margin-top: 25px;
+    margin-left: 25px;
+    background-color: lightgray;
 `;
 
 //List render books

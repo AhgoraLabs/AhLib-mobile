@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, View, TouchableOpacity } from "react-native";
-import { Container, Livros, Text, Image, ImageList } from "./styles";
+import { Container, Livros, Text, Image, NoImage, ImageList, ScrollView } from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { Placeholder, PlaceholderMedia, PlaceholderLine, Fade, Loader, Shine, ShineOverlay } from "rn-placeholder";
+import { Placeholder, Loader } from "rn-placeholder";
 
 //context
 import { useBookContext } from "../Context/book";
@@ -47,20 +47,49 @@ function List({ navigation }) {
         navigation.navigate("Pagina do Livro");
     };
 
-    const normalBooksRender = () => (
+    const gridBooksRender = () => (
         <Container>
+            {/* <ScrollView>
+                {listBooks.map(item => (
+                    <View key={item._id} style={{ paddingBottom: 30 }}>
+                        <View style={{ elevation: 6 }}>
+                            {item.image ? (
+                                <Image
+                                    source={{
+                                        uri: item.image,
+                                    }}
+                                />
+                            ) : (
+                                <NoImage>Sem Imagem Disponível</NoImage>
+                            )}
+                        </View>
+
+                        <Livros onPress={() => handleClickBook(item)}>
+                            <Text color="#201A33" bold={true} size={14}>
+                                {item.title}
+                            </Text>
+                        </Livros>
+                    </View>
+                ))}
+            </ScrollView> */}
             <FlatList
                 data={listBooks}
-                numColumns={1}
-                contentContainerStyle={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}
+                contentContainerStyle={{ flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "center", height: "120%" }}
                 keyExtractor={listBooks => listBooks.title}
                 renderItem={({ item }) => (
                     <View key={item._id} style={{ paddingBottom: 30 }}>
-                        <Image
-                            source={{
-                                uri: item.image,
-                            }}
-                        />
+                        <View style={{ elevation: 6 }}>
+                            {item.image ? (
+                                <Image
+                                    source={{
+                                        uri: item.image,
+                                    }}
+                                />
+                            ) : (
+                                <NoImage>Sem Imagem Disponível</NoImage>
+                            )}
+                        </View>
+
                         <Livros onPress={() => handleClickBook(item)}>
                             <Text color="#201A33" bold={true} size={14}>
                                 {item.title}
@@ -119,7 +148,7 @@ function List({ navigation }) {
                     >
                         <MaterialCommunityIcons style={{ marginLeft: 5 }} name={normalModeList ? "view-headline" : "view-grid-outline"} color="gray" size={30} />
                     </TouchableOpacity>
-                    {normalModeList ? normalBooksRender() : listBooksRender()}
+                    {normalModeList ? gridBooksRender() : listBooksRender()}
                 </>
             )}
         </>
