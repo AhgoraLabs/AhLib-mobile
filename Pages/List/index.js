@@ -8,11 +8,11 @@ import { Placeholder, Loader } from "rn-placeholder";
 import { useBookContext } from "../Context/book";
 
 //api
-import { getCommentsBook } from "../../api/api";
+import { getCommentsBook, getBooks } from "../../api/api";
 
 function List({ navigation }) {
-    const { providerBook, providerComments } = useBookContext();
-
+    const { providerBook, providerComments, providerBookList } = useBookContext();
+    const dataBookList = providerBookList("get");
     const [listBooks, setListBooks] = useState([]);
     const [normalModeList, setNormalModeList] = useState(true);
 
@@ -20,22 +20,13 @@ function List({ navigation }) {
         handleGetBooks();
     }, []);
 
-    const handleGetBooks = async () => {
-        try {
-            //const token = await AsyncStorage.getItem("@token");
-            const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/books/", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-            });
+    useEffect(() => {
+        setListBooks(dataBookList);
+    }, [dataBookList]);
 
-            const responseData = await response.json();
-            setListBooks(responseData.data);
-        } catch (error) {
-            console.log(error);
-        }
+    const handleGetBooks = async () => {
+        const response = await getBooks();
+        providerBookList("set", response);
     };
 
     const handleClickBook = async item => {
