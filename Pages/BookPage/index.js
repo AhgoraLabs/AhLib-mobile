@@ -83,7 +83,13 @@ function List({ navigation }) {
                                 <MaterialCommunityIcons name="minus" color="#494949" size={20} />
                             </TouchableOpacity>
                         </View>
-                        <ReadMore numberOfLines={5} seeMoreText="Ver Mais" seeLessText="Ver Menos" preserveLinebreaks={true} style={{ textAlign: "justify", color: "gray", fontSize: sizeDescription }}>
+                        <ReadMore
+                            numberOfLines={10}
+                            seeMoreText="Ver Mais"
+                            seeLessText="Ver Menos"
+                            preserveLinebreaks={true}
+                            style={{ textAlign: "justify", color: "gray", fontSize: sizeDescription }}
+                        >
                             {BookData.description}
                         </ReadMore>
                     </View>
