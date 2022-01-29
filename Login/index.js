@@ -17,13 +17,14 @@ export default function Login({ navigation }) {
     }, []);
 
     const handleLogin = async (email, password) => {
+        if (!email || !password) return alert("necessário inserir email e senha");
         setLoading(true);
         try {
             const settings = {
                 method: "POST",
                 body: JSON.stringify({
-                    email: "pablo.bion@hotmail.com",
-                    password: "1XBdcJzo",
+                    email,
+                    password,
                 }),
                 headers: {
                     Accept: "application/json",
@@ -34,18 +35,14 @@ export default function Login({ navigation }) {
             const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/users/auth", settings);
             const responseData = await response.json();
             const { error, message } = responseData;
-            const { token } = responseData.data;
 
-            console.log(message);
-
-            if (error || !token) {
-                alert(message);
-                return;
-            }
             setLoading(false);
-            await AsyncStorage.setItem("@token", token);
-            await navigation.navigate("Início");
-            //await navigation.navigate("book");
+            if (error) return alert(message);
+
+            await AsyncStorage.setItem("@token", responseData.data.token);
+            console.log(navigation);
+            navigation.navigate("Início");
+            navigation.navigate("book");
         } catch (err) {
             console.log(err);
         }
@@ -134,6 +131,14 @@ export default function Login({ navigation }) {
                 >
                     <Text style={styles.submitText}>Acessar</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.btnSubmit}
+                    onPress={() => {
+                        handleLogin("pablo.bion@hotmail.com", "1XBdcJzo");
+                    }}
+                >
+                    <Text style={styles.submitText}>Acessar (Dev)</Text>
+                </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     );
@@ -167,6 +172,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderRadius: 7,
         width: 250,
+        marginTop: 5,
     },
     submitText: {
         color: "#FFF",

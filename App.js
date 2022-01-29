@@ -105,7 +105,6 @@ function MyTabs({ navigation }) {
                 />
                 <Tab.Screen
                     options={{
-                        title: "AhLib",
                         tabBarLabel: "Sair",
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="logout" color={color} size={26} />,
                         tabBarStyle: { display: "none" },
