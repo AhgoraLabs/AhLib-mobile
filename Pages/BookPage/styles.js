@@ -27,6 +27,15 @@ export const Image = styled.Image`
     border-radius: 20px;
 `;
 
+export const NoImage = styled.Text`
+    width: 180px;
+    height: 250px;
+    border-radius: 20px;
+    background-color: lightgray;
+    text-align: center;
+    padding-top: 100px;
+`;
+
 export const FooterView = styled.View`
     position: absolute;
     bottom: 0;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, BackgroundColorHead, Image, Text, FooterView } from "./styles";
+import { Container, BackgroundColorHead, Image, NoImage, Text, FooterView } from "./styles";
 import { View, ScrollView, TouchableOpacity, Button } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ReadMore from "@fawazahmed/react-native-read-more";
@@ -36,11 +36,15 @@ function List({ navigation }) {
             <ScrollView>
                 <Container>
                     <BackgroundColorHead />
-                    <Image
-                        source={{
-                            uri: BookData.image,
-                        }}
-                    />
+                    {BookData.image ? (
+                        <Image
+                            source={{
+                                uri: BookData.image,
+                            }}
+                        />
+                    ) : (
+                        <NoImage>Sem Imagem{"\n"}Disponível</NoImage>
+                    )}
                     <StarRating containerStyle={{ marginTop: 20 }} disabled={false} maxStars={5} rating={rate ? rate : 0} fullStarColor="gold" halfStarColor="gold" />
                     <Text style={{ marginTop: 20, marginBottom: 15 }} bold={true} size={24} uppercase={true} color="#201A33">
                         {BookData.title}
@@ -52,19 +56,19 @@ function List({ navigation }) {
                         <View style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                             <Text color="gray">Editora</Text>
                             <Text size={16} bold={true} color="#201A33">
-                                {BookData.publisher}
+                                {BookData.publisher ? BookData.publisher : "n/a"}
                             </Text>
                         </View>
                         <View style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                             <Text color="gray">Idioma</Text>
                             <Text size={16} bold={true} color="#201A33">
-                                {BookData.language}
+                                {BookData.language ? BookData.language : "n/a"}
                             </Text>
                         </View>
                         <View style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                             <Text color="gray">Páginas</Text>
                             <Text size={16} bold={true} color="#201A33">
-                                {BookData.pages}
+                                {BookData.pages ? BookData.pages : "n/a"}
                             </Text>
                         </View>
                     </View>
