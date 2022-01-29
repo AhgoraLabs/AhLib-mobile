@@ -2,10 +2,12 @@ import { View, Text, StyleSheet, Image, TextInput, Button, TouchableOpacity, Bac
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState, useEffect } from "react";
 import { KeyboardAvoidingView } from "./styles";
+import { Placeholder, Loader } from "rn-placeholder";
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         startImageRotateFunction();
@@ -15,6 +17,7 @@ export default function Login({ navigation }) {
     }, []);
 
     const handleLogin = async (email, password) => {
+        setLoading(true);
         try {
             const settings = {
                 method: "POST",
@@ -39,9 +42,10 @@ export default function Login({ navigation }) {
                 alert(message);
                 return;
             }
-
+            setLoading(false);
             await AsyncStorage.setItem("@token", token);
             await navigation.navigate("Início");
+            //await navigation.navigate("book");
         } catch (err) {
             console.log(err);
         }
@@ -95,6 +99,14 @@ export default function Login({ navigation }) {
                     source={require("../assets/ahlib.png")}
                 ></Animated.Image>
             </View>
+
+            {loading ? (
+                <View style={{ height: 80 }}>
+                    <Placeholder style={{ marginTop: 100 }} Animation={props => <Loader {...props} size="large" color="gray" />} />
+                </View>
+            ) : (
+                <View style={{ height: 80 }}></View>
+            )}
 
             <View style={styles.containerLogo}>
                 <TextInput

@@ -109,6 +109,8 @@ function MyTabs({ navigation }) {
                         tabBarLabel: "Sair",
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="logout" color={color} size={26} />,
                         tabBarStyle: { display: "none" },
+                        headerLeft: () => null,
+                        headerShown: false,
                     }}
                     name="logout"
                     component={Login}
