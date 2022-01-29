@@ -8,14 +8,14 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 //context
 import { useBookContext } from "../../../Context/book";
 
-function Comments({ route }) {
-    const { providerBook } = useBookContext();
+function Comments({}) {
+    const { providerComments } = useBookContext();
+    const dataCommentsContext = providerComments();
     const [commentsData, setCommentsData] = useState([]);
 
     useEffect(() => {
-        setCommentsData(route.params.data);
-        console.log(providerBook("get"));
-    }, [route]);
+        setCommentsData(dataCommentsContext);
+    }, [dataCommentsContext]);
     return (
         <ScrollView>
             <View>

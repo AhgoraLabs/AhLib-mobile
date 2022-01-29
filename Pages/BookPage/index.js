@@ -8,35 +8,27 @@ import StarRating from "react-native-star-rating";
 import { useBookContext } from "../Context/book";
 
 function List({ navigation }) {
-    const { providerBook } = useBookContext();
-    const data = providerBook("get");
+    const { providerBook, providerComments } = useBookContext();
+    const dataBookContext = providerBook("get");
+    const dataCommentsContext = providerComments("get");
+
     const [BookData, setBookData] = useState({});
-    const [commentsData, setCommentsData] = useState({});
     const [sizeDescription, setSizeDescription] = useState(16);
     const [rate, setRate] = useState([]);
 
     useEffect(() => {
-        setBookData(data);
-        fetchGetComments(data);
-    }, [data]);
+        setBookData(dataBookContext);
+        totalStars();
+    }, [dataBookContext, dataCommentsContext]);
 
-    const fetchGetComments = async book => {
+    const totalStars = () => {
         try {
-            const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/comments/?idBook=${book._id}`);
-            const responseData = await response.json();
-            setCommentsData(responseData);
-
-            const dataStars = responseData.data;
-            const stars = dataStars.map(({ stars }) => stars);
-            const valueStars = totalStars(stars);
+            const stars = dataCommentsContext.map(({ stars }) => stars);
+            const valueStars = stars.length > 0 ? parseInt(stars.reduce((acc, curr) => curr + acc)) / stars.length : 0;
             setRate(valueStars);
         } catch (err) {
             console.log(err);
         }
-    };
-
-    const totalStars = (star = []) => {
-        return star.length > 0 ? parseInt(star.reduce((acc, curr) => curr + acc)) / star.length : 0;
     };
 
     return (
@@ -100,7 +92,7 @@ function List({ navigation }) {
             <FooterView>
                 <View style={{ display: "flex", paddingTop: 5, justifyContent: "space-evenly", flexDirection: "row" }}>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate("Comentários", { data: commentsData.data })}
+                        onPress={() => navigation.navigate("Comentários")}
                         style={{ backgroundColor: "#162130", borderRadius: 10, padding: 15, display: "flex", flexDirection: "row", alignItems: "center" }}
                     >
                         <MaterialCommunityIcons name="comment-text-outline" color="white" size={18} />

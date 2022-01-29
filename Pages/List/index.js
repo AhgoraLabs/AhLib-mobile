@@ -3,10 +3,15 @@ import { FlatList, View, TouchableOpacity } from "react-native";
 import { Container, Livros, Text, Image, ImageList } from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Placeholder, PlaceholderMedia, PlaceholderLine, Fade, Loader, Shine, ShineOverlay } from "rn-placeholder";
+
+//context
 import { useBookContext } from "../Context/book";
 
+//api
+import { getCommentsBook } from "../../api/api";
+
 function List({ navigation }) {
-    const { providerBook } = useBookContext();
+    const { providerBook, providerComments } = useBookContext();
 
     const [listBooks, setListBooks] = useState([]);
     const [normalModeList, setNormalModeList] = useState(true);
@@ -28,14 +33,17 @@ function List({ navigation }) {
 
             const responseData = await response.json();
             setListBooks(responseData.data);
-            console.log(responseData);
         } catch (error) {
             console.log(error);
         }
     };
 
-    const handleClickBook = item => {
+    const handleClickBook = async item => {
+        //set book to provider
         providerBook("set", item);
+        //set comments to provider
+        const comments = await getCommentsBook(item._id);
+        providerComments("set", comments);
         navigation.navigate("Pagina do Livro");
     };
 
