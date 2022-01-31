@@ -14,7 +14,7 @@ function List({ navigation }) {
 
     const [BookData, setBookData] = useState({});
     const [sizeDescription, setSizeDescription] = useState(16);
-    const [rate, setRate] = useState([]);
+    const [rate, setRate] = useState(0);
 
     useEffect(() => {
         setBookData(dataBookContext);

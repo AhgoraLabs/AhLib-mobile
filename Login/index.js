@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { KeyboardAvoidingView } from "./styles";
 import { Placeholder, Loader } from "rn-placeholder";
 
-export default function Login({ navigation }) {
+export default function Login({ navigation, route }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -40,9 +40,7 @@ export default function Login({ navigation }) {
             if (error) return alert(message);
 
             await AsyncStorage.setItem("@token", responseData.data.token);
-            console.log(navigation);
-            navigation.navigate("Início");
-            navigation.navigate("book");
+            route.name === "logout" ? navigation.navigate("Início") : navigation.navigate("book");
         } catch (err) {
             console.log(err);
         }
