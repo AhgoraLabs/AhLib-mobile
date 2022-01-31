@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Image } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
 
@@ -11,6 +11,8 @@ export default function CameraComponent({ navigation }) {
     const [hasPermission, setHasPermission] = useState(null);
     const isFocused = useIsFocused();
     const [isbnText, setIsbnText] = useState("");
+    
+        
 
     useEffect(() => {
         (async () => {
@@ -22,18 +24,18 @@ export default function CameraComponent({ navigation }) {
     const getPerIsbn = async ({ type, data }) => {
         setLoading(true);
         try {
-            const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/9788500019531`);
+            const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/${data}`);
             const responseData = await response.json();
             setScanned(true);
             setLoading(false);
-            console.log("PORAAAAAA");
+            console.logv 
             navigation.navigate("Cadastro de Livro", { data: { ...responseData, data } });
         } catch (error) {
             console.log(error);
         }
     };
 
-    const handleGetPerIsbnText = dataIsbn => {
+    const handleGetPerIsbnText = (dataIsbn) => {
         if (dataIsbn === "") return navigation.navigate("Cadastro de Livro");
         if (dataIsbn.length < 10) return alert("Isbn precisa ter 10 ou mais números e não pode ser vazio.");
         getPerIsbn({ data: dataIsbn });
@@ -63,7 +65,7 @@ export default function CameraComponent({ navigation }) {
                     <>
                         <LineBar />
                         <Text style={{ color: "white", fontSize: 20, marginTop: 20, textAlign: "center" }}>Coloque o código de barras na area indicada</Text>
-                        <Input placeholder="Digite o ISBN" autoCorrect={false} onChangeText={value => setIsbnText(value)} />
+                        <Input placeholder="Digite o ISBN" autoCorrect={false} keyboardType="numeric" onChangeText={(value) => setIsbnText(value)} />
                         <Button
                             onPress={() => {
                                 handleGetPerIsbnText(isbnText);
@@ -80,8 +82,9 @@ export default function CameraComponent({ navigation }) {
                         >
                             Cadastrar um novo livro
                         </Text>
+                        
                     </>
-                )}
+                )}  
                 {loading && (
                     <View style={{ flex: 1, backgroundColor: "white", alignItems: "center", justifyContent: "center" }}>
                         <Image style={{ marginTop: 30 }} source={require("../../assets/loading2.gif")} />
