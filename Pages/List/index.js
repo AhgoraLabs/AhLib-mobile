@@ -44,6 +44,9 @@ function List({ navigation }) {
                 numColumns={2}
                 data={listBooks}
                 contentContainerStyle={{ paddingBottom: 100 }}
+                keyExtractor={() => {
+                    return new Date().getTime().toString() + Math.floor(Math.random() * Math.floor(new Date().getTime())).toString();
+                }}
                 renderItem={({ item }) => (
                     <View key={item._id} style={{ paddingBottom: 30 }}>
                         <View style={{ elevation: 6 }}>
