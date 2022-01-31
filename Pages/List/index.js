@@ -40,33 +40,10 @@ function List({ navigation }) {
 
     const gridBooksRender = () => (
         <Container>
-            {/* <ScrollView>
-                {listBooks.map(item => (
-                    <View key={item._id} style={{ paddingBottom: 30 }}>
-                        <View style={{ elevation: 6 }}>
-                            {item.image ? (
-                                <Image
-                                    source={{
-                                        uri: item.image,
-                                    }}
-                                />
-                            ) : (
-                                <NoImage>Sem Imagem Disponível</NoImage>
-                            )}
-                        </View>
-
-                        <Livros onPress={() => handleClickBook(item)}>
-                            <Text color="#201A33" bold={true} size={14}>
-                                {item.title}
-                            </Text>
-                        </Livros>
-                    </View>
-                ))}
-            </ScrollView> */}
             <FlatList
+                numColumns={2}
                 data={listBooks}
-                contentContainerStyle={{ flexDirection: "row", flexWrap: "wrap", alignItems: "center", justifyContent: "center", height: "120%" }}
-                keyExtractor={listBooks => listBooks.title}
+                contentContainerStyle={{ paddingBottom: 100 }}
                 renderItem={({ item }) => (
                     <View key={item._id} style={{ paddingBottom: 30 }}>
                         <View style={{ elevation: 6 }}>
@@ -80,7 +57,6 @@ function List({ navigation }) {
                                 <NoImage>{item.title}</NoImage>
                             )}
                         </View>
-
                         <Livros onPress={() => handleClickBook(item)}>
                             <Text color="#201A33" bold={true} size={14}>
                                 {item.title}
