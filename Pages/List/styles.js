@@ -1,5 +1,19 @@
 import styled from "styled-components/native";
 
+const randomColor = {
+    0: "#FFCB00",
+    1: "#FF8A00",
+    2: "#FF5E00",
+    3: "#F1948A",
+    4: "#D2B4DE",
+    5: "#A9CCE3",
+    6: "#A3E4D7",
+    7: "#F9E79F",
+    8: "#F5CBA7",
+    9: "#CCD1D1",
+    10: "#52BE80",
+};
+
 export const Container = styled.View`
     display: flex;
 
@@ -59,7 +73,7 @@ export const NoImage = styled.Text`
     margin-bottom: -220px;
     margin-top: 25px;
     margin-left: 25px;
-    background-color: lightblue;
+    background-color: ${randomColor[Math.floor(Math.random() * 10)]};
 `;
 
 //List render books
@@ -69,4 +83,14 @@ export const ImageList = styled.Image`
     height: 80px;
     border-radius: 5px;
     margin-right: 20px;
+`;
+
+export const NoImageList = styled.View`
+    width: 40px;
+    height: 80px;
+    border-radius: 5px;
+    background-color: blue;
+    margin-right: 25px;
+    padding-top: 10px;
+    background-color: ${randomColor[Math.floor(Math.random() * 10)]};
 `;

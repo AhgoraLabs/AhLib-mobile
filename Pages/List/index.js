@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, View, TouchableOpacity } from "react-native";
-import { Container, Livros, Text, Image, NoImage, ImageList, ScrollView } from "./styles";
+import { Container, Livros, Text, Image, NoImage, ImageList, ScrollView, NoImageList } from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Placeholder, Loader } from "rn-placeholder";
 
@@ -11,10 +11,10 @@ import { useBookContext } from "../Context/book";
 import { getCommentsBook, getBooks } from "../../api/api";
 
 function List({ navigation }) {
-    const { providerBook, providerComments, providerBookList } = useBookContext();
+    const { providerBook, providerComments, providerBookList } = useBookContext([]);
     const dataBookList = providerBookList("get");
     const [listBooks, setListBooks] = useState([]);
-    const [normalModeList, setNormalModeList] = useState(true);
+    const [normalModeList, setNormalModeList] = useState(false);
 
     useEffect(() => {
         handleGetBooks();
@@ -92,11 +92,18 @@ function List({ navigation }) {
                     onPress={() => handleClickBook(item)}
                 >
                     <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                        <ImageList
-                            source={{
-                                uri: item.image,
-                            }}
-                        />
+                        {item.image ? (
+                            <ImageList
+                                source={{
+                                    uri: item.image,
+                                }}
+                            />
+                        ) : (
+                            <NoImageList>
+                                <Text size={10}>{item.title}</Text>
+                            </NoImageList>
+                        )}
+
                         <Text color="#201A33" size={18} bold={true}>
                             {item.title}
                         </Text>
