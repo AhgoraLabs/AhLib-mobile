@@ -48,7 +48,7 @@ export default function Login({ navigation, route }) {
         }
     };
     const handleCreate = async (email, name) => {
-        if (!email || !name) return alert("necessário inserir email e nome");
+       // if (!email || !name) return alert("necessário inserir email e nome");
         setLoading(true);
         try {
             const settings = {
@@ -174,7 +174,7 @@ export default function Login({ navigation, route }) {
                     placeholder="Nome"
                     autoCorrect={false}
                     onChangeText={value => {
-                        setEmail(value);
+                        setName(value);
                     }}
                 />
     <TextInput
@@ -190,7 +190,7 @@ export default function Login({ navigation, route }) {
                 <TouchableOpacity
                     style={styles.btnSubmit}
                     onPress={() =>  { 
-                        handleLogin(email, password);
+                        handleCreate(email, name);
                     }}
                 >
                     <Text >Criar Conta</Text>

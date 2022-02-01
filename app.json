@@ -7,9 +7,9 @@
         "privacy": "public",
         "icon": "./assets/onlylogo.png",
         "splash": {
-            "image": "./assets/splash.png",
+            "image": "./assets/iconAhgora.png",
             "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
+            "backgroundColor": "#2d2d2d"
         },
         "updates": {
             "fallbackToCacheTimeout": 0
