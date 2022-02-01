@@ -159,9 +159,9 @@ export default function Login({ navigation, route }) {
                         >
                             <Text style={styles.submitText}>Acessar</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.btnSubmit} onPress={() => setMode("create")}>
+                        {/* <TouchableOpacity style={styles.btnSubmit} onPress={() => setMode("create")}>
                             <Text>Criar Conta</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </>
                 )}
                 {mode === "create" && (
