@@ -12,7 +12,7 @@ import { getCommentsBook, getBooks } from "../../api/api";
 
 function List({ navigation }) {
     const { providerBook, providerComments, providerBookList } = useBookContext([]);
-    const dataBookList = providerBookList("get");
+    // const dataBookList = providerBookList("get");
     const [listBooks, setListBooks] = useState([]);
     const [normalModeList, setNormalModeList] = useState(false);
 
@@ -20,13 +20,14 @@ function List({ navigation }) {
         handleGetBooks();
     }, []);
 
-    useEffect(() => {
-        setListBooks(dataBookList);
-    }, [dataBookList]);
+    // useEffect(() => {
+    //     setListBooks(dataBookList);
+    // }, [dataBookList]);
 
     const handleGetBooks = async () => {
         const response = await getBooks();
-        providerBookList("set", response);
+        setListBooks(response);
+        //providerBookList("set", response);
     };
 
     const handleClickBook = async item => {
