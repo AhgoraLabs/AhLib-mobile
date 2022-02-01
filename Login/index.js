@@ -9,7 +9,7 @@ export default function Login({ navigation, route }) {
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
-    const [mode, setMode] = useState("login")
+    const [mode, setMode] = useState("login");
 
     useEffect(() => {
         startImageRotateFunction();
@@ -42,13 +42,13 @@ export default function Login({ navigation, route }) {
             if (error) return alert(message);
 
             await AsyncStorage.setItem("@token", responseData.data.token);
-            route.name === "logout" ? navigation.navigate("Início") : navigation.navigate("book");
+            route.name === "logout" ? navigation.navigate("Lista de Livros") : navigation.navigate("book");
         } catch (err) {
             console.log(err);
         }
     };
     const handleCreate = async (email, name) => {
-       // if (!email || !name) return alert("necessário inserir email e nome");
+        // if (!email || !name) return alert("necessário inserir email e nome");
         setLoading(true);
         try {
             const settings = {
@@ -69,15 +69,10 @@ export default function Login({ navigation, route }) {
 
             setLoading(false);
             if (error) return alert(message);
-
-            await AsyncStorage.setItem("@token", responseData.data.token);
-            route.name === "logout" ? navigation.navigate("Início") : navigation.navigate("book");
         } catch (err) {
             console.log(err);
         }
     };
-
-
 
     let [rotateValueHolder] = useState(new Animated.Value(0));
 
@@ -137,68 +132,71 @@ export default function Login({ navigation, route }) {
             )}
 
             <View style={styles.containerLogo}>
-            { mode === "login" && ( <><TextInput
-                    
-                    style={styles.input}
-                    placeholder="Email"
-                    autoCorrect={false}
-                    onChangeText={value => {
-                        setEmail(value);
-                    }}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="Senha"
-                    autoCorrect={false}
-                    secureTextEntry={true}
-                    onChangeText={value => {
-                        setPassword(value);
-                    }}
-                />
-                <TouchableOpacity
-                    style={styles.btnSubmit}
-                    onPress={() => {
-                        handleLogin(email, password);
-                    }}
-                >
-                    <Text style={styles.submitText}>Acessar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.btnSubmit} onPress={() => setMode("create")}><Text>Criar Conta</Text></TouchableOpacity>
-                
-                </>
-)}
-    { mode === "create" && ( <>
-        <TextInput
-                    
-                    style={styles.input}
-                    placeholder="Nome"
-                    autoCorrect={false}
-                    onChangeText={value => {
-                        setName(value);
-                    }}
-                />
-    <TextInput
-                    
-                    style={styles.input}
-                    placeholder="Email"
-                    autoCorrect={false}
-                    onChangeText={value => {
-                        setEmail(value);
-                    }}
-                />
+                {mode === "login" && (
+                    <>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Email"
+                            autoCorrect={false}
+                            onChangeText={value => {
+                                setEmail(value);
+                            }}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Senha"
+                            autoCorrect={false}
+                            secureTextEntry={true}
+                            onChangeText={value => {
+                                setPassword(value);
+                            }}
+                        />
+                        <TouchableOpacity
+                            style={styles.btnSubmit}
+                            onPress={() => {
+                                handleLogin(email, password);
+                            }}
+                        >
+                            <Text style={styles.submitText}>Acessar</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.btnSubmit} onPress={() => setMode("create")}>
+                            <Text>Criar Conta</Text>
+                        </TouchableOpacity>
+                    </>
+                )}
+                {mode === "create" && (
+                    <>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Nome"
+                            autoCorrect={false}
+                            onChangeText={value => {
+                                setName(value);
+                            }}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Email"
+                            autoCorrect={false}
+                            onChangeText={value => {
+                                setEmail(value);
+                            }}
+                        />
 
-                <TouchableOpacity
-                    style={styles.btnSubmit}
-                    onPress={() =>  { 
-                        handleCreate(email, name);
-                    }}
-                >
-                    <Text >Criar Conta</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.btnCreate} onPress={() => setMode("login")}><Text>Cancelar</Text></TouchableOpacity>
-                </>
-)}
-               
+                        <TouchableOpacity
+                            style={styles.btnSubmit}
+                            onPress={() => {
+                                handleCreate(email, name);
+                            }}
+                        >
+                            <Text>Criar Conta</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.btnCreate} onPress={() => setMode("login")}>
+                            <Text>Cancelar</Text>
+                        </TouchableOpacity>
+                    </>
+                )}
+
                 <TouchableOpacity
                     style={styles.btnSubmit}
                     onPress={() => {
@@ -255,10 +253,9 @@ const styles = StyleSheet.create({
         color: "#FFF",
         marginLeft: "35%",
     },
-    btnCreate:{
-        padding:15,
-        alignItems: "center"  ,
+    btnCreate: {
+        padding: 15,
+        alignItems: "center",
         justifyContent: "center",
-    
     },
 });

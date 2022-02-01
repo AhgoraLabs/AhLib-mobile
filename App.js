@@ -39,9 +39,19 @@ function MyTabs({ navigation }) {
             >
                 <Tab.Screen
                     options={{
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
+                        // tabBarButton: () => null,
+                        headerLeft: () => null,
+                    }}
+                    name="Lista de Livros"
+                    component={List}
+                />
+                <Tab.Screen
+                    options={{
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={26} />,
                         showLabel: false,
                         headerLeft: () => null,
+                        tabBarButton: () => null,
                     }}
                     name="Início"
                     component={Home}
@@ -61,14 +71,6 @@ function MyTabs({ navigation }) {
                     }}
                     name="Cadastro de Livro"
                     component={Book}
-                />
-                <Tab.Screen
-                    options={{
-                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
-                        tabBarButton: () => null,
-                    }}
-                    name="Lista de Livros"
-                    component={List}
                 />
                 <Tab.Screen
                     options={{
