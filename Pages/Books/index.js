@@ -15,8 +15,6 @@ function Books({ route }) {
 
     const handleSendBook = async () => {
         const body = data;
-        // const momentDate = data.publishDate ? moment(new Date("Mar 14, 2017")).format("DD/MM/YYYY") : false;
-        // body.publishDate = momentDate;
 
         if (!data.title || !data.isbn) {
             alert("Necessário título e ISBN");
@@ -60,7 +58,7 @@ function Books({ route }) {
                 Limpar Campos
             </Label>
             <Div>
-                <Input placeholder="ISBN" defaultValue={data.isbn} onChangeText={value => handleChangeData("isbn", value)}></Input>
+                <Input placeholder="ISBN" defaultValue={data.data} onChangeText={value => handleChangeData("isbn", value)}></Input>
                 <Input placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
                 <Input placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
                 <Input placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>

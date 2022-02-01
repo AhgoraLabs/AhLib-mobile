@@ -30,6 +30,7 @@ function List({ navigation }) {
     };
 
     const handleClickBook = async item => {
+        console.log(item);
         //set book to provider
         providerBook("set", item);
         //set comments to provider
