@@ -7,6 +7,7 @@ import { Placeholder, Loader } from "rn-placeholder";
 export default function Login({ navigation, route }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
     const [mode, setMode] = useState("login")
 
@@ -46,6 +47,37 @@ export default function Login({ navigation, route }) {
             console.log(err);
         }
     };
+    const handleCreate = async (email, name) => {
+        if (!email || !name) return alert("necessário inserir email e nome");
+        setLoading(true);
+        try {
+            const settings = {
+                method: "POST",
+                body: JSON.stringify({
+                    email,
+                    name,
+                }),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+            };
+
+            const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/users/create", settings);
+            const responseData = await response.json();
+            const { error, message } = responseData;
+
+            setLoading(false);
+            if (error) return alert(message);
+
+            await AsyncStorage.setItem("@token", responseData.data.token);
+            route.name === "logout" ? navigation.navigate("Início") : navigation.navigate("book");
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
 
     let [rotateValueHolder] = useState(new Animated.Value(0));
 
@@ -131,11 +163,21 @@ export default function Login({ navigation, route }) {
                 >
                     <Text style={styles.submitText}>Acessar</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setMode("create")}><Text>Criar Conta</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btnSubmit} onPress={() => setMode("create")}><Text>Criar Conta</Text></TouchableOpacity>
                 
                 </>
 )}
-    { mode === "create" && ( <><TextInput
+    { mode === "create" && ( <>
+        <TextInput
+                    
+                    style={styles.input}
+                    placeholder="Nome"
+                    autoCorrect={false}
+                    onChangeText={value => {
+                        setEmail(value);
+                    }}
+                />
+    <TextInput
                     
                     style={styles.input}
                     placeholder="Email"
@@ -147,13 +189,13 @@ export default function Login({ navigation, route }) {
 
                 <TouchableOpacity
                     style={styles.btnSubmit}
-                    onPress={() => {
+                    onPress={() =>  { 
                         handleLogin(email, password);
                     }}
                 >
-                    <Text style={styles.submitText}>Criar Conta</Text>
+                    <Text >Criar Conta</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setMode("login")}><Text>Cancelar</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.btnCreate} onPress={() => setMode("login")}><Text>Cancelar</Text></TouchableOpacity>
                 </>
 )}
                
@@ -212,5 +254,11 @@ const styles = StyleSheet.create({
     registerText: {
         color: "#FFF",
         marginLeft: "35%",
+    },
+    btnCreate:{
+        padding:15,
+        alignItems: "center"  ,
+        justifyContent: "center",
+    
     },
 });
