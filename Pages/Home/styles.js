@@ -28,6 +28,8 @@ export const ModalStorie = styled.View`
     padding: 3px;
     elevation: 2;
     border-radius: 5px;
+    display: flex;
+    flex-direction: row;
 `;
 
 export const ImageStorie = styled.Image`
