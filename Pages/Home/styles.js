@@ -8,7 +8,7 @@ export const Text = styled.Text`
 `;
 
 export const Button = styled.TouchableOpacity`
-    background-color: cyan;
+    background-color: lightblue;
     align-items: center;
     margin: 20px;
     padding: 10px;

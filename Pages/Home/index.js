@@ -6,7 +6,6 @@ import styled from "styled-components/native";
 export default function Home({ navigation }) {
     return (
         <View style={{ padding: 10 }}>
-            <Text>Bem vindo ao AH Library seu merdass</Text>
             <Stories horizontal={true}>
                 <ModalStorie>
                     <ImageStorie style={{ borderWidth: 1, borderColor: "thistle", borderRadius: 50 }} source={require("../../assets/person1.jpg")} />
@@ -33,9 +32,8 @@ export default function Home({ navigation }) {
                     <ImageStorie source={require("../../assets/person1.jpg")} />
                 </ModalStorie>
             </Stories>
-            <Text>Últimos Livro acessados</Text>
             <Button onPress={() => navigation.navigate("Lista de Livros")}>
-                <Text>Lista de Livros (BETA)</Text>
+                <Text>Acessar todos os livros</Text>
             </Button>
         </View>
     );
