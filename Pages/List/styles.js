@@ -15,8 +15,7 @@ const randomColor = {
 };
 
 export const Container = styled.View`
-    display: flex;
-
+    flex-direction: row;
     padding-top: 10px;
     padding-bottom: 100px;
     height: 120%;
@@ -26,7 +25,6 @@ export const ScrollView = styled.ScrollView`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
     width: 100%;
 `;
 export const Livros = styled.TouchableOpacity`
@@ -40,8 +38,8 @@ export const Livros = styled.TouchableOpacity`
     margin-top: 50px;
     elevation: 5;
     padding-bottom: 20px;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 30px;
+    margin-left: 30px;
 `;
 
 export const Text = styled.Text`
@@ -58,9 +56,9 @@ export const Image = styled.Image`
     border-radius: 10px;
     position: relative;
     top: 0;
-    margin-left: 25px;
+    margin-left: 45px;
     margin-bottom: -220px;
-    margin-top: 25px;
+    margin-top: 45px;
 `;
 export const NoImage = styled.Text`
     width: 140px;
@@ -71,9 +69,9 @@ export const NoImage = styled.Text`
     padding-top: 100px;
     text-align: center;
     margin-bottom: -220px;
-    margin-top: 25px;
-    margin-left: 25px;
-    background-color: ${randomColor[Math.floor(Math.random() * 10)]};
+    margin-top: 45px;
+    margin-left: 45px;
+    background-color: ${props => (props.color ? props.color : "lightblue")};
 `;
 
 //List render books
@@ -92,5 +90,5 @@ export const NoImageList = styled.View`
     background-color: blue;
     margin-right: 25px;
     padding-top: 10px;
-    background-color: ${randomColor[Math.floor(Math.random() * 10)]};
+    background-color: ${props => (props.color ? props.color : "lightblue")};
 `;

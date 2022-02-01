@@ -40,12 +40,26 @@ function List({ navigation }) {
         navigation.navigate("Pagina do Livro");
     };
 
+    const randomColor = {
+        0: "#FFCB00",
+        1: "#FF8A00",
+        2: "#FF5E00",
+        3: "#F1948A",
+        4: "#D2B4DE",
+        5: "#A9CCE3",
+        6: "#A3E4D7",
+        7: "#F9E79F",
+        8: "#F5CBA7",
+        9: "#CCD1D1",
+        10: "#52BE80",
+    };
+
     const gridBooksRender = () => (
         <Container>
             <FlatList
                 numColumns={2}
                 data={listBooks}
-                contentContainerStyle={{ paddingBottom: 100 }}
+                contentContainerStyle={{ paddingBottom: 100, backgroundColor: "#494949", alignItems: "center", justifyContent: "space-between" }}
                 keyExtractor={() => {
                     return new Date().getTime().toString() + Math.floor(Math.random() * Math.floor(new Date().getTime())).toString();
                 }}
@@ -59,9 +73,10 @@ function List({ navigation }) {
                                     }}
                                 />
                             ) : (
-                                <NoImage>{item.title}</NoImage>
+                                <NoImage color={randomColor[Math.floor(Math.random() * 10)]}>{item.title}</NoImage>
                             )}
                         </View>
+
                         <Livros onPress={() => handleClickBook(item)}>
                             <Text color="#201A33" bold={true} size={14}>
                                 {item.title}
