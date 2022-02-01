@@ -15,7 +15,7 @@ const Example = () => {
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = (date) => {
+  const onConfirm = (date) => {
     console.warn("Data selecionada: ", date);
     hideDatePicker();
   };
@@ -26,8 +26,9 @@ const Example = () => {
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
-        onConfirm={handleConfirm}
+        onConfirm={onConfirm}
         onCancel={hideDatePicker}
+        
       />
     </View>
   );

@@ -8,6 +8,7 @@ export default function Login({ navigation, route }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const [mode, setMode] = useState("login")
 
     useEffect(() => {
         startImageRotateFunction();
@@ -104,7 +105,8 @@ export default function Login({ navigation, route }) {
             )}
 
             <View style={styles.containerLogo}>
-                <TextInput
+            { mode === "login" && ( <><TextInput
+                    
                     style={styles.input}
                     placeholder="Email"
                     autoCorrect={false}
@@ -129,6 +131,32 @@ export default function Login({ navigation, route }) {
                 >
                     <Text style={styles.submitText}>Acessar</Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => setMode("create")}><Text>Criar Conta</Text></TouchableOpacity>
+                
+                </>
+)}
+    { mode === "create" && ( <><TextInput
+                    
+                    style={styles.input}
+                    placeholder="Email"
+                    autoCorrect={false}
+                    onChangeText={value => {
+                        setEmail(value);
+                    }}
+                />
+
+                <TouchableOpacity
+                    style={styles.btnSubmit}
+                    onPress={() => {
+                        handleLogin(email, password);
+                    }}
+                >
+                    <Text style={styles.submitText}>Criar Conta</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setMode("login")}><Text>Cancelar</Text></TouchableOpacity>
+                </>
+)}
+               
                 <TouchableOpacity
                     style={styles.btnSubmit}
                     onPress={() => {
