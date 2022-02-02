@@ -80,7 +80,7 @@ function List({ navigation }) {
                         </View>
 
                         <Livros onPress={() => handleClickBook(item)}>
-                            <Text color="black" bold={true} size={14}>
+                            <Text color="white" bold={true} size={14}>
                                 {item.title}
                             </Text>
                         </Livros>
@@ -95,12 +95,12 @@ function List({ navigation }) {
             data={listBooks}
             numColumns={1}
             keyExtractor={listBooks => listBooks.title}
-            contentContainerStyle={{ backgroundColor: colorBackground, height: "100%" }}
+            contentContainerStyle={{ backgroundColor: colorBackground, paddingBottom: 200 }}
             renderItem={({ item }) => (
                 <TouchableOpacity
                     key={item._id}
                     style={{
-                        backgroundColor: "white",
+                        backgroundColor: "#333",
                         padding: 10,
                         borderRadius: 10,
                         display: "flex",
@@ -122,7 +122,7 @@ function List({ navigation }) {
                             </NoImageList>
                         )}
 
-                        <Text color="#201A33" size={18} bold={true}>
+                        <Text color="white" size={18} bold={true}>
                             {item.title}
                         </Text>
                     </View>

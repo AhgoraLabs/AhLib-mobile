@@ -33,7 +33,7 @@ export const Livros = styled.TouchableOpacity`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    background-color: white;
+    background-color: #333;
     margin-top: 50px;
     elevation: 5;
     padding-bottom: 20px;
