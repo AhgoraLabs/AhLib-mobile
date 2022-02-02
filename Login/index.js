@@ -103,7 +103,7 @@ export default function Login({ navigation, route }) {
     return (
         <KeyboardAvoidingView>
             <View style={styles.container}>
-                <Animated.Image
+                {/* <Animated.Image
                     style={{
                         resizeMode: "contain",
                         height: 100,
@@ -111,15 +111,14 @@ export default function Login({ navigation, route }) {
                         transform: [{ rotate: rotateData }],
                     }}
                     source={require("../assets/onlylogo.png")}
-                />
+                /> */}
                 <Animated.Image
                     style={{
                         resizeMode: "contain",
-                        height: 100,
-                        width: 200,
+                        width: 300,
                         opacity: fadeAnim,
                     }}
-                    source={require("../assets/ahlib.png")}
+                    source={require("../assets/logoAhgora.png")}
                 ></Animated.Image>
             </View>
 

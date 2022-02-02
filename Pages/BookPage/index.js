@@ -90,15 +90,18 @@ function List({ navigation }) {
                                 <MaterialCommunityIcons name="minus" color="white" size={20} />
                             </TouchableOpacity>
                         </View>
-                        <ReadMore
-                            numberOfLines={15}
+                        {/* <ReadMore
+                            numberOfLines={10}
                             seeMoreText="Ver Mais"
                             seeLessText="Ver Menos"
                             preserveLinebreaks={true}
                             style={{ textAlign: "justify", color: "white", fontSize: sizeDescription }}
                         >
                             {BookData.description ? BookData.description : "Descrição não disponibilizada"}
-                        </ReadMore>
+                        </ReadMore> */}
+                        <Text style={{ textAlign: "justify", color: "white" }} size={sizeDescription}>
+                            {BookData.description ? BookData.description : "Descrição não disponibilizada"}
+                        </Text>
                     </View>
                 </Container>
             </ScrollView>
