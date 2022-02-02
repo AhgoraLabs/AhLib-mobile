@@ -54,7 +54,7 @@ function List({ navigation }) {
         10: "#52BE80",
     };
 
-    const colorBackground = "#121214";
+    const colorBackground = "#222";
 
     const gridBooksRender = () => (
         <Container>

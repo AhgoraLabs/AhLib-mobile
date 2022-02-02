@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Text } from "react-native";
 import { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
@@ -34,21 +35,36 @@ function MyTabs({ navigation }) {
                 shifting={true}
                 sceneAnimationEnabled={false}
                 screenOptions={{
-                    headerLeft: () => <MaterialCommunityIcons onPress={() => navigation.goBack()} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />,
+                    tabBarActiveTintColor: "white",
+                    tabBarInactiveTintColor: "gray",
+                    headerStyle: {
+                        backgroundColor: "#444",
+                    },
+                    headerTitleStyle: {
+                        color: "white",
+                    },
+                    headerLeft: () => <MaterialCommunityIcons onPress={() => navigation.goBack()} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="white" size={26} />,
+                    tabBarStyle: {
+                        paddingBottom: 6,
+                        backgroundColor: "#333",
+                        borderTopColor: "#444",
+                    },
                 }}
             >
                 <Tab.Screen
                     options={{
-                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color="white" size={26} />,
                         // tabBarButton: () => null,
                         headerLeft: () => null,
+                        //change color text
+                        tabBarOptions: { activeTintColor: "red" },
                     }}
                     name="Lista de Livros"
                     component={List}
                 />
                 <Tab.Screen
                     options={{
-                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={26} />,
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color="white" size={26} />,
                         showLabel: false,
                         headerLeft: () => null,
                         tabBarButton: () => null,
@@ -59,14 +75,14 @@ function MyTabs({ navigation }) {
                 <Tab.Screen
                     options={{
                         tabBarLabel: "Cadastro de Livro",
-                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="barcode" color={color} size={26} />,
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="barcode" color="white" size={26} />,
                     }}
                     name="Código de Barras"
                     component={Camera}
                 />
                 <Tab.Screen
                     options={{
-                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color="white" size={26} />,
                         tabBarButton: () => null,
                     }}
                     name="Cadastro de Livro"
@@ -74,7 +90,7 @@ function MyTabs({ navigation }) {
                 />
                 <Tab.Screen
                     options={{
-                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color="white" size={26} />,
                         tabBarButton: () => null,
                         headerLeft: () => (
                             <MaterialCommunityIcons onPress={() => navigation.navigate("Lista de Livros")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />
@@ -85,7 +101,7 @@ function MyTabs({ navigation }) {
                 />
                 <Tab.Screen
                     options={{
-                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color="white" size={26} />,
                         tabBarButton: () => null,
                         headerLeft: () => (
                             <MaterialCommunityIcons onPress={() => navigation.navigate("Pagina do Livro")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />
@@ -96,7 +112,7 @@ function MyTabs({ navigation }) {
                 />
                 <Tab.Screen
                     options={{
-                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color={color} size={26} />,
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color="white" size={26} />,
                         tabBarButton: () => null,
                         headerLeft: () => (
                             <MaterialCommunityIcons onPress={() => navigation.navigate("Pagina do Livro")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />
@@ -108,7 +124,7 @@ function MyTabs({ navigation }) {
                 <Tab.Screen
                     options={{
                         tabBarLabel: "Sair",
-                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="logout" color={color} size={26} />,
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="logout" color="white" size={26} />,
                         tabBarStyle: { display: "none" },
                         headerLeft: () => null,
                         headerShown: false,
@@ -136,7 +152,11 @@ export default function App(navigation) {
     return (
         <BookProvider>
             <NavigationContainer>
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                <Stack.Navigator
+                    screenOptions={{
+                        headerShown: false,
+                    }}
+                >
                     {!logged && <Stack.Screen name="login" component={Login} />}
                     <Stack.Screen name="book" component={MyTabs} />
                 </Stack.Navigator>
