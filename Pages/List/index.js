@@ -54,12 +54,14 @@ function List({ navigation }) {
         10: "#52BE80",
     };
 
+    const colorBackground = "#121214";
+
     const gridBooksRender = () => (
         <Container>
             <FlatList
                 numColumns={2}
                 data={listBooks}
-                contentContainerStyle={{ paddingBottom: 100, backgroundColor: "#082032", alignItems: "center", justifyContent: "space-between" }}
+                contentContainerStyle={{ paddingBottom: 100, backgroundColor: colorBackground, alignItems: "center", justifyContent: "space-between" }}
                 keyExtractor={() => {
                     return new Date().getTime().toString() + Math.floor(Math.random() * Math.floor(new Date().getTime())).toString();
                 }}
@@ -78,7 +80,7 @@ function List({ navigation }) {
                         </View>
 
                         <Livros onPress={() => handleClickBook(item)}>
-                            <Text color="#201A33" bold={true} size={14}>
+                            <Text color="black" bold={true} size={14}>
                                 {item.title}
                             </Text>
                         </Livros>
@@ -90,11 +92,11 @@ function List({ navigation }) {
 
     const listBooksRender = () => (
         <FlatList
-            style={{ marginTop: 10 }}
             data={listBooks}
             numColumns={1}
             contentContainerStyle={{}}
             keyExtractor={listBooks => listBooks.title}
+            contentContainerStyle={{ backgroundColor: colorBackground }}
             renderItem={({ item }) => (
                 <TouchableOpacity
                     key={item._id}
@@ -117,7 +119,7 @@ function List({ navigation }) {
                             />
                         ) : (
                             <NoImageList>
-                                <Text size={10}>{item.title}</Text>
+                                <Text size={9}>{item.title}</Text>
                             </NoImageList>
                         )}
 
@@ -138,7 +140,7 @@ function List({ navigation }) {
                 <>
                     <TouchableOpacity
                         onPress={() => setNormalModeList(!normalModeList)}
-                        style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", paddingRight: 20, marginTop: 5, flexDirection: "row" }}
+                        style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", padding: 10, flexDirection: "row", backgroundColor: colorBackground }}
                     >
                         <MaterialCommunityIcons style={{ marginLeft: 5 }} name={normalModeList ? "view-headline" : "view-grid-outline"} color="gray" size={30} />
                     </TouchableOpacity>

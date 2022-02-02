@@ -16,7 +16,6 @@ const randomColor = {
 
 export const Container = styled.View`
     flex-direction: row;
-    padding-top: 10px;
     padding-bottom: 100px;
     height: 120%;
 `;
@@ -66,6 +65,7 @@ export const NoImage = styled.Text`
     border-radius: 10px;
     position: relative;
     top: 0;
+    padding: 5px;
     padding-top: 100px;
     text-align: center;
     margin-bottom: -220px;
@@ -77,18 +77,17 @@ export const NoImage = styled.Text`
 //List render books
 
 export const ImageList = styled.Image`
-    width: 40px;
-    height: 80px;
+    width: 60px;
+    height: 90px;
     border-radius: 5px;
     margin-right: 20px;
 `;
 
 export const NoImageList = styled.View`
-    width: 40px;
-    height: 80px;
+    width: 60px;
+    height: 90px;
     border-radius: 5px;
-    background-color: blue;
     margin-right: 25px;
-    padding-top: 10px;
+    padding-top: 20px;
     background-color: ${props => (props.color ? props.color : "lightblue")};
 `;
