@@ -94,9 +94,8 @@ function List({ navigation }) {
         <FlatList
             data={listBooks}
             numColumns={1}
-            contentContainerStyle={{}}
             keyExtractor={listBooks => listBooks.title}
-            contentContainerStyle={{ backgroundColor: colorBackground }}
+            contentContainerStyle={{ backgroundColor: colorBackground, height: "100%" }}
             renderItem={({ item }) => (
                 <TouchableOpacity
                     key={item._id}

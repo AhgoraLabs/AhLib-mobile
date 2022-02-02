@@ -244,7 +244,6 @@ const styles = StyleSheet.create({
         color: "#FFF",
         fontSize: 15,
         borderRadius: 7,
-        marginBottom: 10,
     },
     btnRegister: {
         marginTop: 10,

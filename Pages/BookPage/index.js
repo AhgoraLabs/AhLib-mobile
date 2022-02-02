@@ -31,6 +31,9 @@ function List({ navigation }) {
         }
     };
 
+    const textColorPrimary = "white";
+    const textColorSecondary = "#E1E1E6";
+
     return (
         <>
             <ScrollView>
@@ -46,55 +49,55 @@ function List({ navigation }) {
                         <NoImage>{BookData.title}</NoImage>
                     )}
                     <StarRating containerStyle={{ marginTop: 20 }} disabled={false} maxStars={5} rating={rate ? rate : 0} fullStarColor="gold" halfStarColor="gold" />
-                    <Text style={{ marginTop: 20, marginBottom: 15 }} bold={true} size={24} uppercase={true} color="#201A33">
+                    <Text style={{ marginTop: 20, marginBottom: 15 }} bold={true} size={24} uppercase={true} color={textColorPrimary}>
                         {BookData.title}
                     </Text>
 
-                    <Text color="gray">By {BookData.author}</Text>
+                    <Text color={textColorSecondary}>By {BookData.author}</Text>
 
                     <View style={{ display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-around", marginTop: 30 }}>
                         <View style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <Text color="gray">Editora</Text>
-                            <Text size={16} bold={true} color="#201A33">
+                            <Text>Editora</Text>
+                            <Text size={16} bold={true} color={textColorPrimary}>
                                 {BookData.publisher ? BookData.publisher : "n/a"}
                             </Text>
                         </View>
                         <View style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <Text color="gray">Idioma</Text>
-                            <Text size={16} bold={true} color="#201A33">
+                            <Text>Idioma</Text>
+                            <Text size={16} bold={true} color={textColorPrimary}>
                                 {BookData.language ? BookData.language : "n/a"}
                             </Text>
                         </View>
                         <View style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <Text color="gray">Páginas</Text>
-                            <Text size={16} bold={true} color="#201A33">
+                            <Text>Páginas</Text>
+                            <Text size={16} bold={true} color={textColorPrimary}>
                                 {BookData.pages ? BookData.pages : "n/a"}
                             </Text>
                         </View>
                     </View>
                     <View style={{ width: "100%", paddingLeft: 30, paddingRight: 30, marginTop: 25 }}>
                         <View style={{ display: "flex", flexDirection: "row", alignItems: "center", marginBottom: 15 }}>
-                            <Text size={24} bold={true} color="#201A33">
+                            <Text size={24} bold={true} color="#A8A8B3">
                                 Descrição
                             </Text>
-                            <Text color="#494949" style={{ marginLeft: 30 }}>
+                            <Text color="white" style={{ marginLeft: 30 }}>
                                 Fonte
                             </Text>
                             <TouchableOpacity style={{ marginLeft: 10, marginRight: 20 }} onPress={() => setSizeDescription(sizeDescription + 2)}>
-                                <MaterialCommunityIcons name="plus" color="#494949" size={20} />
+                                <MaterialCommunityIcons name="plus" color="white" size={20} />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => setSizeDescription(sizeDescription - 2)}>
-                                <MaterialCommunityIcons name="minus" color="#494949" size={20} />
+                                <MaterialCommunityIcons name="minus" color="white" size={20} />
                             </TouchableOpacity>
                         </View>
                         <ReadMore
-                            numberOfLines={10}
+                            numberOfLines={15}
                             seeMoreText="Ver Mais"
                             seeLessText="Ver Menos"
                             preserveLinebreaks={true}
-                            style={{ textAlign: "justify", color: "gray", fontSize: sizeDescription }}
+                            style={{ textAlign: "justify", color: "white", fontSize: sizeDescription }}
                         >
-                            {BookData.description}
+                            {BookData.description ? BookData.description : "Descrição não disponibilizada"}
                         </ReadMore>
                     </View>
                 </Container>

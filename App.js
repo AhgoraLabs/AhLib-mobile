@@ -56,8 +56,6 @@ function MyTabs({ navigation }) {
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color="white" size={26} />,
                         // tabBarButton: () => null,
                         headerLeft: () => null,
-                        //change color text
-                        tabBarOptions: { activeTintColor: "red" },
                     }}
                     name="Lista de Livros"
                     component={List}
