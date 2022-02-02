@@ -59,12 +59,12 @@ function List({ navigation }) {
             <FlatList
                 numColumns={2}
                 data={listBooks}
-                contentContainerStyle={{ paddingBottom: 100, backgroundColor: "#494949", alignItems: "center", justifyContent: "space-between" }}
+                contentContainerStyle={{ paddingBottom: 100, backgroundColor: "#082032", alignItems: "center", justifyContent: "space-between" }}
                 keyExtractor={() => {
                     return new Date().getTime().toString() + Math.floor(Math.random() * Math.floor(new Date().getTime())).toString();
                 }}
                 renderItem={({ item }) => (
-                    <View key={item._id} style={{ paddingBottom: 30 }}>
+                    <View key={item._id} style={{ paddingBottom: 30, display: "flex", alignItems: "center" }}>
                         <View style={{ elevation: 6 }}>
                             {item.image ? (
                                 <Image

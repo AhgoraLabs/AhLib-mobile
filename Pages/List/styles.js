@@ -38,8 +38,9 @@ export const Livros = styled.TouchableOpacity`
     margin-top: 50px;
     elevation: 5;
     padding-bottom: 20px;
-    margin-right: 30px;
-    margin-left: 30px;
+
+    margin-left: 15px;
+    margin-right: 15px;
 `;
 
 export const Text = styled.Text`
@@ -56,9 +57,8 @@ export const Image = styled.Image`
     border-radius: 10px;
     position: relative;
     top: 0;
-    margin-left: 45px;
-    margin-bottom: -220px;
     margin-top: 45px;
+    margin-bottom: -220px;
 `;
 export const NoImage = styled.Text`
     width: 140px;
@@ -70,7 +70,7 @@ export const NoImage = styled.Text`
     text-align: center;
     margin-bottom: -220px;
     margin-top: 45px;
-    margin-left: 45px;
+
     background-color: ${props => (props.color ? props.color : "lightblue")};
 `;
 
