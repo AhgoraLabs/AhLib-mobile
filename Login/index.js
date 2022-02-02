@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
         width: 250,
     },
     btnSubmit: {
-        backgroundColor: "lightblue",
+        backgroundColor: "#8257E5",
         height: 50,
         padding: 10,
         alignItems: "center",
