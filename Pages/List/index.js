@@ -86,7 +86,7 @@ function List({ navigation, route }) {
             <FlatList
                 data={bookList}
                 numColumns={1}
-                keyExtractor={bookList => bookList.title}
+                keyExtractor={bookList => bookList._id}
                 contentContainerStyle={{ backgroundColor: colorBackground, paddingBottom: 200 }}
                 renderItem={({ item }) => (
                     <TouchableOpacity
@@ -109,7 +109,7 @@ function List({ navigation, route }) {
                                     }}
                                 />
                             ) : (
-                                <NoImageList>
+                                <NoImageList color={randomColor[Math.floor(Math.random() * 10)]}>
                                     <Text size={9}>{item.title}</Text>
                                 </NoImageList>
                             )}

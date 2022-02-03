@@ -92,7 +92,7 @@ function MyTabs({ navigation }) {
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color="white" size={26} />,
                         tabBarButton: () => null,
                         headerLeft: () => (
-                            <MaterialCommunityIcons onPress={() => navigation.navigate("Lista de Livros")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />
+                            <MaterialCommunityIcons onPress={() => navigation.navigate("Lista de Livros")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="white" size={26} />
                         ),
                     }}
                     name="Pagina do Livro"
@@ -103,7 +103,7 @@ function MyTabs({ navigation }) {
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color="white" size={26} />,
                         tabBarButton: () => null,
                         headerLeft: () => (
-                            <MaterialCommunityIcons onPress={() => navigation.navigate("Pagina do Livro")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />
+                            <MaterialCommunityIcons onPress={() => navigation.navigate("Pagina do Livro")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="white" size={26} />
                         ),
                     }}
                     name="Comentários"
@@ -114,7 +114,7 @@ function MyTabs({ navigation }) {
                         tabBarIcon: ({ color }) => <MaterialCommunityIcons name="book" color="white" size={26} />,
                         tabBarButton: () => null,
                         headerLeft: () => (
-                            <MaterialCommunityIcons onPress={() => navigation.navigate("Pagina do Livro")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="black" size={26} />
+                            <MaterialCommunityIcons onPress={() => navigation.navigate("Pagina do Livro")} style={{ marginTop: 5, marginLeft: 20 }} name="arrow-left" color="white" size={26} />
                         ),
                     }}
                     name="Emprestimo"

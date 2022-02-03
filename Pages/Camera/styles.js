@@ -38,7 +38,7 @@ export const Modal = styled.View`
 `;
 
 export const Button = styled.TouchableOpacity`
-    background-color: #1565c0;
+    background-color: #8257e5;
     width: 220px;
     border-radius: 10px;
     display: flex;

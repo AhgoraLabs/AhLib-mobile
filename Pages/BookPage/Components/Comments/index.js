@@ -17,9 +17,9 @@ function Comments({}) {
         setCommentsData(dataCommentsContext);
     }, [dataCommentsContext]);
     return (
-        <ScrollView>
+        <ScrollView style={{ backgroundColor: "#222" }}>
             <View>
-                <Text style={{ textAlign: "center", marginTop: 10 }} color="#201A33" size={30} bold={true}>
+                <Text style={{ textAlign: "center", marginTop: 10 }} color="white" size={30} bold={true}>
                     Comentários
                 </Text>
             </View>
@@ -29,7 +29,7 @@ function Comments({}) {
                         key={item._id}
                         style={{
                             marginBottom: 20,
-                            backgroundColor: "white",
+                            backgroundColor: "#444",
                             padding: 20,
                             borderRadius: 10,
                             display: "flex",
@@ -39,16 +39,23 @@ function Comments({}) {
                     >
                         <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                             <UserAvatar size={30} name={item.by} style={{ marginRight: 10 }} />
-                            <Text numberOfLines={1} ellipsizeMode="tail" color="#201A33" size={18} bold={true} style={{ width: "70%" }}>
+                            <Text numberOfLines={1} ellipsizeMode="tail" color="white" size={18} bold={true} style={{ width: "70%" }}>
                                 {item.by}
                             </Text>
                             <MaterialCommunityIcons style={{ marginLeft: 20 }} name="star" color="gold" size={30} />
-                            <Text color="#201A33" size={18} bold={true}>
+                            <Text color="white" size={18} bold={true}>
                                 {item.stars}
                             </Text>
                         </View>
 
-                        <ReadMore numberOfLines={2} seeMoreText="Ver Mais" seeLessText="Ver Menos" preserveLinebreaks={true} style={{ textAlign: "justify", color: "gray" }}>
+                        <ReadMore
+                            numberOfLines={2}
+                            seeMoreText="Ver Mais"
+                            seeLessText="Ver Menos"
+                            preserveLinebreaks={true}
+                            style={{ textAlign: "justify", color: "white" }}
+                            seeMoreStyle={{ color: "#04D361" }}
+                        >
                             {item.comment}
                         </ReadMore>
                     </View>

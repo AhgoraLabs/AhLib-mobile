@@ -63,19 +63,20 @@ function Books({ route }) {
                 Limpar Campos
             </Label>
             <Div>
-                <Input placeholderTextColor="whitesmoke" placeholder="ISBN" defaultValue={data.data} onChangeText={value => handleChangeData("isbn", value)}></Input>
-                <Input placeholderTextColor="whitesmoke" placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
-                <Input placeholderTextColor="whitesmoke" placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
-                <Input placeholderTextColor="whitesmoke" placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>
-                <Input placeholderTextColor="whitesmoke" placeholder="Pages" defaultValue={data.language} onChangeText={value => handleChangeData("pages", value)}></Input>
-                <Input placeholderTextColor="whitesmoke" placeholder="Idioma" defaultValue={data.language} onChangeText={value => handleChangeData("language", value)}></Input>
+                <Input color="whitesmoke" placeholderTextColor="gray" placeholder="ISBN" defaultValue={data.data} onChangeText={value => handleChangeData("isbn", value)}></Input>
+                <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
+                <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
+                <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>
+                <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Pages" defaultValue={data.language} onChangeText={value => handleChangeData("pages", value)}></Input>
+                <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Idioma" defaultValue={data.language} onChangeText={value => handleChangeData("language", value)}></Input>
 
                 <Input
                     defaultValue={data.description}
                     height={150}
                     underlineColorAndroid="transparent"
                     placeholder="Descrição"
-                    placeholderTextColor="whitesmoke"
+                    color="whitesmoke"
+                    placeholderTextColor="gray"
                     numberOfLines={10}
                     multiline={true}
                     onChange={target => handleChangeData("description", target.target.value)}

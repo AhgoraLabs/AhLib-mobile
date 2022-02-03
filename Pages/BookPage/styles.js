@@ -12,7 +12,7 @@ export const BackgroundColorHead = styled.View`
     position: absolute;
     width: 100%;
     height: 200px;
-    background-color: #444;
+    background-color: #8257e5;
 `;
 
 export const Text = styled.Text`

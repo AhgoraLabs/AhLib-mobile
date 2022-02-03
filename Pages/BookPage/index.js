@@ -107,7 +107,7 @@ function List({ navigation }) {
                 <View style={{ display: "flex", paddingTop: 5, justifyContent: "space-evenly", flexDirection: "row" }}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate("Comentários")}
-                        style={{ backgroundColor: "#162130", borderRadius: 10, padding: 15, display: "flex", flexDirection: "row", alignItems: "center", paddingLeft: 40, paddingRight: 40 }}
+                        style={{ backgroundColor: "#8257E5", borderRadius: 10, padding: 15, display: "flex", flexDirection: "row", alignItems: "center", paddingLeft: 40, paddingRight: 40 }}
                     >
                         <MaterialCommunityIcons name="comment-text-outline" color="white" size={18} />
                     </TouchableOpacity>
