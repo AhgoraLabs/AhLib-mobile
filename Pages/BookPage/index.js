@@ -8,9 +8,9 @@ import StarRating from "react-native-star-rating";
 import { useBookContext } from "../Context/book";
 
 function List({ navigation }) {
-    const { setCommentsContext, book } = useBookContext();
+    const { providerComments, book } = useBookContext();
 
-    const dataCommentsContext = setCommentsContext("get");
+    const dataCommentsContext = providerComments("get");
 
     const [sizeDescription, setSizeDescription] = useState(16);
     const [rate, setRate] = useState(5);

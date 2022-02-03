@@ -10,18 +10,22 @@ import { getCommentsBook } from "../../api/api";
 import { useBookContext } from "../Context/book";
 
 function List({ navigation, route }) {
-    const { setBookContext, setCommentsContext, fetchBookList, bookList } = useBookContext([]);
+    const { setBookContext, providerComments, fetchBookList, bookList } = useBookContext([]);
     const [normalModeList, setNormalModeList] = useState(false);
 
     useEffect(() => {
+        handleFetchBookList();
+    }, []);
+
+    const handleFetchBookList = () => {
         fetchBookList();
-    }, [bookList]);
+    };
 
     const handleClickBook = async item => {
         setBookContext(item);
 
         const comments = await getCommentsBook(item._id);
-        setCommentsContext("set", comments);
+        providerComments("set", comments);
         navigation.navigate("Pagina do Livro");
     };
 
@@ -77,63 +81,71 @@ function List({ navigation, route }) {
         </Container>
     );
 
-    const listBooksRender = () => (
-        <FlatList
-            data={bookList}
-            numColumns={1}
-            keyExtractor={bookList => bookList.title}
-            contentContainerStyle={{ backgroundColor: colorBackground, paddingBottom: 200 }}
-            renderItem={({ item }) => (
-                <TouchableOpacity
-                    key={item._id}
-                    style={{
-                        backgroundColor: "#333",
-                        padding: 10,
-                        borderRadius: 10,
-                        display: "flex",
-                        elevation: 1,
-                        margin: 10,
-                    }}
-                    onPress={() => handleClickBook(item)}
-                >
-                    <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                        {item.image ? (
-                            <ImageList
-                                source={{
-                                    uri: item.image,
-                                }}
-                            />
-                        ) : (
-                            <NoImageList>
-                                <Text size={9}>{item.title}</Text>
-                            </NoImageList>
-                        )}
+    const listBooksRender = () => {
+        return bookList.length > 0 ? (
+            <FlatList
+                data={bookList}
+                numColumns={1}
+                keyExtractor={bookList => bookList.title}
+                contentContainerStyle={{ backgroundColor: colorBackground, paddingBottom: 200 }}
+                renderItem={({ item }) => (
+                    <TouchableOpacity
+                        key={item._id}
+                        style={{
+                            backgroundColor: "#333",
+                            padding: 10,
+                            borderRadius: 10,
+                            display: "flex",
+                            elevation: 1,
+                            margin: 10,
+                        }}
+                        onPress={() => handleClickBook(item)}
+                    >
+                        <View style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                            {item.image ? (
+                                <ImageList
+                                    source={{
+                                        uri: item.image,
+                                    }}
+                                />
+                            ) : (
+                                <NoImageList>
+                                    <Text size={9}>{item.title}</Text>
+                                </NoImageList>
+                            )}
 
-                        <Text color="white" size={18} bold={true}>
-                            {item.title}
-                        </Text>
-                    </View>
-                </TouchableOpacity>
-            )}
-        ></FlatList>
-    );
+                            <Text color="white" size={18} bold={true}>
+                                {item.title}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                )}
+            ></FlatList>
+        ) : (
+            <></>
+        );
+    };
 
     return (
-        <>
+        <View style={{ backgroundColor: colorBackground }}>
             {bookList.length === 0 ? (
                 <Placeholder style={{ marginTop: 100 }} Animation={props => <Loader {...props} size="large" color="gray" />} />
             ) : (
                 <>
-                    <TouchableOpacity
-                        onPress={() => setNormalModeList(!normalModeList)}
-                        style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", padding: 10, flexDirection: "row", backgroundColor: colorBackground }}
-                    >
-                        <MaterialCommunityIcons style={{ marginLeft: 5 }} name={normalModeList ? "view-headline" : "view-grid-outline"} color="gray" size={30} />
-                    </TouchableOpacity>
+                    <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: 10, flexDirection: "row", backgroundColor: colorBackground }}>
+                        <TouchableOpacity onPress={handleFetchBookList} style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                            <MaterialCommunityIcons style={{ marginRight: 5 }} name="refresh" color="gray" size={30} />
+                            <Text color="white">{bookList.length} Livros encontrados</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => setNormalModeList(!normalModeList)}>
+                            <MaterialCommunityIcons style={{ marginLeft: 5 }} name={normalModeList ? "view-headline" : "view-grid-outline"} color="gray" size={30} />
+                        </TouchableOpacity>
+                    </View>
+
                     {normalModeList ? gridBooksRender() : listBooksRender()}
                 </>
             )}
-        </>
+        </View>
     );
 }
 

@@ -57,6 +57,7 @@ function MyTabs({ navigation }) {
                         // tabBarButton: () => null,
                         headerLeft: () => null,
                     }}
+                    onclick={() => alert("ss")}
                     name="Lista de Livros"
                     component={List}
                 />

@@ -19,11 +19,10 @@ export default function BookProvider({ children }) {
     };
 
     const setBookContext = async data => {
-        console.log("slc");
         setBook(data);
     };
 
-    const setCommentsContext = (type, data) => {
+    const providerComments = (type, data) => {
         return type === "set" ? setComments(data) : comments;
     };
 
@@ -31,7 +30,7 @@ export default function BookProvider({ children }) {
         <BookContext.Provider
             value={{
                 setBookContext,
-                setCommentsContext,
+                providerComments,
                 fetchBookList,
                 bookList,
                 book,
@@ -47,11 +46,10 @@ export function useBookContext() {
 
     const {
         setBookContext, //functions
-        setCommentsContext,
+        providerComments,
         fetchBookList,
         bookList,
         book, //states
-        comments,
     } = context;
-    return { setBookContext, setCommentsContext, fetchBookList, bookList, book, comments };
+    return { setBookContext, providerComments, fetchBookList, bookList, book };
 }
