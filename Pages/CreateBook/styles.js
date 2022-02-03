@@ -17,12 +17,6 @@ export const Div = styled.View`
     width: 100%;
 `;
 
-export const Label = styled.Text`
-    font-size: ${props => (props.size ? `${props.size}px` : "18px")};
-    color: ${props => (props.color ? props.color : "black")};
-    margin-bottom: 10px;
-`;
-
 export const Input = styled.TextInput`
     font-size: 18px;
     background-color: #444;
@@ -35,7 +29,7 @@ export const Input = styled.TextInput`
 `;
 
 export const Button = styled.TouchableOpacity`
-    background-color: #1565c0;
+    background-color: ${props => (props.color ? `${props.color}` : "#8257E5")};
     color: #fff;
     width: 300px;
     border-radius: 10px;
@@ -45,5 +39,4 @@ export const Button = styled.TouchableOpacity`
     justify-content: center;
     height: 50px;
     margin-bottom: 40px;
-    padding-top: 10px;
 `;

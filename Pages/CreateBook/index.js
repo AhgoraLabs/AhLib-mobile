@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
-import { Container, Div, Label, Input, Button } from "./styles";
+import { Text, TouchableOpacity } from "react-native";
+import { Container, Div, Input, Button } from "./styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import moment from "moment";
 
 import { useBookContext } from "../Context/book";
 
-function Books({ route }) {
+function Books({ route, navigation }) {
     const { fetchBookList } = useBookContext();
     const [data, setData] = useState({});
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        console.log(route?.params?.data);
         if (route?.params?.data) setData(route?.params?.data);
     }, [route]);
 
@@ -19,10 +18,11 @@ function Books({ route }) {
 
     const handleSendBook = async () => {
         const body = data;
-        fetchBookList();
+        setLoading(true);
 
         if (!data.title || !data.isbn) {
             alert("Necessário título e ISBN");
+            setLoading(false);
             return false;
         }
 
@@ -39,35 +39,39 @@ function Books({ route }) {
             });
 
             const responseData = await response.json();
+            setLoading(false);
 
             if (responseData.error) {
                 console.log(responseData);
                 alert("Houve problema ao cadastrar livro");
                 return false;
             }
+
             alert("Livro cadastrado com sucesso!");
-            console.log(responseData);
+            setData({});
+            fetchBookList();
+            navigation.navigate("Lista de Livros");
         } catch (error) {
             console.log(error);
         }
+
+        setLoading(false);
     };
 
     return (
         <Container>
             <Div>
-                <Label size={30} color="white">
-                    Dados do livro
-                </Label>
+                <Text style={{ color: "white", fontSize: 25, marginBottom: 20 }}>Dados do livro</Text>
             </Div>
-            <Label onPress={() => setData({})} color="white" style={{ marginBottom: 20, width: 300, marginLeft: 20, backgroundColor: "#333", width: 150, padding: 10, borderRadius: 10 }}>
-                Limpar Campos
-            </Label>
+            <TouchableOpacity onPress={() => setData({})} style={{ marginBottom: 20, width: 300, marginLeft: 20, backgroundColor: "#333", width: 150, padding: 10, borderRadius: 10 }}>
+                <Text style={{ color: "white", fontSize: 16, marginLeft: 7 }}>Limpar Campos</Text>
+            </TouchableOpacity>
             <Div>
-                <Input color="whitesmoke" placeholderTextColor="gray" placeholder="ISBN" defaultValue={data.data} onChangeText={value => handleChangeData("isbn", value)}></Input>
+                <Input color="whitesmoke" placeholderTextColor="gray" placeholder="ISBN" defaultValue={data.isbn} onChangeText={value => handleChangeData("isbn", value)}></Input>
                 <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
                 <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
                 <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>
-                <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Pages" defaultValue={data.language} onChangeText={value => handleChangeData("pages", value)}></Input>
+                <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Pages" defaultValue={data.pages} onChangeText={value => handleChangeData("pages", value)}></Input>
                 <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Idioma" defaultValue={data.language} onChangeText={value => handleChangeData("language", value)}></Input>
 
                 <Input
@@ -81,22 +85,12 @@ function Books({ route }) {
                     multiline={true}
                     onChange={target => handleChangeData("description", target.target.value)}
                 ></Input>
-                <Button onPress={() => handleSendBook()}>
-                    <Label color="white">Enviar</Label>
+                <Button color={loading ? "gray" : "#8257E5"} disabled={loading} onPress={() => handleSendBook()}>
+                    <Text style={{ color: "white", fontSize: 18 }}>Enviar</Text>
                 </Button>
             </Div>
         </Container>
     );
 }
-const styles = StyleSheet.create({
-    dateComponent: {
-        fontSize: 50,
-        backgroundColor: "white",
-        color: "#000000",
-        borderRadius: 15,
-        marginBottom: 15,
-        width: 330,
-        marginLeft: -3,
-    },
-});
+
 export default Books;
