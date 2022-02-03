@@ -3,7 +3,11 @@ import { StyleSheet } from "react-native";
 import { Container, Div, Label, Input, Button } from "./styles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
+
+import { useBookContext } from "../Context/book";
+
 function Books({ route }) {
+    const { fetchBookList } = useBookContext();
     const [data, setData] = useState({});
 
     useEffect(() => {
@@ -15,6 +19,7 @@ function Books({ route }) {
 
     const handleSendBook = async () => {
         const body = data;
+        fetchBookList();
 
         if (!data.title || !data.isbn) {
             alert("Necessário título e ISBN");

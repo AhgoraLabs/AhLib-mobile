@@ -4,39 +4,24 @@ import { Container, Livros, Text, Image, NoImage, ImageList, ScrollView, NoImage
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Placeholder, Loader } from "rn-placeholder";
 
+//api
+import { getCommentsBook } from "../../api/api";
 //context
 import { useBookContext } from "../Context/book";
 
-//api
-import { getCommentsBook, getBooks } from "../../api/api";
-
-function List({ navigation }) {
-    const { providerBook, providerComments, providerBookList } = useBookContext([]);
-    // const dataBookList = providerBookList("get");
-    const [listBooks, setListBooks] = useState([]);
+function List({ navigation, route }) {
+    const { setBookContext, setCommentsContext, fetchBookList, bookList } = useBookContext([]);
     const [normalModeList, setNormalModeList] = useState(false);
 
     useEffect(() => {
-        handleGetBooks();
-    }, []);
-
-    // useEffect(() => {
-    //     setListBooks(dataBookList);
-    // }, [dataBookList]);
-
-    const handleGetBooks = async () => {
-        const response = await getBooks();
-        setListBooks(response);
-        //providerBookList("set", response);
-    };
+        fetchBookList();
+    }, [bookList]);
 
     const handleClickBook = async item => {
-        console.log(item);
-        //set book to provider
-        providerBook("set", item);
-        //set comments to provider
+        setBookContext(item);
+
         const comments = await getCommentsBook(item._id);
-        providerComments("set", comments);
+        setCommentsContext("set", comments);
         navigation.navigate("Pagina do Livro");
     };
 
@@ -58,43 +43,45 @@ function List({ navigation }) {
 
     const gridBooksRender = () => (
         <Container>
-            <FlatList
-                numColumns={2}
-                data={listBooks}
-                contentContainerStyle={{ paddingBottom: 100, backgroundColor: colorBackground, alignItems: "center", justifyContent: "space-between" }}
-                keyExtractor={() => {
-                    return new Date().getTime().toString() + Math.floor(Math.random() * Math.floor(new Date().getTime())).toString();
-                }}
-                renderItem={({ item }) => (
-                    <View key={item._id} style={{ paddingBottom: 30, display: "flex", alignItems: "center" }}>
-                        <View style={{ elevation: 6 }}>
-                            {item.image ? (
-                                <Image
-                                    source={{
-                                        uri: item.image,
-                                    }}
-                                />
-                            ) : (
-                                <NoImage color={randomColor[Math.floor(Math.random() * 10)]}>{item.title}</NoImage>
-                            )}
-                        </View>
+            {bookList.length > 0 && (
+                <FlatList
+                    numColumns={2}
+                    data={bookList}
+                    contentContainerStyle={{ paddingBottom: 100, backgroundColor: colorBackground, alignItems: "center", justifyContent: "space-between" }}
+                    keyExtractor={() => {
+                        return new Date().getTime().toString() + Math.floor(Math.random() * Math.floor(new Date().getTime())).toString();
+                    }}
+                    renderItem={({ item }) => (
+                        <View key={item._id} style={{ paddingBottom: 30, display: "flex", alignItems: "center" }}>
+                            <View style={{ elevation: 6 }}>
+                                {item.image ? (
+                                    <Image
+                                        source={{
+                                            uri: item.image,
+                                        }}
+                                    />
+                                ) : (
+                                    <NoImage color={randomColor[Math.floor(Math.random() * 10)]}>{item.title}</NoImage>
+                                )}
+                            </View>
 
-                        <Livros onPress={() => handleClickBook(item)}>
-                            <Text color="white" bold={true} size={14}>
-                                {item.title}
-                            </Text>
-                        </Livros>
-                    </View>
-                )}
-            ></FlatList>
+                            <Livros onPress={() => handleClickBook(item)}>
+                                <Text color="white" bold={true} size={14}>
+                                    {item.title}
+                                </Text>
+                            </Livros>
+                        </View>
+                    )}
+                ></FlatList>
+            )}
         </Container>
     );
 
     const listBooksRender = () => (
         <FlatList
-            data={listBooks}
+            data={bookList}
             numColumns={1}
-            keyExtractor={listBooks => listBooks.title}
+            keyExtractor={bookList => bookList.title}
             contentContainerStyle={{ backgroundColor: colorBackground, paddingBottom: 200 }}
             renderItem={({ item }) => (
                 <TouchableOpacity
@@ -133,7 +120,7 @@ function List({ navigation }) {
 
     return (
         <>
-            {listBooks.length === 0 ? (
+            {bookList.length === 0 ? (
                 <Placeholder style={{ marginTop: 100 }} Animation={props => <Loader {...props} size="large" color="gray" />} />
             ) : (
                 <>

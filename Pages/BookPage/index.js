@@ -8,18 +8,16 @@ import StarRating from "react-native-star-rating";
 import { useBookContext } from "../Context/book";
 
 function List({ navigation }) {
-    const { providerBook, providerComments } = useBookContext();
-    const dataBookContext = providerBook("get");
-    const dataCommentsContext = providerComments("get");
+    const { setCommentsContext, book } = useBookContext();
 
-    const [BookData, setBookData] = useState({});
+    const dataCommentsContext = setCommentsContext("get");
+
     const [sizeDescription, setSizeDescription] = useState(16);
     const [rate, setRate] = useState(5);
 
     useEffect(() => {
-        setBookData(dataBookContext);
         totalStars();
-    }, [dataBookContext, dataCommentsContext]);
+    }, [dataCommentsContext]);
 
     const totalStars = () => {
         try {
@@ -39,39 +37,39 @@ function List({ navigation }) {
             <ScrollView>
                 <Container>
                     <BackgroundColorHead />
-                    {BookData.image ? (
+                    {book.image ? (
                         <Image
                             source={{
-                                uri: BookData.image,
+                                uri: book.image,
                             }}
                         />
                     ) : (
-                        <NoImage>{BookData.title}</NoImage>
+                        <NoImage>{book.title}</NoImage>
                     )}
                     <StarRating containerStyle={{ marginTop: 20 }} disabled={false} maxStars={5} rating={rate ? rate : 0} fullStarColor="gold" halfStarColor="gold" />
                     <Text style={{ marginTop: 20, marginBottom: 15 }} bold={true} size={24} uppercase={true} color={textColorPrimary}>
-                        {BookData.title}
+                        {book.title}
                     </Text>
 
-                    <Text color={textColorSecondary}>By {BookData.author}</Text>
+                    <Text color={textColorSecondary}>By {book.author}</Text>
 
                     <View style={{ display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-around", marginTop: 30 }}>
                         <View style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                             <Text>Editora</Text>
                             <Text size={16} bold={true} color={textColorPrimary}>
-                                {BookData.publisher ? BookData.publisher : "n/a"}
+                                {book.publisher ? book.publisher : "n/a"}
                             </Text>
                         </View>
                         <View style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                             <Text>Idioma</Text>
                             <Text size={16} bold={true} color={textColorPrimary}>
-                                {BookData.language ? BookData.language : "n/a"}
+                                {book.language ? book.language : "n/a"}
                             </Text>
                         </View>
                         <View style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                             <Text>Páginas</Text>
                             <Text size={16} bold={true} color={textColorPrimary}>
-                                {BookData.pages ? BookData.pages : "n/a"}
+                                {book.pages ? book.pages : "n/a"}
                             </Text>
                         </View>
                     </View>
@@ -97,10 +95,10 @@ function List({ navigation }) {
                             preserveLinebreaks={true}
                             style={{ textAlign: "justify", color: "white", fontSize: sizeDescription }}
                         >
-                            {BookData.description ? BookData.description : "Descrição não disponibilizada"}
+                            {book.description ? book.description : "Descrição não disponibilizada"}
                         </ReadMore> */}
                         <Text style={{ textAlign: "justify", color: "white" }} size={sizeDescription}>
-                            {BookData.description ? BookData.description : "Descrição não disponibilizada"}
+                            {book.description ? book.description : "Descrição não disponibilizada"}
                         </Text>
                     </View>
                 </Container>
