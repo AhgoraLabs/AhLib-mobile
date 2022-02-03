@@ -55,27 +55,27 @@ function Books({ route }) {
     return (
         <Container>
             <Div>
-                <Label size={30} color="#494949">
+                <Label size={30} color="white">
                     Dados do livro
                 </Label>
             </Div>
-            <Label onPress={() => setData({})} color="black" style={{ marginBottom: 20, width: 300 }}>
+            <Label onPress={() => setData({})} color="white" style={{ marginBottom: 20, width: 300, marginLeft: 20, backgroundColor: "#333", width: 150, padding: 10, borderRadius: 10 }}>
                 Limpar Campos
             </Label>
             <Div>
-                <Input placeholder="ISBN" defaultValue={data.data} onChangeText={value => handleChangeData("isbn", value)}></Input>
-                <Input placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
-                <Input placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
-                <Input placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>
-                <Input placeholder="Pages" defaultValue={data.language} onChangeText={value => handleChangeData("pages", value)}></Input>
-                <Input placeholder="Idioma" defaultValue={data.language} onChangeText={value => handleChangeData("language", value)}></Input>
+                <Input placeholderTextColor="whitesmoke" placeholder="ISBN" defaultValue={data.data} onChangeText={value => handleChangeData("isbn", value)}></Input>
+                <Input placeholderTextColor="whitesmoke" placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
+                <Input placeholderTextColor="whitesmoke" placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
+                <Input placeholderTextColor="whitesmoke" placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>
+                <Input placeholderTextColor="whitesmoke" placeholder="Pages" defaultValue={data.language} onChangeText={value => handleChangeData("pages", value)}></Input>
+                <Input placeholderTextColor="whitesmoke" placeholder="Idioma" defaultValue={data.language} onChangeText={value => handleChangeData("language", value)}></Input>
 
                 <Input
                     defaultValue={data.description}
                     height={150}
                     underlineColorAndroid="transparent"
                     placeholder="Descrição"
-                    placeholderTextColor="grey"
+                    placeholderTextColor="whitesmoke"
                     numberOfLines={10}
                     multiline={true}
                     onChange={target => handleChangeData("description", target.target.value)}

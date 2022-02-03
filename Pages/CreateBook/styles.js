@@ -6,6 +6,7 @@ export const Container = styled.ScrollView`
     width: 100%;
     height: 100%;
     padding: 10px;
+    background-color: #222;
 `;
 
 export const Div = styled.View`
@@ -24,13 +25,12 @@ export const Label = styled.Text`
 
 export const Input = styled.TextInput`
     font-size: 18px;
-    background-color: #fff;
+    background-color: #444;
     width: 90%;
-    color: black;
     border-radius: 5px;
     padding-left: 10px;
     margin-bottom: 10px;
-    border: 1px solid lightgray;
+    border: 1px solid #555;
     height: ${props => (props.height ? `${props.height}px` : "40px")};
 `;
 
