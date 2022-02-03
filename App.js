@@ -14,7 +14,7 @@ import BookProvider from "./Pages/Context/book";
 import Login from "./Login";
 import Home from "./Pages/Home";
 import Camera from "./Pages/Camera";
-import Book from "./Pages/Books";
+import Book from "./Pages/CreateBook";
 import List from "./Pages/List/index";
 import BookPage from "./Pages/BookPage";
 import BookPageComments from "./Pages/BookPage/Components/Comments";
