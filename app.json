@@ -5,9 +5,9 @@
         "version": "1.0.0",
         "orientation": "portrait",
         "privacy": "public",
-        "icon": "./assets/onlylogo.png",
+        "icon": "./assets/icon.png",
         "splash": {
-            "image": "./assets/onlylogo.png",
+            "image": "./assets/splash.png",
             "resizeMode": "contain",
             "backgroundColor": "#2d2d2d"
         },
@@ -21,7 +21,7 @@
         "android": {
             "package": "com.correabruno.AppAhgoraLabs",
             "adaptiveIcon": {
-                "foregroundImage": "./assets/iconAhgora.png",
+                "foregroundImage": "./assets/icon.png",
                 "backgroundColor": "#FFFFFF"
             }
         },
