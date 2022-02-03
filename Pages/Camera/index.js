@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Image } from "react-native";
 import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
+import { Placeholder, Loader } from "rn-placeholder";
 
 import { Container, Modal, Button, CameraView, LineBar, TextInput, Input } from "./styles";
 
@@ -51,10 +52,10 @@ export default function CameraComponent({ navigation }) {
             <CameraView>
                 {isFocused && <Camera onBarCodeScanned={scanned ? undefined : getPerIsbn} style={StyleSheet.absoluteFillObject} />}
                 {scanned && !loading && (
-                    <Modal style={{ backgroundColor: "white", height: 100 }}>
-                        <Text style={{ color: "black", fontSize: 24, textAlign: "center" }}>Você deseja scanear um novo livro?</Text>
+                    <Modal style={{ backgroundColor: "#444", height: 100 }}>
+                        <Text style={{ color: "white", fontSize: 20, textAlign: "center", marginBottom: 25 }}>Você deseja scanear um novo livro?</Text>
                         <Button onPress={() => setScanned(false)}>
-                            <Text style={{ color: "white", fontSize: 24 }}>Scanear novo livro</Text>
+                            <Text style={{ color: "white", fontSize: 20 }}>Scanear novo livro</Text>
                         </Button>
                     </Modal>
                 )}
@@ -82,8 +83,10 @@ export default function CameraComponent({ navigation }) {
                     </>
                 )}
                 {loading && (
-                    <View style={{ flex: 1, backgroundColor: "white", alignItems: "center", justifyContent: "center" }}>
-                        <Image style={{ marginTop: 30 }} source={require("../../assets/loading2.gif")} />
+                    <View style={{ flex: 1, backgroundColor: "#444", alignItems: "center", justifyContent: "center" }}>
+                        <Placeholder style={{ marginTop: 100 }} Animation={props => <Loader {...props} size="large" color="gray" />} />
+                        <Text style={{ color: "white" }}>Buscando Livro</Text>
+                        {/* <Image style={{ marginTop: 30 }} source={require("../../assets/loading2.gif")} /> */}
                     </View>
                 )}
             </CameraView>

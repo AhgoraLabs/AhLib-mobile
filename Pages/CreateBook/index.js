@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Container, Div, Input, Button } from "./styles";
 import { Placeholder, Loader } from "rn-placeholder";
 
@@ -63,7 +63,10 @@ function Books({ route, navigation }) {
     return (
         <Container>
             {loading ? (
-                <Placeholder style={{ marginTop: 100 }} Animation={props => <Loader {...props} size="large" color="gray" />} />
+                <View style={{ display: "flex", alignItems: "center" }}>
+                    <Placeholder style={{ marginTop: 100 }} Animation={props => <Loader {...props} size="large" color="gray" />} />
+                    <Text style={{ color: "white" }}>Cadastrando Livro</Text>
+                </View>
             ) : (
                 <>
                     <Div>

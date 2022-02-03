@@ -34,7 +34,7 @@ export const Modal = styled.View`
     min-height: 50%;
     padding: 10px;
     border-radius: 30px;
-    border: 1px solid lightgray;
+    border: 1px solid #555;
 `;
 
 export const Button = styled.TouchableOpacity`

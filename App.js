@@ -1,8 +1,6 @@
 import * as React from "react";
-import { Text } from "react-native";
 import { useState, useEffect } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -20,7 +18,6 @@ import BookPage from "./Pages/BookPage";
 import BookPageComments from "./Pages/BookPage/Components/Comments";
 import BookLoan from "./Pages/BookPage/Components/Loan";
 
-//const Tab = createMaterialBottomTabNavigator();
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -147,9 +144,18 @@ export default function App(navigation) {
         token === "false" ? setLogged(false) : setLogged(true);
     }, []);
 
+    const MyTheme = {
+        ...DefaultTheme,
+        colors: {
+            ...DefaultTheme.colors,
+            primary: "#222",
+            background: "#222",
+        },
+    };
+
     return (
         <BookProvider>
-            <NavigationContainer>
+            <NavigationContainer theme={MyTheme}>
                 <Stack.Navigator
                     screenOptions={{
                         headerShown: false,
