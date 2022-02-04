@@ -4,8 +4,8 @@ import { View, ScrollView, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ReadMore from "@fawazahmed/react-native-read-more";
 import StarRating from "react-native-star-rating";
-
 import { useBookContext } from "../Context/book";
+
 
 function List({ navigation }) {
     const { providerComments, book } = useBookContext();
@@ -33,6 +33,23 @@ function List({ navigation }) {
     const textColorSecondary = "#E1E1E6";
 
     
+    
+    const handleDelete = async () => {
+        const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/books/${book._id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                //auth: token,
+            }
+        });
+        const {error} = response
+        if (error){
+            return alert("Não foi possível deletar o livro")
+        }
+         alert ("Deletado com sucesso")
+         return navigation.navigate("Lista de Livros")
+    }
 
     return (
         <>
@@ -104,7 +121,7 @@ function List({ navigation }) {
                             {book.description ? book.description : "Descrição não disponibilizada"}
                         </Text>
                     </View>
-                    <ButtonDelete>
+                    <ButtonDelete onPress={() => handleDelete()}>
                          <MaterialCommunityIcons name="delete" color="white" size={20} />
                             <Text>Deletar livro</Text>
                         </ButtonDelete>
