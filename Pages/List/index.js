@@ -121,7 +121,10 @@ function List({ navigation, route }) {
                 )}
             ></FlatList>
         ) : (
-            <></>
+            <View style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <Placeholder style={{ marginTop: 300 }} Animation={props => <Loader {...props} size="large" color="gray" />} />
+                <Text color="white">Carregando listagem de livros</Text>
+            </View>
         );
     };
 
