@@ -76,7 +76,7 @@ function Books({ route, navigation }) {
                         <Text style={{ color: "white", fontSize: 16, marginLeft: 7 }}>Limpar Campos</Text>
                     </TouchableOpacity>
                     <Div>
-                        <Input color="whitesmoke" placeholderTextColor="gray" placeholder="ISBN" defaultValue={data.isbn} onChangeText={value => handleChangeData("isbn", value)}></Input>
+                        <Input color="whitesmoke" placeholderTextColor="gray" placeholder="ISBN" defaultValue={data.isbn} onChangeText={value => handleChangeData("isbn", value)}  keyboardType='numeric'></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>
