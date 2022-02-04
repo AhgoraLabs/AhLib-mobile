@@ -103,7 +103,7 @@ function List({ navigation }) {
                     </View>
                 </Container>
             </ScrollView>
-            <FooterView>
+            {/*<FooterView>
                 <View style={{ display: "flex", paddingTop: 5, justifyContent: "space-evenly", flexDirection: "row" }}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate("Comentários")}
@@ -118,9 +118,9 @@ function List({ navigation }) {
                         <Text size={16} color="white">
                             Alugar Este Livro
                         </Text>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity> 
                 </View>
-            </FooterView>
+            </FooterView>*/}
         </>
     );
 }

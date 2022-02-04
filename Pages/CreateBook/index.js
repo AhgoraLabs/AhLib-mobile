@@ -80,7 +80,7 @@ function Books({ route, navigation }) {
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>
-                        <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Pages" defaultValue={data.pages} onChangeText={value => handleChangeData("pages", value)}></Input>
+                        <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Pages" defaultValue={data.pages} onChangeText={value => handleChangeData("pages", value)} keyboardType='numeric'></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Idioma" defaultValue={data.language} onChangeText={value => handleChangeData("language", value)}></Input>
 
                         <Input
