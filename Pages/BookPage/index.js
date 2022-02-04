@@ -7,8 +7,9 @@ import StarRating from "react-native-star-rating";
 import { useBookContext } from "../Context/book";
 
 
+
 function List({ navigation }) {
-    const { providerComments, book } = useBookContext();
+    const { providerComments, book, fetchBookList } = useBookContext();
 
     const dataCommentsContext = providerComments("get");
 
@@ -48,6 +49,7 @@ function List({ navigation }) {
             return alert("Não foi possível deletar o livro")
         }
          alert ("Deletado com sucesso")
+         fetchBookList();
          return navigation.navigate("Lista de Livros")
     }
 
