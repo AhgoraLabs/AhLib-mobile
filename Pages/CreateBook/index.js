@@ -20,6 +20,7 @@ function Books({ route, navigation }) {
 
     const handleSendBook = async () => {
         const body = data;
+        console.log(data);
         setLoading(true);
 
         if (!data.title || !data.isbn) {
@@ -44,8 +45,7 @@ function Books({ route, navigation }) {
             setLoading(false);
 
             if (responseData.error) {
-                console.log(responseData);
-                alert("Houve problema ao cadastrar livro");
+                alert("Houve problema ao cadastrar livro, verifique se preencheu todos os campos corretamente");
                 return false;
             }
 
@@ -76,7 +76,14 @@ function Books({ route, navigation }) {
                         <Text style={{ color: "white", fontSize: 16, marginLeft: 7 }}>Limpar Campos</Text>
                     </TouchableOpacity>
                     <Div>
-                        <Input color="whitesmoke" placeholderTextColor="gray" placeholder="ISBN" defaultValue={data.isbn} onChangeText={value => handleChangeData("isbn", value)}  keyboardType='numeric'></Input>
+                        <Input
+                            color="whitesmoke"
+                            placeholderTextColor="gray"
+                            placeholder="ISBN"
+                            defaultValue={data.isbn}
+                            onChangeText={value => handleChangeData("isbn", value)}
+                            keyboardType="numeric"
+                        ></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>
@@ -92,7 +99,7 @@ function Books({ route, navigation }) {
                             placeholderTextColor="gray"
                             numberOfLines={10}
                             multiline={true}
-                            onChange={target => handleChangeData("description", target.target.value)}
+                            onChangeText={value => handleChangeData("description", value)}
                         ></Input>
                         <Button color={loading ? "gray" : "#8257E5"} disabled={loading} onPress={() => handleSendBook()}>
                             <Text style={{ color: "white", fontSize: 18 }}>Enviar</Text>
