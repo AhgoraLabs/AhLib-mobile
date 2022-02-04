@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Container, BackgroundColorHead, Image, NoImage, Text, FooterView } from "./styles";
-import { View, ScrollView, TouchableOpacity, Button } from "react-native";
+import { Container, BackgroundColorHead, Image, NoImage, Text, FooterView,ButtonDelete } from "./styles";
+import { View, ScrollView, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ReadMore from "@fawazahmed/react-native-read-more";
 import StarRating from "react-native-star-rating";
@@ -31,6 +31,8 @@ function List({ navigation }) {
 
     const textColorPrimary = "white";
     const textColorSecondary = "#E1E1E6";
+
+    
 
     return (
         <>
@@ -97,10 +99,15 @@ function List({ navigation }) {
                         >
                             {book.description ? book.description : "Descrição não disponibilizada"}
                         </ReadMore> */}
+                       
                         <Text style={{ textAlign: "justify", color: "white" }} size={sizeDescription}>
                             {book.description ? book.description : "Descrição não disponibilizada"}
                         </Text>
                     </View>
+                    <ButtonDelete>
+                         <MaterialCommunityIcons name="delete" color="white" size={20} />
+                            <Text>Deletar livro</Text>
+                        </ButtonDelete>
                 </Container>
             </ScrollView>
             {/*<FooterView>

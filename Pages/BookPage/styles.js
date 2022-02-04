@@ -46,3 +46,16 @@ export const FooterView = styled.View`
     width: 100%;
     background-color: rgba(255, 255, 255, 0.1);
 `;
+
+export const ButtonDelete = styled.TouchableOpacity` 
+border-radius: 10px;
+ padding: 15px;
+  display: flex;
+   flex-Direction: row; 
+   align-Items: center;
+    padding-Left: 40px;
+    padding-Right: 40px;
+background-color:red;
+margin-Top: 65px;
+
+`;
