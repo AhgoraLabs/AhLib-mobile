@@ -22,11 +22,10 @@ function List({ navigation, route }) {
     };
 
     const handleClickBook = async item => {
+        navigation.navigate("Pagina do Livro");
         setBookContext(item);
-
         const comments = await getCommentsBook(item._id);
         providerComments("set", comments);
-        navigation.navigate("Pagina do Livro");
     };
 
     const randomColor = {
