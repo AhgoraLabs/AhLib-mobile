@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Container, BackgroundColorHead, Image, NoImage, Text, FooterView,ButtonDelete } from "./styles";
+import { Container, BackgroundColorHead, Image, NoImage, Text, FooterView, ButtonDelete } from "./styles";
 import { View, ScrollView, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ReadMore from "@fawazahmed/react-native-read-more";
 import StarRating from "react-native-star-rating";
 import { useBookContext } from "../Context/book";
-
-
 
 function List({ navigation }) {
     const { providerComments, book, fetchBookList } = useBookContext();
@@ -22,6 +20,7 @@ function List({ navigation }) {
 
     const totalStars = () => {
         try {
+            if (!dataCommentsContext) return false;
             const stars = dataCommentsContext.map(({ stars }) => stars);
             const valueStars = stars.length > 0 ? parseInt(stars.reduce((acc, curr) => curr + acc)) / stars.length : 0;
             setRate(valueStars);
@@ -33,8 +32,6 @@ function List({ navigation }) {
     const textColorPrimary = "white";
     const textColorSecondary = "#E1E1E6";
 
-    
-    
     const handleDelete = async () => {
         const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/books/${book._id}`, {
             method: "DELETE",
@@ -42,16 +39,20 @@ function List({ navigation }) {
                 "Content-Type": "application/json",
                 Accept: "application/json",
                 //auth: token,
-            }
+            },
         });
-        const {error} = response
-        if (error){
-            return alert("Não foi possível deletar o livro")
+        const { error } = response;
+        if (error) {
+            return alert("Não foi possível deletar o livro");
         }
-         alert ("Deletado com sucesso")
-         fetchBookList();
-         return navigation.navigate("Lista de Livros")
-    }
+        alert("Deletado com sucesso");
+        fetchBookList();
+        return navigation.navigate("Lista de Livros");
+    };
+
+    const handleEdit = () => {
+        navigation.navigate("Cadastro de Livro", { mode: "edit", data: book, isbn: book.isbn });
+    };
 
     return (
         <>
@@ -68,6 +69,9 @@ function List({ navigation }) {
                         <NoImage>{book.title}</NoImage>
                     )}
                     <StarRating containerStyle={{ marginTop: 20 }} disabled={false} maxStars={5} rating={rate ? rate : 0} fullStarColor="gold" halfStarColor="gold" />
+                    <TouchableOpacity onPress={handleEdit} style={{ backgroundColor: "lightgray", padding: 10, marginTop: 20, borderRadius: 10 }}>
+                        <Text color="black">Editar Livro</Text>
+                    </TouchableOpacity>
                     <Text style={{ marginTop: 20, marginBottom: 15 }} bold={true} size={24} uppercase={true} color={textColorPrimary}>
                         {book.title}
                     </Text>
@@ -118,15 +122,15 @@ function List({ navigation }) {
                         >
                             {book.description ? book.description : "Descrição não disponibilizada"}
                         </ReadMore> */}
-                       
+
                         <Text style={{ textAlign: "justify", color: "white" }} size={sizeDescription}>
                             {book.description ? book.description : "Descrição não disponibilizada"}
                         </Text>
                     </View>
                     <ButtonDelete onPress={() => handleDelete()}>
-                         <MaterialCommunityIcons name="delete" color="white" size={20} />
-                            <Text>Deletar livro</Text>
-                        </ButtonDelete>
+                        <MaterialCommunityIcons name="delete" color="white" size={20} />
+                        <Text>Deletar livro</Text>
+                    </ButtonDelete>
                 </Container>
             </ScrollView>
             {/*<FooterView>

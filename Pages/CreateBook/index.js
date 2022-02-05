@@ -11,16 +11,68 @@ function Books({ route, navigation }) {
     const { fetchBookList } = useBookContext();
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
 
     useEffect(() => {
+        if (route?.params?.mode === "edit") {
+            setIsEdit(true);
+            const data = route.params.data;
+            data.isbn = `${data.isbn}`;
+            data.pages = `${data.pages}`;
+            setData(data);
+        }
+
+        if (route?.params?.mode === "newBlank") {
+            setIsEdit(false);
+            setData({});
+        }
+
         if (route?.params?.data) setData(route?.params?.data);
     }, [route]);
 
     const handleChangeData = (key, value) => setData({ ...data, [key]: value });
 
+    const handleEditBook = async () => {
+        try {
+            const body = data;
+            setLoading(true);
+
+            if (!data.title || !data.isbn) {
+                alert("Necessário título e ISBN");
+                setLoading(false);
+                return false;
+            }
+
+            const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/books/", {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    //auth: token,
+                },
+                body: JSON.stringify(body),
+            });
+
+            const responseData = await response.json();
+            setLoading(false);
+
+            if (responseData.error) {
+                alert("Houve problema ao cadastrar livro, verifique se preencheu todos os campos corretamente");
+                return false;
+            }
+
+            alert("Livro atualizado com sucesso!");
+            setData({});
+            fetchBookList();
+            navigation.navigate("Lista de Livros");
+        } catch (err) {
+            alert("Algo deu errado, contate o suporte");
+            console.log(err);
+        }
+    };
+
     const handleSendBook = async () => {
         const body = data;
-        console.log(data);
         setLoading(true);
 
         if (!data.title || !data.isbn) {
@@ -87,7 +139,14 @@ function Books({ route, navigation }) {
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Título" defaultValue={data.title} onChangeText={value => handleChangeData("title", value)}></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Autor" defaultValue={data.author} onChangeText={value => handleChangeData("author", value)}></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Editora" defaultValue={data.publisher} onChangeText={value => handleChangeData("publisher", value)}></Input>
-                        <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Pages" defaultValue={data.pages} onChangeText={value => handleChangeData("pages", value)} keyboardType='numeric'></Input>
+                        <Input
+                            color="whitesmoke"
+                            placeholderTextColor="gray"
+                            placeholder="Pages"
+                            defaultValue={data.pages}
+                            onChangeText={value => handleChangeData("pages", value)}
+                            keyboardType="numeric"
+                        ></Input>
                         <Input color="whitesmoke" placeholderTextColor="gray" placeholder="Idioma" defaultValue={data.language} onChangeText={value => handleChangeData("language", value)}></Input>
 
                         <Input
@@ -101,7 +160,7 @@ function Books({ route, navigation }) {
                             multiline={true}
                             onChangeText={value => handleChangeData("description", value)}
                         ></Input>
-                        <Button color={loading ? "gray" : "#8257E5"} disabled={loading} onPress={() => handleSendBook()}>
+                        <Button color={loading ? "gray" : "#8257E5"} disabled={loading} onPress={() => console.log(isEdit ? handleEditBook() : handleSendBook())}>
                             <Text style={{ color: "white", fontSize: 18 }}>Enviar</Text>
                         </Button>
                     </Div>

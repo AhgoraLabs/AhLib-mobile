@@ -75,7 +75,7 @@ export default function CameraComponent({ navigation }) {
                         <Text
                             style={{ color: "white", marginTop: 20 }}
                             onPress={() => {
-                                navigation.navigate("Cadastro de Livro");
+                                navigation.navigate("Cadastro de Livro", { mode: "newBlank" });
                             }}
                         >
                             Cadastrar um novo livro
