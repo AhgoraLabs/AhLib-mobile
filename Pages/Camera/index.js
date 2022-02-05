@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Image } from "react-native";
-import { Camera } from "expo-camera";
 import { useIsFocused } from "@react-navigation/native";
-import { Placeholder, Loader } from "rn-placeholder";
-
-import { Container, Modal, Button, CameraView, LineBar, TextInput, Input } from "./styles";
+import { Camera } from "expo-camera";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Loader, Placeholder } from "rn-placeholder";
+import { Button, CameraView, Container, Input, LineBar, Modal } from "./styles";
 
 export default function CameraComponent({ navigation }) {
     const [scanned, setScanned] = useState(false);

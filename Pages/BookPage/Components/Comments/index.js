@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { ScrollView, Image, View } from "react-native";
-import { Container, Text } from "../../styles";
 import ReadMore from "@fawazahmed/react-native-read-more";
+import React, { useEffect, useState } from "react";
+import { ScrollView, View } from "react-native";
 import UserAvatar from "react-native-user-avatar";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
 //context
 import { useBookContext } from "../../../Context/book";
+import { Text } from "../../styles";
 
 function Comments({}) {
     const { providerComments } = useBookContext();

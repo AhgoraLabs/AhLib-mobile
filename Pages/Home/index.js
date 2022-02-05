@@ -1,7 +1,6 @@
 import React from "react";
-import { View, StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
-import { Stories, Text, ImageStorie, ModalStorie, Button } from "./styles";
-import styled from "styled-components/native";
+import { View } from "react-native";
+import { Button, ImageStorie, ModalStorie, Stories, Text } from "./styles";
 
 export default function Home({ navigation }) {
     return (

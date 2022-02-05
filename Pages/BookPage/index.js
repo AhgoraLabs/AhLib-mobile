@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container, BackgroundColorHead, Image, NoImage, Text, FooterView, ButtonDelete } from "./styles";
-import { View, ScrollView, TouchableOpacity } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import ReadMore from "@fawazahmed/react-native-read-more";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import StarRating from "react-native-star-rating";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useBookContext } from "../Context/book";
+import { BackgroundColorHead, ButtonDelete, Container, Image, NoImage, Text } from "./styles";
 
 function List({ navigation }) {
     const { providerComments, book, fetchBookList } = useBookContext();

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View, TouchableOpacity } from "react-native";
-import { Container, Livros, Text, Image, NoImage, ImageList, ScrollView, NoImageList } from "./styles";
+import { FlatList, TouchableOpacity, View } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { Placeholder, Loader } from "rn-placeholder";
-
+import { Loader, Placeholder } from "rn-placeholder";
 //api
 import { getCommentsBook } from "../../api/api";
 //context
 import { useBookContext } from "../Context/book";
+import { Container, Image, ImageList, Livros, NoImage, NoImageList, Text } from "./styles";
 
 function List({ navigation, route }) {
     const { setBookContext, providerComments, fetchBookList, bookList } = useBookContext([]);
