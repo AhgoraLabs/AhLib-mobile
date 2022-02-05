@@ -49,7 +49,7 @@ function List({ navigation, route }) {
                 <FlatList
                     numColumns={2}
                     data={bookList}
-                    contentContainerStyle={{ paddingBottom: 300, backgroundColor: colorBackground, alignItems: "center", justifyContent: "space-between" }}
+                    contentContainerStyle={{ paddingBottom: 500, backgroundColor: colorBackground, alignItems: "center", justifyContent: "space-between" }}
                     keyExtractor={() => {
                         return new Date().getTime().toString() + Math.floor(Math.random() * Math.floor(new Date().getTime())).toString();
                     }}

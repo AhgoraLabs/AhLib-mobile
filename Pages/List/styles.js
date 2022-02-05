@@ -16,7 +16,6 @@ const randomColor = {
 
 export const Container = styled.View`
     flex-direction: row;
-    padding-bottom: 100px;
     height: 120%;
 `;
 
