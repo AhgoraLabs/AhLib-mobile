@@ -17,8 +17,8 @@ function Books({ route, navigation }) {
         if (route?.params?.mode === "edit") {
             setIsEdit(true);
             const data = route.params.data;
-            data.isbn = `${data.isbn}`;
-            data.pages = `${data.pages}`;
+            data.isbn = `${data.isbn ? data.isbn : 0}`;
+            data.pages = `${data.pages ? data.pages : 0}`;
             setData(data);
         }
 
@@ -54,6 +54,7 @@ function Books({ route, navigation }) {
             });
 
             const responseData = await response.json();
+            console.log(responseData);
             setLoading(false);
 
             if (responseData.error) {

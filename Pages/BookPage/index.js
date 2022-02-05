@@ -13,8 +13,10 @@ function List({ navigation }) {
 
     const [sizeDescription, setSizeDescription] = useState(16);
     const [rate, setRate] = useState(5);
+    const [confirmDelete, setConfirmDelete] = useState(false);
 
     useEffect(() => {
+        setConfirmDelete(false);
         totalStars();
     }, [dataCommentsContext]);
 
@@ -33,21 +35,32 @@ function List({ navigation }) {
     const textColorSecondary = "#E1E1E6";
 
     const handleDelete = async () => {
-        const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/books/${book._id}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json",
-                //auth: token,
-            },
-        });
-        const { error } = response;
-        if (error) {
-            return alert("Não foi possível deletar o livro");
+        if (!confirmDelete) {
+            return setConfirmDelete(true);
         }
-        alert("Deletado com sucesso");
-        fetchBookList();
-        return navigation.navigate("Lista de Livros");
+
+        if (confirmDelete) {
+            alert("Deletado com sucesso");
+            try {
+                const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/books/${book._id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        //auth: token,
+                    },
+                });
+                const { error } = response;
+                if (error) {
+                    return alert("Não foi possível deletar o livro");
+                }
+                setConfirmDelete(false);
+                fetchBookList();
+                return navigation.navigate("Lista de Livros");
+            } catch (err) {
+                console.log(err);
+            }
+        }
     };
 
     const handleEdit = () => {
@@ -129,8 +142,13 @@ function List({ navigation }) {
                     </View>
                     <ButtonDelete onPress={() => handleDelete()}>
                         <MaterialCommunityIcons name="delete" color="white" size={20} />
-                        <Text>Deletar livro</Text>
+                        <Text>{confirmDelete ? "Confirmar exclusão" : "Excluir livro"}</Text>
                     </ButtonDelete>
+                    {confirmDelete && (
+                        <TouchableOpacity style={{ marginTop: 30, borderRadius: 10 }} onPress={() => setConfirmDelete(false)}>
+                            <Text>Cancelar</Text>
+                        </TouchableOpacity>
+                    )}
                 </Container>
             </ScrollView>
             {/*<FooterView>
