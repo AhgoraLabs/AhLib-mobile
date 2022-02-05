@@ -57,7 +57,7 @@ export const Image = styled.Image`
     position: relative;
     top: 0;
     margin-top: 45px;
-    margin-bottom: -220px;
+    margin-bottom: -200px;
 `;
 export const NoImage = styled.Text`
     width: 140px;
@@ -68,7 +68,7 @@ export const NoImage = styled.Text`
     padding: 5px;
     padding-top: 100px;
     text-align: center;
-    margin-bottom: -220px;
+    margin-bottom: -200px;
     margin-top: 45px;
 
     background-color: ${props => (props.color ? props.color : "lightblue")};

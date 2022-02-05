@@ -113,7 +113,7 @@ function List({ navigation, route }) {
                                 </NoImageList>
                             )}
 
-                            <Text color="white" size={18} bold={true}>
+                            <Text color="white" size={18} bold={true} style={{ width: 250 }}>
                                 {item.title}
                             </Text>
                         </View>
