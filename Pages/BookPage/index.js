@@ -80,6 +80,9 @@ function List({ navigation }) {
                     ) : (
                         <NoImage>{book.title}</NoImage>
                     )}
+                    <Text style={{ marginTop: 5 }} size={14}>
+                        ISBN: {book.isbn}
+                    </Text>
                     <StarRating containerStyle={{ marginTop: 20 }} disabled={false} maxStars={5} rating={rate ? rate : 0} fullStarColor="gold" halfStarColor="gold" />
                     <TouchableOpacity onPress={handleEdit} style={{ backgroundColor: "lightgray", padding: 10, marginTop: 20, borderRadius: 10 }}>
                         <Text color="black">Editar Livro</Text>
