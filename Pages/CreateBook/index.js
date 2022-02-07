@@ -27,7 +27,14 @@ function Books({ route, navigation }) {
         if (route?.params?.data) setData(route?.params?.data);
     }, [route]);
 
-    const handleChangeData = (key, value) => setData({ ...data, [key]: value });
+    const handleChangeData = (key, value) => {
+        const typeNumbers = ["isbn", "pages"];
+        if (typeNumbers.includes(key)) {
+            value = value.replace(/[^0-9]/g, "");
+        }
+
+        setData({ ...data, [key]: value });
+    };
 
     const handleEditBook = async () => {
         try {
@@ -130,6 +137,7 @@ function Books({ route, navigation }) {
                             color="whitesmoke"
                             placeholderTextColor="gray"
                             placeholder="ISBN"
+                            value={data.isbn}
                             defaultValue={data.isbn}
                             onChangeText={value => handleChangeData("isbn", value)}
                             keyboardType="numeric"
@@ -141,6 +149,7 @@ function Books({ route, navigation }) {
                             color="whitesmoke"
                             placeholderTextColor="gray"
                             placeholder="Pages"
+                            value={data.pages}
                             defaultValue={data.pages}
                             onChangeText={value => handleChangeData("pages", value)}
                             keyboardType="numeric"
