@@ -68,7 +68,7 @@ function List({ navigation, route }) {
                             </View>
 
                             <Livros onPress={() => handleClickBook(item)}>
-                                <Text color="white" bold={true} size={14}>
+                                <Text style={{ height: 45, paddingTop: 10 }} color="white" bold={true} size={14}>
                                     {item.title}
                                 </Text>
                             </Livros>
