@@ -11,7 +11,7 @@ export const getCommentsBook = async id => {
 export const getBooks = async () => {
     try {
         //const token = await AsyncStorage.getItem("@token");
-        const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/books/", {
+        const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/books/?limit=1000&offset=0", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

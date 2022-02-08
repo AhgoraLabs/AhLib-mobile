@@ -45,7 +45,7 @@ function List({ navigation, route }) {
 
     const gridBooksRender = () => (
         <Container>
-            {bookList.length > 0 && (
+            {bookList && bookList.length > 0 && (
                 <FlatList
                     numColumns={2}
                     data={bookList}
@@ -80,7 +80,7 @@ function List({ navigation, route }) {
     );
 
     const listBooksRender = () => {
-        return bookList.length > 0 ? (
+        return bookList && bookList.length > 0 ? (
             <FlatList
                 data={bookList}
                 numColumns={1}
@@ -129,14 +129,14 @@ function List({ navigation, route }) {
 
     return (
         <View style={{ backgroundColor: colorBackground }}>
-            {bookList.length === 0 ? (
+            {bookList && bookList.length === 0 ? (
                 <Placeholder style={{ marginTop: 100 }} Animation={props => <Loader {...props} size="large" color="gray" />} />
             ) : (
                 <>
                     <View style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: 10, flexDirection: "row", backgroundColor: colorBackground }}>
                         <TouchableOpacity onPress={handleFetchBookList} style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                             <MaterialCommunityIcons style={{ marginRight: 5 }} name="refresh" color="gray" size={30} />
-                            <Text color="white">{bookList.length} Livros encontrados</Text>
+                            <Text color="white">{bookList ? bookList.length : 0} Livros encontrados</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => setNormalModeList(!normalModeList)}>
                             <MaterialCommunityIcons style={{ marginLeft: 5 }} name={normalModeList ? "view-headline" : "view-grid-outline"} color="gray" size={30} />

@@ -7,7 +7,7 @@ import { getBooks } from "../../api/api";
 export default function BookProvider({ children }) {
     const [book, setBook] = useState({});
     const [comments, setComments] = useState([]);
-    const [bookList, setBookList] = useState({});
+    const [bookList, setBookList] = useState([]);
 
     const fetchBookList = async () => {
         try {
