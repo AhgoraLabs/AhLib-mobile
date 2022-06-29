@@ -1,6 +1,8 @@
+const baseUrl = 'https://ahlibs.rj.r.appspot.com'
 export const getCommentsBook = async id => {
+
     try {
-        const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/comments/?idBook=${id}`);
+        const response = await fetch(`${baseUrl}/comments/?idBook=${id}`);
         const responseData = await response.json();
         return responseData.data;
     } catch (err) {
@@ -11,7 +13,7 @@ export const getCommentsBook = async id => {
 export const getBooks = async () => {
     try {
         //const token = await AsyncStorage.getItem("@token");
-        const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/books/?limit=1000&offset=0", {
+        const response = await fetch(`${baseUrl}/books/?limit=1000&offset=0`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
