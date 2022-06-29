@@ -47,7 +47,7 @@ function Books({ route, navigation }) {
                 return false;
             }
 
-            const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/books/", {
+            const response = await fetch("https://ahlibs.rj.r.appspot.com/books/", {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

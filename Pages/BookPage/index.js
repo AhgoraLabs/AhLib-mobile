@@ -41,7 +41,7 @@ function List({ navigation }) {
         if (confirmDelete) {
             alert("Deletado com sucesso");
             try {
-                const response = await fetch(`http://sound-aileron-337523.rj.r.appspot.com/books/${book._id}`, {
+                const response = await fetch(`https://ahlibs.rj.r.appspot.com/books/${book._id}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",

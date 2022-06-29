@@ -22,7 +22,7 @@ export default function CameraComponent({ navigation }) {
     const getPerIsbn = async ({ type, data }) => {
         setLoading(true);
         try {
-            const response = await fetch(`http://ahlib.herokuapp.com/books/isbn/${data}`);
+            const response = await fetch(`https://ahlibs.rj.r.appspot.com/books/isbn/${data}`);
             const responseData = await response.json();
             setScanned(true);
             setLoading(false);
