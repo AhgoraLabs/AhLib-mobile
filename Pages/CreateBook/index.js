@@ -47,7 +47,7 @@ function Books({ route, navigation }) {
                 return false;
             }
 
-            const response = await fetch("https://ahlibs.rj.r.appspot.com/books/", {
+            const response = await fetch(`https://ahlibs.rj.r.appspot.com/books/`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -88,7 +88,7 @@ function Books({ route, navigation }) {
 
         try {
             //const token = await AsyncStorage.getItem("@token");
-            const response = await fetch("http://sound-aileron-337523.rj.r.appspot.com/books/", {
+            const response = await fetch("https://ahlibs.rj.r.appspot.com/books/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -98,7 +98,7 @@ function Books({ route, navigation }) {
                 body: JSON.stringify(body),
             });
 
-            const responseData = await response.json();
+            const responseData = await response.text();
             setLoading(false);
 
             if (responseData.error) {
